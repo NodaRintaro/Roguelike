@@ -1,0 +1,499 @@
+Using pre-set license
+Built from '2022.3/staging' branch; Version is '2022.3.28f1 (6bae5ce6b222) revision 7056988'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22631) 64bit Core' Language: 'ja' Physical Memory: 16068 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.3.28f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/vantan/Desktop/Unity/RoguelikeGame
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+50223
+Successfully changed project path to: C:/Users/vantan/Desktop/Unity/RoguelikeGame
+C:/Users/vantan/Desktop/Unity/RoguelikeGame
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [29884] Host "[IP] 192.168.11.32 [Port] 0 [Flags] 2 [Guid] 249448495 [EditorId] 249448495 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-1NCQE91) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [29884] Host "[IP] 192.168.11.32 [Port] 0 [Flags] 2 [Guid] 249448495 [EditorId] 249448495 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-1NCQE91) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 19 workers.
+Refreshing native plugins compatible for Editor in 2784.06 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.28f1 (6bae5ce6b222)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.28f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/vantan/Desktop/Unity/RoguelikeGame/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3060 Laptop GPU (ID=0x2560)
+    Vendor:   NVIDIA
+    VRAM:     5996 MB
+    Driver:   32.0.15.5599
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.28f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.28f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.28f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56396
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.28f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.005814 seconds.
+- Loaded All Assemblies, in 11.796 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.291 seconds
+Domain Reload Profiling: 12085ms
+	BeginReloadAssembly (9373ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (722ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (59ms)
+	LoadAllAssembliesAndSetupDomain (1628ms)
+		LoadAssemblies (9373ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (1625ms)
+			TypeCache.Refresh (1623ms)
+				TypeCache.ScanAssembly (980ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (291ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (225ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (9ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (147ms)
+			ProcessInitializeOnLoadMethodAttributes (57ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  4.370 seconds
+Refreshing native plugins compatible for Editor in 3.17 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.676 seconds
+Domain Reload Profiling: 5044ms
+	BeginReloadAssembly (140ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (18ms)
+	RebuildCommonClasses (43ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (4131ms)
+		LoadAssemblies (3954ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (265ms)
+			TypeCache.Refresh (246ms)
+				TypeCache.ScanAssembly (129ms)
+			ScanForSourceGeneratedMonoScriptInfo (12ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (676ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (519ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (93ms)
+			ProcessInitializeOnLoadAttributes (386ms)
+			ProcessInitializeOnLoadMethodAttributes (20ms)
+			AfterProcessingInitializeOnLoad (6ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (6ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
+Refreshing native plugins compatible for Editor in 4.57 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3095 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 33 unused Assets / (57.6 KB). Loaded Objects now: 3555.
+Memory consumption went from 126.6 MB to 126.5 MB.
+Total: 3.145000 ms (FindLiveObjects: 0.281600 ms CreateObjectMapping: 0.158000 ms MarkObjects: 2.572000 ms  DeleteObjects: 0.132400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/MapCreate.cs: 714f936be9c7e856417b3546b06b64ce -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: c6ee1eb762ef36d6c8dc53d53d94d6fe -> bcc195bee4c3b61e1217329ab4874a0c
+  custom:scripting/monoscript/fileName/MapGenerater.cs:  -> 3b86aa65202975f9977331253d112009
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.453 seconds
+Refreshing native plugins compatible for Editor in 3.83 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.931 seconds
+Domain Reload Profiling: 1381ms
+	BeginReloadAssembly (158ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (37ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (30ms)
+	LoadAllAssembliesAndSetupDomain (223ms)
+		LoadAssemblies (291ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (15ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (931ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (480ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (87ms)
+			ProcessInitializeOnLoadAttributes (356ms)
+			ProcessInitializeOnLoadMethodAttributes (20ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (6ms)
+Refreshing native plugins compatible for Editor in 2.37 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3088 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 24 unused Assets / (31.6 KB). Loaded Objects now: 3558.
+Memory consumption went from 125.7 MB to 125.6 MB.
+Total: 2.451200 ms (FindLiveObjects: 0.171700 ms CreateObjectMapping: 0.074500 ms MarkObjects: 2.163000 ms  DeleteObjects: 0.041100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/MapCreate.cs: 714f936be9c7e856417b3546b06b64ce -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 830.569628 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '137769d73715b3ae0d45b6961f2f805b') in 0.003538 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 142.859376 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ac00128bd0a9cf34d1c2efb2c692f24') in 0.000765 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 86.107903 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ebb94edc02d055cc07845f6131079be') in 0.000465 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 11.554354 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e2c4283ce83fed42bf24eba02cb0154') in 0.000572 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 46.884905 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '544c98f8631d56892b2dc20401b042d3') in 0.000582 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 45.655606 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a7c438da8fb5fa84e08f9fb92838c5c') in 0.000479 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 16.424753 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b4fb5de116341556281e0b250904c60') in 0.000554 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 22.662294 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '75c10ee5600728e4bad407c51cc1fda9') in 0.000686 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 42.662323 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee1f2369e01aa1a2e355566607b10e29') in 0.000634 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 139.425875 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92ae59dddf4b9aabdaa520220a68f79d') in 0.000641 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 36.924639 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87b7cd6c0e553f59c5a89b8d72b4dd73') in 0.000573 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 607.867012 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9a9f15e92d67944d4992f2c714f181b2') in 0.000674 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 26737.682099 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe6660ca4b1d2f4e3a16a1d8ffbbf748') in 0.001458 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1857.658052 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf1a6d7d1787668f6b3cb2e1e85f98ea') in 0.002256 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 47.824568 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ace8d440dd14738cf77a1f8f0d9579a') in 0.001239 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 8.527974 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3bcaa5f7f6505fcf04088f4215d9a6ba') in 0.001851 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 7.460362 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17b79c3d182aa0c8e6eb21dc3dedeca7') in 0.001141 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 52.459014 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b54241b483a183b47d5eb2f744c63cb5') in 0.001045 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 83.809049 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebf64ebfe43df05a84245c5c237262f0') in 0.001051 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 92.413704 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5bce497a90b45a73a325469edbb2f589') in 0.001282 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 6.487500 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b720b82715b97311f3f2ad293abc0e4') in 0.000890 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 897.444687 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f02894c639a0537daf38f6131976a3f') in 0.000930 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 74.115309 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f01db587dc7c5dfc843c7538a7ad548') in 0.000897 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 12.810477 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '75726a68c3b82c0db55fa3b7b69cb4bc') in 0.001172 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 22.938330 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '489704c4202a06322a2f29fbc9aa65f5') in 0.000874 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1772.097403 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd19abac978defbb66f7a49ad1f777ac5') in 0.001341 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 171.368928 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3da1a89ff58531a26ca9907a8c15fe50') in 0.000972 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 628.245194 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48461a6d922d8886a8c744c907df0288') in 0.001073 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 11.551565 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a760d8ed048ed6fe522a39cb70b0c37') in 0.000855 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 6.403749 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f286ac00b71e57e23309cca66ba6950') in 0.001035 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 646.290776 seconds.
+  path: Assets/Script/MapGenerater.cs
+  artifactKey: Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/MapGenerater.cs using Guid(690cbd4863f402844b6d1cd572556229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b121ce22a72a434b08f333ca836fe54') in 0.001131 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
