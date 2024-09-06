@@ -1,50 +1,36 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ‹æˆæ•ªŠ„–@‚É‚æ‚éMap©“®¶¬
+/// åŒºåŸŸåˆ†å‰²æ³•ã«ã‚ˆã‚‹Mapè‡ªå‹•ç”Ÿæˆ
 /// </summary>
 public class MapGenerater : MonoBehaviour
 {
-    //ƒ}ƒbƒv‘S‘Ì‚Ì‘å‚«‚³‚ğŒˆ‚ß‚é
-    [SerializeField,Header("ƒ}ƒbƒv‘S‘Ì‚Ì‰¡•")] static public int _xLength = 50;//ƒ}ƒbƒv‘S‘Ì‚Ì‰¡•
-    [SerializeField,Header("ƒ}ƒbƒv‘S‘Ì‚Ìc•")] static public int _zLength = 50;//ƒ}ƒbƒv‘S‘Ì‚Ìc•
-    [SerializeField,Header("ì‚éƒGƒŠƒA‚Ì”")] int _areaNum = 4;//ì‚éƒGƒŠƒA‚Ì”
+    //ãƒãƒƒãƒ—å…¨ä½“ã®å¤§ãã•ã‚’æ±ºã‚ã‚‹
+    [SerializeField,Header("ãƒãƒƒãƒ—å…¨ä½“ã®æ¨ªå¹…")] static public int _xLength = 50;
+    [SerializeField,Header("ãƒãƒƒãƒ—å…¨ä½“ã®ç¸¦å¹…")] static public int _zLength = 50;
+    [SerializeField,Header("ä½œã‚‹ã‚¨ãƒªã‚¢ã®æ•°")] int _areaNum = 4;
 
-    //•”‰®‚Ì‘å‚«‚³‚ÌŒˆ‚ß‚é‚½‚ß‚Ì”ÍˆÍ
-    [SerializeField,Header("¶¬‚·‚éƒGƒŠƒA‘å‚«‚³‚ÌÅ¬’l")] int _roomSizeMin = 3;//¶¬‚·‚éƒGƒŠƒA‘å‚«‚³‚ÌÅ¬’l
-    [SerializeField,Header("¶¬‚·‚éƒGƒŠƒA‘å‚«‚³‚ÌÅ‘å’l")] int _roomSizeMax = 7;//¶¬‚·‚éƒGƒŠƒA‘å‚«‚³‚ÌÅ‘å’l
+    //éƒ¨å±‹ã®å¤§ãã•ã®æ±ºã‚ã‚‹ãŸã‚ã®ç¯„å›²
+    [SerializeField,Header("ç”Ÿæˆã™ã‚‹éƒ¨å±‹ã®å¤§ãã•ã®æœ€å°å€¤")] int _roomSizeMin = 5;
+    [SerializeField,Header("ç”Ÿæˆã™ã‚‹éƒ¨å±‹ã®å¤§ãã•ã®æœ€å¤§å€¤")] int _roomSizeMax = 10;
+    [SerializeField,Header("ç”Ÿæˆã™ã‚‹ã‚¨ãƒªã‚¢å¤§ãã•ã®æœ€å°å€¤")] int _mapSizeMin = 6;
+    [SerializeField, Header("ç”Ÿæˆã™ã‚‹ã‚¨ãƒªã‚¢å¤§ãã•ã®æœ€å¤§å€¤")] int _mapSizeMax = 6;
 
-    private int _randomPosX, _randomPosZ, _randomRoomSize;//‰¡‚Æc‚Ì’†S“_‚Æ‚Ö•”‰®‚Ì‘å‚«‚³
+    private int _randomPosX, _randomPosZ, _randomRoomSize, _areaSize;
 
+    /// <summary>
+    /// ä»Šã®xåº§æ¨™ã®æœ€å¤§å€¤ã¨å‰å›ã®xåº§æ¨™ã®æœ€å¤§å€¤
+    /// </summary>
+    private int _currentMaxAreaSizeX = 1, _keepMinAreaSizeX = 1;
     public void MapGenerate()
     {
-        int areaSize;//•ªŠ„‚·‚éƒGƒŠƒA‚Ì‘å‚«‚³
-
-        int currentMaxAreaSize = 1;//¡‚ÌxÀ•W‚ÌÅ‘å’l
-        int keepMinAreaSize = 1;//‘O‰ñ‚ÌxÀ•W‚ÌÅ‘å’l
-
-        areaSize = _xLength / _areaNum;//•ªŠ„‚·‚é‘å‚«‚³‚ğŒˆ‚ß‚é
-
         for(int i = 0; i < _areaNum; i++)
         {
-            keepMinAreaSize = currentMaxAreaSize;//‘O‰ñ‚ÌÅ‘å’l‚ğ•Û‘¶‚·‚é
             if(i == 0)
             {
-                currentMaxAreaSize = areaSize;
-                _randomPosX = Random.Range(_roomSizeMin + keepMinAreaSize, currentMaxAreaSize);
-            }//Å‰‚Ì‹æ‰æ‚¾‚Á‚½ê‡
-            else if(i == _areaNum - 1)
-            {
-                currentMaxAreaSize = _xLength - 1;
-                Debug.Log($"{"‘O‰ñ‚ÌÅ‘å‚Ì•:" + currentMaxAreaSize} {"¡‰ñ‚ÌÅ‘å‚Ì•:" + keepMinAreaSize}");
-                _randomPosX = Random.Range(keepMinAreaSize, currentMaxAreaSize);
-            }
-            else
-            {
-                currentMaxAreaSize += areaSize;
-                Debug.Log($"{"‘O‰ñ‚ÌÅ‘å‚Ì•:" + currentMaxAreaSize} {"¡‰ñ‚ÌÅ‘å‚Ì•:" + keepMinAreaSize}");
+
             }
         }
     }
