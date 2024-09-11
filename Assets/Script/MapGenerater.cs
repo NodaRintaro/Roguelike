@@ -41,6 +41,8 @@ public class MapGenerater : MonoBehaviour
     //区画ごとのKeyの名前
     private string _a = "a";
     private string _b = "b";
+
+    //最終的に出来上がった区画のKeyのみを保存するList
     private List<string> _keyList = new List<string>();
 
     //エリアを分割するランダムな座標
@@ -70,6 +72,7 @@ public class MapGenerater : MonoBehaviour
             }
             else
             {
+                _wideArea = null;
                 foreach(string key in _keyList)
                 {
                     if(_wideArea == null)
@@ -85,7 +88,14 @@ public class MapGenerater : MonoBehaviour
                         }
                     }
                 }
-                
+                if (_areaData[_wideArea].xMax - _areaData[_wideArea].xMin > _areaData[_wideArea].zMax - _areaData[_wideArea].zMin)
+                {
+
+                }
+                else
+                {
+                    
+                }
             }
         }
     }
