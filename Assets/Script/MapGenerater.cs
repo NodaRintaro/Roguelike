@@ -92,7 +92,7 @@ public class MapGenerater : MonoBehaviour
                 {
                     _randomDividePos = Random.Range(_areaData[_wideArea].xMin + _areaSizeMin, _areaData[_wideArea].xMax - _areaSizeMin);
                     _keyList.Remove(_wideArea);
-                    _areaData.Add(_wideArea + _a,)
+                    _areaData.Add(_wideArea + _a,_areaData[_wideArea].xMin - _areaData[_])
 
                 }
                 else
