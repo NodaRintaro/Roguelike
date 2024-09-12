@@ -39,8 +39,8 @@ public class MapGenerater : MonoBehaviour
     private int _areaSizeZ;
 
     //区画ごとのKeyの名前
-    private string _a = "a";
-    private string _b = "b";
+    private string _a = "A";
+    private string _b = "B";
 
     //最終的に出来上がった区画のKeyのみを保存するList
     private List<string> _keyList = new List<string>();
@@ -69,7 +69,7 @@ public class MapGenerater : MonoBehaviour
                 _keyList.Add(_b);
                 Debug.Log("エリア" + _a + "の座標:" + _areaData[_a]);
                 Debug.Log("エリア" + _b + "の座標:" + _areaData[_b]);
-            }
+            }//最初のエリアAとBを作る
             else
             {
                 _wideArea = null;
@@ -90,13 +90,17 @@ public class MapGenerater : MonoBehaviour
                 }
                 if (_areaData[_wideArea].xMax - _areaData[_wideArea].xMin > _areaData[_wideArea].zMax - _areaData[_wideArea].zMin)
                 {
+                    _randomDividePos = Random.Range(_areaData[_wideArea].xMin + _areaSizeMin, _areaData[_wideArea].xMax - _areaSizeMin);
+                    _keyList.Remove(_wideArea);
+                    _areaData.Add(_wideArea + _a,)
 
                 }
                 else
                 {
                     
                 }
-            }
+            }//最初のエリアAとBをもとに子エリアを増やす
+
         }
     }
 }
