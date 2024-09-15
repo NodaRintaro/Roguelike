@@ -58,6 +58,7 @@ public class MapGenerater : MonoBehaviour
 
     public void MapGenerate()
     {
+        //エリアを分割する
         for(int i = 0; i < _areaNum; i++)
         {
             if(i == 0)
@@ -72,7 +73,8 @@ public class MapGenerater : MonoBehaviour
 
                 Debug.Log("エリア" + _a + "の座標:" + _areaData[_a]);
                 Debug.Log("エリア" + _b + "の座標:" + _areaData[_b]);
-            }//最初のエリアAとBを作る
+            }
+            //最初のエリアAとBを作る
             else
             {
                 _wideArea = null;
@@ -93,29 +95,36 @@ public class MapGenerater : MonoBehaviour
                 }
                 if (_areaData[_wideArea].xMax - _areaData[_wideArea].xMin > _areaData[_wideArea].zMax - _areaData[_wideArea].zMin)
                 {
-                    //エリアを分割する座標を決める
                     _randomDividePos = Random.Range(_areaData[_wideArea].xMin + _areaSizeMin, _areaData[_wideArea].xMax - _areaSizeMin);
 
-                    //
                     _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMin, _randomDividePos - 1, _areaData[_wideArea].zMin, _areaData[_wideArea].zMax));
                     _areaData.Add(_wideArea + _b, (_randomDividePos + 1, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _areaData[_wideArea].zMax));
+
+                    Debug.Log("エリア" + _wideArea + _a + "の座標:" + _areaData[_wideArea + _a]);
+                    Debug.Log("エリア" + _wideArea + _b + "の座標:" + _areaData[_wideArea + _b]);
 
                     _keyList.Remove(_wideArea);
                     _keyList.Add(_wideArea + _a);
                     _keyList.Add(_wideArea + _b);
-
-                    Debug.Log("エリア" + _wideArea + _a + "の座標:" + _areaData[_wideArea + _a]);
-                    Debug.Log("エリア" + _wideArea + _b + "の座標:" + _areaData[_wideArea + _b]);
                 }
                 else
                 {
-                    //エリアを分割する座標を決める
                     _randomDividePos = Random.Range(_areaData[_wideArea].zMin + _areaSizeMin, _areaData[_wideArea].zMax - _areaSizeMin);
 
-                    _areaData.Add(_wideArea + _a,_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin,)
-                }
-            }//最初のエリアAとBをもとに子エリアを増やす
+                    _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _randomDividePos - 1));
+                    _areaData.Add(_wideArea + _b, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _randomDividePos + 1, _areaData[_wideArea].zMax));
 
+                    Debug.Log("エリア" + _wideArea + _a + "の座標:" + _areaData[_wideArea + _a]);
+                    Debug.Log("エリア" + _wideArea + _b + "の座標:" + _areaData[_wideArea + _b]);
+
+                    _keyList.Remove(_wideArea);
+                    _keyList.Add(_wideArea + _a);
+                    _keyList.Add(_wideArea + _b);
+                }
+                //最初のエリアAとBをもとに子エリアを増やす
+            }
         }
+
+        //分割したエリアをもとに部屋を生成する
     }
 }
