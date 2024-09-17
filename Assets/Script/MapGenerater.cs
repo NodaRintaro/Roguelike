@@ -19,6 +19,9 @@ public class MapGenerater : MonoBehaviour
     [SerializeField, Header("エリアを分割する時の初期の分割し始める初期の中心座標")]
     (int x, int z) _startPos = (1, 1);
 
+    [SerializeField, Header("部屋の床となるオブジェクト")]
+    private GameObject _roomTile;
+
     //それぞれのエリアと部屋の大きさのデータ
     Dictionary<string, (int xMin, int xMax, int zMin, int zMax)> _areaData 
         = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
@@ -47,6 +50,13 @@ public class MapGenerater : MonoBehaviour
 
     //一番大きいエリア
     private string _wideArea = null;
+
+    //部屋を作る際のランダムな最小座標と最大座標
+    private int _randomRoomSizeMinX;
+    private int _randomRoomSizeMaxX;
+    private int _randomRoomSizeMinZ;
+    private int _randomRoomSizeMaxZ;
+
 
     public void Start()
     {
@@ -128,7 +138,17 @@ public class MapGenerater : MonoBehaviour
 
         foreach (var key in _keyList)
         {
-            for(int roomMinPosX =   )
+            _randomRoomSizeMinX = Random.Range(_areaData[key].xMin, _areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2) - _roomSizeMin);
+            _randomRoomSizeMaxX = Random.Range(_areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2), _areaData[key].xMax);
+            _randomRoomSizeMinZ = Random.Range(_areaData[key].zMin, _areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2) - _roomSizeMin);
+            _randomRoomSizeMaxZ = Random.Range(_areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2), _areaData[key].zMax);
+            for(int i = _randomRoomSizeMinX;_randomRoomSizeMaxX >= _randomRoomSizeMinX; i++)
+            {
+                for (int j = _randomRoomSizeMinZ; _randomRoomSizeMaxZ >= _randomRoomSizeMinZ; j++)
+                {
+                    Instantiate(_roomTile,new Vector3(i, 0, j),Quaternion.identity);
+                }
+            }
         }
         //分割したエリアをもとに部屋を生成する
     }
