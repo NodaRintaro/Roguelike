@@ -23,9 +23,6 @@ public class MapGenerater : MonoBehaviour
     Dictionary<string, (int xMin, int xMax, int zMin, int zMax)> _areaData 
         = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
 
-    Dictionary<string, (int xMin, int xMax, int zMin, int zMax)> _roomData 
-        = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
-
     //部屋を生成し始める中心座標
     private int _randomRoomPosX;
     private int _randomRoomPosZ;
@@ -58,8 +55,11 @@ public class MapGenerater : MonoBehaviour
 
     public void MapGenerate()
     {
+        _areaData = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
+        _keyList = new List<string>();
+
         //エリアを分割する
-        for(int i = 0; i < _areaNum; i++)
+        for (int i = 0; i < _areaNum; i++)
         {
             if(i == 0)
             {
@@ -92,6 +92,7 @@ public class MapGenerater : MonoBehaviour
                             _wideArea = key;
                         }
                     }
+                    Debug.Log(key);
                 }
                 if (_areaData[_wideArea].xMax - _areaData[_wideArea].xMin > _areaData[_wideArea].zMax - _areaData[_wideArea].zMin)
                 {
@@ -125,6 +126,10 @@ public class MapGenerater : MonoBehaviour
             }
         }
 
+        foreach (var key in _keyList)
+        {
+            for(int roomMinPosX =   )
+        }
         //分割したエリアをもとに部屋を生成する
     }
 }
