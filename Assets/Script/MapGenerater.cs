@@ -23,7 +23,10 @@ public class MapGenerater : MonoBehaviour
     private GameObject _roomTile;
 
     //それぞれのエリアと部屋の大きさのデータ
-    Dictionary<string, (int xMin, int xMax, int zMin, int zMax)> _areaData 
+    private Dictionary<string, (int xMin, int xMax, int zMin, int zMax)> _areaData 
+        = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
+
+    private Dictionary<string, (int xMin, int xMax, int zMin, int zMax)> _roomData
         = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
 
     //部屋を生成し始める中心座標
@@ -65,13 +68,16 @@ public class MapGenerater : MonoBehaviour
 
     public void MapGenerate()
     {
+        //Dataの初期化
+        _roomData = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
         _areaData = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
         _keyList = new List<string>();
 
         //エリアを分割する
-        for (int i = 0; i < _areaNum; i++)
+        for (int i = 1; i < _areaNum; i++)
         {
-            if(i == 0)
+            //最初のエリアAとBを作る
+            if (i == 1)
             {
                 _randomDividePos = Random.Range(_startPos.x + _areaSizeMin, _xLength - _areaSizeMin);
 
@@ -84,26 +90,31 @@ public class MapGenerater : MonoBehaviour
                 Debug.Log("エリア" + _a + "の座標:" + _areaData[_a]);
                 Debug.Log("エリア" + _b + "の座標:" + _areaData[_b]);
             }
-            //最初のエリアAとBを作る
+            
+            //エリアが複数存在する場合ひとつのエリアを選択して分割
             else
             {
                 _wideArea = null;
+
+                //分割する一番大きなエリアを選択
                 foreach(string key in _keyList)
                 {
                     if(_wideArea == null)
                     {
                         _wideArea = key;
                     }
-                    else
+                    else if(_wideArea != null)
                     {
-                        if (_areaData[_wideArea].xMax - _areaData[_wideArea].xMin * _areaData[_wideArea].zMax - _areaData[_wideArea].zMin <
-                            _areaData[key].xMax - _areaData[key].xMin * _areaData[key].zMax - _areaData[key].zMin)
+                        if ((_areaData[_wideArea].xMax - _areaData[_wideArea].xMin) * (_areaData[_wideArea].zMax - _areaData[_wideArea].zMin) <
+                            (_areaData[key].xMax - _areaData[key].xMin) * (_areaData[key].zMax - _areaData[key].zMin))
                         {
                             _wideArea = key;
                         }
                     }
-                    Debug.Log(key);
                 }
+                Debug.Log(_wideArea + "を分割します");
+
+                //_wideAreaがXじくに大きければたてにYじくのに大きければ横に分割する
                 if (_areaData[_wideArea].xMax - _areaData[_wideArea].xMin > _areaData[_wideArea].zMax - _areaData[_wideArea].zMin)
                 {
                     _randomDividePos = Random.Range(_areaData[_wideArea].xMin + _areaSizeMin, _areaData[_wideArea].xMax - _areaSizeMin);
@@ -132,24 +143,35 @@ public class MapGenerater : MonoBehaviour
                     _keyList.Add(_wideArea + _a);
                     _keyList.Add(_wideArea + _b);
                 }
-                //最初のエリアAとBをもとに子エリアを増やす
             }
         }
 
+        //部屋を作る
         foreach (var key in _keyList)
         {
+            //ランダムに部屋の大きさを決める
             _randomRoomSizeMinX = Random.Range(_areaData[key].xMin, _areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2) - _roomSizeMin);
             _randomRoomSizeMaxX = Random.Range(_areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2), _areaData[key].xMax);
             _randomRoomSizeMinZ = Random.Range(_areaData[key].zMin, _areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2) - _roomSizeMin);
             _randomRoomSizeMaxZ = Random.Range(_areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2), _areaData[key].zMax);
-            for(int i = _randomRoomSizeMinX;_randomRoomSizeMaxX >= _randomRoomSizeMinX; i++)
+
+            //上記で決めた大きさをもとに床となるオブジェクトを生成する
+            for(int i = _randomRoomSizeMinX;_randomRoomSizeMaxX >= i; i++)
             {
-                for (int j = _randomRoomSizeMinZ; _randomRoomSizeMaxZ >= _randomRoomSizeMinZ; j++)
+                for (int j = _randomRoomSizeMinZ; _randomRoomSizeMaxZ >= j; j++)
                 {
-                    Instantiate(_roomTile,new Vector3(i, 0, j),Quaternion.identity);
+                   Instantiate(_roomTile,new Vector3(i, 0, j),Quaternion.identity);
                 }
             }
+
+            //部屋のDataを保存する
+            _roomData.Add(key,(_randomRoomSizeMinX, _randomRoomSizeMaxX, _randomRoomSizeMinZ, _randomRoomSizeMaxZ));
         }
-        //分割したエリアをもとに部屋を生成する
+
+        //通路を作る
+        foreach(var key in _roomData.Keys)
+        {
+            
+        }
     }
 }
