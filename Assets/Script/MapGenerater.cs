@@ -48,8 +48,8 @@ public class MapGenerater : MonoBehaviour
     //最終的に出来上がった区画のKeyのみを保存するList
     private List<string> _keyList = new List<string>();
 
-    //エリアを分割するランダムな座標
-    private int _randomDividePos;
+    //ランダムな座標
+    private int _randomPos;
 
     //一番大きいエリア
     private string _wideArea = null;
@@ -60,6 +60,8 @@ public class MapGenerater : MonoBehaviour
     private int _randomRoomSizeMinZ;
     private int _randomRoomSizeMaxZ;
 
+    //生成する道の本数
+    private int _randomRoadNum;
 
     public void Start()
     {
@@ -79,10 +81,10 @@ public class MapGenerater : MonoBehaviour
             //最初のエリアAとBを作る
             if (i == 1)
             {
-                _randomDividePos = Random.Range(_startPos.x + _areaSizeMin, _xLength - _areaSizeMin);
+                _randomPos = Random.Range(_startPos.x + _areaSizeMin, _xLength - _areaSizeMin);
 
-                _areaData.Add(_a, (_startPos.x, _randomDividePos - 1, _startPos.z, _zLength));
-                _areaData.Add(_b, (_randomDividePos + 1, _xLength, _startPos.z, _zLength));
+                _areaData.Add(_a, (_startPos.x, _randomPos - 1, _startPos.z, _zLength));
+                _areaData.Add(_b, (_randomPos + 1, _xLength, _startPos.z, _zLength));
 
                 _keyList.Add(_a);
                 _keyList.Add(_b);
@@ -117,10 +119,10 @@ public class MapGenerater : MonoBehaviour
                 //_wideAreaがXじくに大きければたてにYじくのに大きければ横に分割する
                 if (_areaData[_wideArea].xMax - _areaData[_wideArea].xMin > _areaData[_wideArea].zMax - _areaData[_wideArea].zMin)
                 {
-                    _randomDividePos = Random.Range(_areaData[_wideArea].xMin + _areaSizeMin, _areaData[_wideArea].xMax - _areaSizeMin);
+                    _randomPos = Random.Range(_areaData[_wideArea].xMin + _areaSizeMin, _areaData[_wideArea].xMax - _areaSizeMin);
 
-                    _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMin, _randomDividePos - 1, _areaData[_wideArea].zMin, _areaData[_wideArea].zMax));
-                    _areaData.Add(_wideArea + _b, (_randomDividePos + 1, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _areaData[_wideArea].zMax));
+                    _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMin, _randomPos - 1, _areaData[_wideArea].zMin, _areaData[_wideArea].zMax));
+                    _areaData.Add(_wideArea + _b, (_randomPos + 1, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _areaData[_wideArea].zMax));
 
                     Debug.Log("エリア" + _wideArea + _a + "の座標:" + _areaData[_wideArea + _a]);
                     Debug.Log("エリア" + _wideArea + _b + "の座標:" + _areaData[_wideArea + _b]);
@@ -131,10 +133,10 @@ public class MapGenerater : MonoBehaviour
                 }
                 else
                 {
-                    _randomDividePos = Random.Range(_areaData[_wideArea].zMin + _areaSizeMin, _areaData[_wideArea].zMax - _areaSizeMin);
+                    _randomPos = Random.Range(_areaData[_wideArea].zMin + _areaSizeMin, _areaData[_wideArea].zMax - _areaSizeMin);
 
-                    _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _randomDividePos - 1));
-                    _areaData.Add(_wideArea + _b, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _randomDividePos + 1, _areaData[_wideArea].zMax));
+                    _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _randomPos - 1));
+                    _areaData.Add(_wideArea + _b, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _randomPos + 1, _areaData[_wideArea].zMax));
 
                     Debug.Log("エリア" + _wideArea + _a + "の座標:" + _areaData[_wideArea + _a]);
                     Debug.Log("エリア" + _wideArea + _b + "の座標:" + _areaData[_wideArea + _b]);
@@ -169,9 +171,12 @@ public class MapGenerater : MonoBehaviour
         }
 
         //通路を作る
-        foreach(var key in _roomData.Keys)
+        foreach(var key in _keyList)
         {
-            
+            for(int i = 0;_randomRoadNum > i; i++)
+            {
+                
+            }
         }
     }
 }
