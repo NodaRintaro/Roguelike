@@ -29,24 +29,16 @@ public class MapGenerater : MonoBehaviour
     private Dictionary<string, (int xMin, int xMax, int zMin, int zMax)> _roomData
         = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
 
-    //部屋を生成し始める中心座標
-    private int _randomRoomPosX;
-    private int _randomRoomPosZ;
-
-    //部屋の横と縦の大きさ
-    private int _randomRoomSizeX;
-    private int _randomRoomSizeY;
-
-    //分割した時のエリアの大きさ
-    private int _areaSizeX;
-    private int _areaSizeZ;
-
     //区画ごとのKeyの名前
     private string _a = "A";
     private string _b = "B";
 
+    //エリアの分割線につける
+    private string _road = "R";
+
     //最終的に出来上がった区画のKeyのみを保存するList
     private List<string> _keyList = new List<string>();
+    private List<string> _roadKeyList = new List<string>();
 
     //ランダムな座標
     private int _randomPos;
@@ -62,6 +54,9 @@ public class MapGenerater : MonoBehaviour
 
     //生成する道の本数
     private int _randomRoadNum;
+
+    //ランダムな数値
+    private int _randomNum;
 
     public void Start()
     {
@@ -91,6 +86,7 @@ public class MapGenerater : MonoBehaviour
 
                 Debug.Log("エリア" + _a + "の座標:" + _areaData[_a]);
                 Debug.Log("エリア" + _b + "の座標:" + _areaData[_b]);
+
             }
             
             //エリアが複数存在する場合ひとつのエリアを選択して分割
@@ -137,10 +133,10 @@ public class MapGenerater : MonoBehaviour
 
                     _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _randomPos - 1));
                     _areaData.Add(_wideArea + _b, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _randomPos + 1, _areaData[_wideArea].zMax));
-
+                   
                     Debug.Log("エリア" + _wideArea + _a + "の座標:" + _areaData[_wideArea + _a]);
                     Debug.Log("エリア" + _wideArea + _b + "の座標:" + _areaData[_wideArea + _b]);
-
+                    
                     _keyList.Remove(_wideArea);
                     _keyList.Add(_wideArea + _a);
                     _keyList.Add(_wideArea + _b);
@@ -151,17 +147,17 @@ public class MapGenerater : MonoBehaviour
         //部屋を作る
         foreach (var key in _keyList)
         {
-            //ランダムに部屋の大きさを決める
-            _randomRoomSizeMinX = Random.Range(_areaData[key].xMin, _areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2) - _roomSizeMin);
-            _randomRoomSizeMaxX = Random.Range(_areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2), _areaData[key].xMax);
-            _randomRoomSizeMinZ = Random.Range(_areaData[key].zMin, _areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2) - _roomSizeMin);
-            _randomRoomSizeMaxZ = Random.Range(_areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2), _areaData[key].zMax);
+            //ランダムに部屋の大きさを決める 
+            _randomRoomSizeMinX = Random.Range(_areaData[key].xMin, _areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2) - _roomSizeMin) + 1;
+            _randomRoomSizeMaxX = Random.Range(_areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2), _areaData[key].xMax) - 1;
+            _randomRoomSizeMinZ = Random.Range(_areaData[key].zMin, _areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2) - _roomSizeMin) + 1;
+            _randomRoomSizeMaxZ = Random.Range(_areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2), _areaData[key].zMax) - 1;
 
             //上記で決めた大きさをもとに床となるオブジェクトを生成する
             for(int i = _randomRoomSizeMinX;_randomRoomSizeMaxX >= i; i++)
             {
                 for (int j = _randomRoomSizeMinZ; _randomRoomSizeMaxZ >= j; j++)
-                {
+                { 
                    Instantiate(_roomTile,new Vector3(i, 0, j),Quaternion.identity);
                 }
             }
@@ -173,10 +169,57 @@ public class MapGenerater : MonoBehaviour
         //通路を作る
         foreach(var key in _keyList)
         {
-            for(int i = 0;_randomRoadNum > i; i++)
+            foreach(var areaKey in _keyList)
             {
-                
+                if (_roomData[key].xMax < _areaData[areaKey].xMax || _roomData[key].xMin > _areaData[areaKey].xMin)
+                {
+                    if (_areaData[areaKey].zMin > _roomData[key].zMax && _areaData[key].zMax - _roomData[key].zMax > (_areaData[areaKey].zMin - _roomData[key].zMax) - 3)
+                    {
+                        _randomPos = Random.Range(_roomData[key].xMin, _roomData[key].xMax);
+
+                        for(int i = _roomData[key].zMax; i < _areaData[areaKey].zMin; i++)
+                        {
+                            Instantiate(_roomTile, new Vector3(_randomPos, 0, i),Quaternion.identity);
+                        }
+                    }
+                    else if(_areaData[areaKey].zMin < _roomData[key].zMax && _roomData[key].zMin - _areaData[key].zMin > (_roomData[key].zMin - _areaData[areaKey].zMax) - 3)
+                    {
+                        _randomPos = Random.Range(_roomData[key].xMin, _roomData[key].xMax);
+
+                        for (int i = _roomData[key].zMin; i > _areaData[areaKey].zMax; i--)
+                        {
+                            Instantiate(_roomTile, new Vector3(_randomPos, 0, i), Quaternion.identity);
+                        }
+                    }
+                }
+                else if (_roomData[key].zMax < _areaData[areaKey].xMax && _roomData[key].zMin > _areaData[areaKey].zMin)
+                {
+                    if (_areaData[areaKey].xMin > _roomData[key].xMax && _areaData[key].xMax - _roomData[key].xMax > (_areaData[areaKey].xMin - _roomData[key].xMax) - 3)
+                    {
+                        _randomPos = Random.Range(_roomData[key].zMin, _roomData[key].zMax);
+
+                        for (int i = _roomData[key].xMax; i < _areaData[areaKey].xMin; i++)
+                        {
+                            Instantiate(_roomTile, new Vector3(i, 0, _randomPos), Quaternion.identity);
+                        }
+                    }
+                    else if(_areaData[areaKey].xMin < _roomData[key].xMax && _roomData[key].xMin - _areaData[key].xMin > (_roomData[key].xMin - _areaData[areaKey].xMax) -3)
+                    {
+                        _randomPos = Random.Range(_roomData[key].zMin, _roomData[key].zMax);
+
+                        for (int i = _roomData[key].xMin; i > _areaData[areaKey].xMax; i--)
+                        {
+                            Instantiate(_roomTile, new Vector3(i, 0, _randomPos), Quaternion.identity);
+                        }
+                    }
+                }
             }
+        }
+
+        //通路をつなげる
+        foreach(var key in _roadKeyList)
+        {
+            
         }
     }
 }
