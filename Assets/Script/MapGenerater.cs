@@ -201,17 +201,74 @@ public class MapGenerater : MonoBehaviour
         //通路を作る
         foreach(var key in _keyList)
         {
-            //たてに分割している場合
-            if (_loadData[key.Remove(key.Length - 1)].startPointX == _loadData[key.Remove(key.Length - 1)].goalPointX)
-            {
+            //エリアに隣接している通路
+            var loadkey = key.Remove(key.Length - 1);
 
+            //たてに分割している場合
+            if (_loadData[loadkey].startPointX == _loadData[loadkey].goalPointX)
+            {
+                //通路を生成し始めるランダムなZ座標
+                _randomPos = Random.Range(_roomData[key].zMin, _roomData[key].zMax);
+
+                if (_areaData[key].xMax < _loadData[loadkey].startPointX)
+                {
+                    for(int i = _roomData[key].xMax; i <= _loadData[loadkey].startPointX; i++)
+                    {
+                        Instantiate(_roomTile,new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
+                        if(i == _loadData[loadkey].startPointX)
+                        {
+                            _linkPoint.Add((i, _randomPos));
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = _roomData[key].xMin; i >= _loadData[loadkey].startPointX; i--)
+                    {
+                        Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
+                        if (i == _loadData[loadkey].startPointX)
+                        {
+                            _linkPoint.Add((i, _randomPos));
+                        }
+                    }
+                }
                 Debug.Log(key.Remove(key.Length - 1));
             }
             //横に分割している場合
-            else if(_loadData[key.Remove(key.Length - 1)].startPointZ == _loadData[key.Remove(key.Length - 1)].goalPointZ)
+            else if(_loadData[loadkey].startPointZ == _loadData[loadkey].goalPointZ)
             {
+                //通路を生成し始めるランダムなZ座標
+                _randomPos = Random.Range(_roomData[key].xMin, _roomData[key].xMax);
+
+                if (_areaData[key].zMax < _loadData[loadkey].startPointZ)
+                {
+                    for (int i = _roomData[key].zMax; i <= _loadData[loadkey].startPointZ; i++)
+                    {
+                        Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                        if (i == _loadData[loadkey].startPointZ)
+                        {
+                            _linkPoint.Add((_randomPos, i));
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = _roomData[key].zMin; i >= _loadData[loadkey].startPointZ; i--)
+                    {
+                        Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                        if (i == _loadData[loadkey].startPointZ)
+                        {
+                            _linkPoint.Add((_randomPos, i));
+                        }
+                    }
+                }
                 Debug.Log(key.Remove(key.Length - 1));
             }
+        }
+
+        foreach(var key in _loadData.Keys)
+        {
+
         }
     }
 }
