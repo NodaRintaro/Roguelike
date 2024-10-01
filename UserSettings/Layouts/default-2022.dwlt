@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -647,9 +647,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 179.24467, y: -2.783544, z: 92.10204}
+    m_Target: {x: 111.69086, y: 2.4403248, z: 69.95483}
     speed: 2
-    m_Value: {x: 179.24467, y: -2.783544, z: 92.10204}
+    m_Value: {x: 111.69086, y: 2.4403248, z: 69.95483}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -695,13 +695,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.7180563, y: -0.0025008954, z: 0.002579416, w: -0.69599754}
+    m_Target: {x: -0.71634746, y: 0.007539959, z: -0.0077424236, w: -0.69768345}
     speed: 2
-    m_Value: {x: -0.7180455, y: -0.0025008575, z: 0.0025793768, w: -0.695987}
+    m_Value: {x: -0.7163358, y: 0.007539836, z: -0.007742297, w: -0.69767207}
   m_Size:
-    m_Target: 107.54617
+    m_Target: 130.4684
     speed: 2
-    m_Value: 107.54617
+    m_Value: 136.61612
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -763,23 +763,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 30fbffff
+      m_SelectedIDs: 24fcfdff
+      m_LastClickedID: -132060
+      m_ExpandedIDs: d833ffffec33ffff0836ffff1c36ffff6894ffff7c94ffff5895ffff6c95ffff4896ffff5c96ffff3897ffff4c97ffff2898ffff3c98ffff30fbffffa0590000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: ForestGround01
+        m_OriginalName: ForestGround01
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -2798
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -932,7 +932,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefab
+    - Assets/Script
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -940,16 +940,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefab
+  - Assets/Script
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\vantan\Desktop\Unity\RoguelikeGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 60}
-    m_SelectedIDs: fe590000
-    m_LastClickedID: 23038
-    m_ExpandedIDs: 00000000f0590000f259000000ca9a3bffffff7f
+    m_SelectedIDs: 025a0000
+    m_LastClickedID: 23042
+    m_ExpandedIDs: 00000000f0590000f2590000fa59000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1002,8 +1002,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 1c150000
+    m_LastClickedInstanceID: 5404
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300006264000036640000
     m_RenameOverlay:
