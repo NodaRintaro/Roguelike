@@ -91,7 +91,7 @@ public class MapGenerater : MonoBehaviour
         //todo:作った道同士をつなげる
     }
 
-    public void AreaCreate()
+    private void AreaCreate()
     {
         //エリアを分割する
         for (int i = 1; i < _areaNum; i++)
@@ -171,7 +171,7 @@ public class MapGenerater : MonoBehaviour
         }
     }
 
-    public void RoomCreate()
+    private void RoomCreate()
     {
         //部屋を作る
         foreach (var key in _keyList)
@@ -196,7 +196,7 @@ public class MapGenerater : MonoBehaviour
         }
     }
 
-    public void LoadCreate()
+    private void LoadCreate()
     {
         //通路を作る
         foreach(var key in _keyList)
