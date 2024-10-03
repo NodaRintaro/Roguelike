@@ -32,7 +32,7 @@ public class MapGenerater : MonoBehaviour
         = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
 
 
-    //道を作る際に必要となる境界線と道同士をつなげる始点のデータ
+    //道を作る際に必要となる境界線のデータ
     private Dictionary<string, (int startPointX, int startPointZ, int goalPointX, int goalPointZ)> _loadData
         = new Dictionary<string, (int startPointX, int startPointZ, int goalPointX, int goalPointZ)>();
 
