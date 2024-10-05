@@ -14,6 +14,10 @@ public class MapGenerater : MonoBehaviour
         public int zMaxPos;
     }
 
+    [SerializeField,Header("1つのグリッドの大きさ")] private int _gridSize;
+
+    public int GridSize => _gridSize;
+
     //マップ全体の大きさを決める
     [SerializeField,Header("マップ全体の横幅")] public int _xLength = 50;
     [SerializeField,Header("マップ全体の縦幅")] public int _zLength = 50;
@@ -23,8 +27,6 @@ public class MapGenerater : MonoBehaviour
     [SerializeField,Header("生成する部屋の大きさの最小値")] int _roomSizeMin = 5;
     [SerializeField,Header("生成する部屋の大きさの最大値")] int _roomSizeMax = 10;
     [SerializeField,Header("生成するエリア大きさの最小値")] int _areaSizeMin = 7;
-
-    private int _gridSize => MapData.GridSize;
 
     [SerializeField, Header("エリアを分割する時の初期の分割し始める初期の中心座標")]
     (int x, int z) _startPos = (1, 1);
@@ -52,6 +54,7 @@ public class MapGenerater : MonoBehaviour
     //区画ごとのKeyの名前
     private string _a = "A";
     private string _b = "B";
+    private string _fKey = "firstKey";
 
     //最終的に出来上がった区画のKeyのみを保存するList
     private List<string> _keyList = new List<string>();
@@ -121,7 +124,7 @@ public class MapGenerater : MonoBehaviour
                         zMaxPos = _zLength
                     });
 
-                _loadData.Add("firstDivide",
+                _loadData.Add(_fKey,
                     new PosData
                     {
                         xMinPos = _randomPos,
@@ -166,10 +169,33 @@ public class MapGenerater : MonoBehaviour
                 {
                     _randomPos = Random.Range(_areaData[_wideArea].xMinPos + _areaSizeMin, _areaData[_wideArea].xMaxPos - _areaSizeMin);
 
-                    _areaData.Add(_wideArea + _a, 
-                        new PosData _areaData[_wideArea].xMinPos, _randomPos - 1, _areaData[_wideArea].zMinPos, _areaData[_wideArea].zMax));
-                    _areaData.Add(_wideArea + _b, (_randomPos + 1, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _areaData[_wideArea].zMax));
-                    _loadData.Add(_wideArea, (_randomPos, _areaData[_wideArea].zMin , _randomPos, _areaData[_wideArea].zMax));
+                    _areaData.Add(_wideArea + _a,
+                        new PosData
+                        {
+                            xMinPos = _areaData[_wideArea].xMinPos,
+                            xMaxPos = _randomPos - 1,
+                            zMinPos = _areaData[_wideArea].zMinPos,
+                            zMaxPos = _areaData[_wideArea].zMaxPos
+                        });
+                    
+                    _areaData.Add(_wideArea + _b,
+                        new PosData
+                        {
+                            xMinPos = _randomPos + 1,
+                            xMaxPos = _areaData[_wideArea].xMaxPos,
+                            zMinPos = _areaData[_wideArea].zMinPos,
+                            zMaxPos = _areaData[_wideArea].zMaxPos
+                        });
+
+
+                    _loadData.Add(_wideArea,
+                        new PosData
+                        {
+                            xMinPos = _randomPos,
+                            xMaxPos = _randomPos,
+                            zMinPos = _areaData[_wideArea].zMinPos,
+                            zMaxPos = _areaData[_wideArea].zMaxPos
+                        });
 
                     Debug.Log("エリア" + _wideArea + _a + "の座標:" + _areaData[_wideArea + _a]);
                     Debug.Log("エリア" + _wideArea + _b + "の座標:" + _areaData[_wideArea + _b]);
@@ -178,13 +204,37 @@ public class MapGenerater : MonoBehaviour
                     _keyList.Add(_wideArea + _a);
                     _keyList.Add(_wideArea + _b);
                 }
+
                 else
                 {
                     _randomPos = Random.Range(_areaData[_wideArea].zMinPos + _areaSizeMin, _areaData[_wideArea].zMaxPos - _areaSizeMin);
 
-                    _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMinPos, _areaData[_wideArea].xMaxPos, _areaData[_wideArea].zMinP, _randomPos - 1));
-                    _areaData.Add(_wideArea + _b, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _randomPos + 1, _areaData[_wideArea].zMax));
-                    _loadData.Add(_wideArea, (_areaData[_wideArea].xMin, _randomPos, _areaData[_wideArea].xMax, _randomPos));
+                    _areaData.Add(_wideArea + _a,
+                        new PosData
+                        {
+                            xMinPos = _areaData[_wideArea].xMinPos,
+                            xMaxPos = _areaData[_wideArea].xMaxPos,
+                            zMinPos = _areaData[_wideArea].zMinPos,
+                            zMaxPos = _randomPos - 1
+                        });
+
+                    _areaData.Add(_wideArea + _b,
+                        new PosData
+                        {
+                            xMinPos = _areaData[_wideArea].xMinPos,
+                            xMaxPos = _areaData[_wideArea].xMaxPos,
+                            zMinPos = _randomPos + 1,
+                            zMaxPos = _areaData[_wideArea].zMaxPos
+                        });
+
+                    _loadData.Add(_wideArea,
+                        new PosData
+                        {
+                            xMinPos = _areaData[_wideArea].xMinPos,
+                            xMaxPos = _areaData[_wideArea].xMaxPos,
+                            zMinPos = _randomPos,
+                            zMaxPos = _randomPos
+                        });
 
                     Debug.Log("エリア" + _wideArea + _a + "の座標:" + _areaData[_wideArea + _a]);
                     Debug.Log("エリア" + _wideArea + _b + "の座標:" + _areaData[_wideArea + _b]);
@@ -218,17 +268,33 @@ public class MapGenerater : MonoBehaviour
             }
 
             //部屋のDataを保存する
-            _roomData.Add(key, (_randomRoomSizeMinX, _randomRoomSizeMaxX, _randomRoomSizeMinZ, _randomRoomSizeMaxZ));
+            _roomData.Add(key,
+                new PosData
+                {
+                    xMinPos = _randomRoomSizeMinX,
+                    xMaxPos = _randomRoomSizeMaxX,
+                    zMinPos = _randomRoomSizeMinZ,
+                    zMaxPos = _randomRoomSizeMaxZ,
+                });
         }
     }
 
     private void LoadCreate()
     {
+        //エリアに隣接している通路のキーを入れる
+        string loadkey = null;
+
         //通路を作る
         foreach(var key in _keyList)
         {
-            //エリアに隣接している通路
-            var loadkey = key.Remove(key.Length - 1);
+            if(key == _a || key == _b)
+            {
+                loadkey = _fKey;
+            }
+            else
+            {
+                loadkey = key.Remove(key.Length - 1);
+            }
 
             //たてに分割している場合
             if (_loadData[loadkey].xMinPos == _loadData[loadkey].xMaxPos)
@@ -238,10 +304,10 @@ public class MapGenerater : MonoBehaviour
 
                 if (_areaData[key].xMaxPos < _loadData[loadkey].xMinPos)
                 {
-                    for(int i = _roomData[key].xMaxPos; i <= _loadData[loadkey].startPointX; i++)
+                    for(int i = _roomData[key].xMaxPos; i <= _loadData[loadkey].xMinPos; i++)
                     {
                         Instantiate(_roomTile,new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                        if(i == _loadData[loadkey].startPointX)
+                        if(i == _loadData[loadkey].xMinPos)
                         {
                             _linkPoint.Add((i, _randomPos));
                         }
@@ -249,10 +315,10 @@ public class MapGenerater : MonoBehaviour
                 }
                 else
                 {
-                    for (int i = _roomData[key].xMinPos; i >= _loadData[loadkey].startPointX; i--)
+                    for (int i = _roomData[key].xMinPos; i >= _loadData[loadkey].xMinPos; i--)
                     {
                         Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                        if (i == _loadData[loadkey].startPointX)
+                        if (i == _loadData[loadkey].xMinPos)
                         {
                             _linkPoint.Add((i, _randomPos));
                         }
@@ -260,18 +326,19 @@ public class MapGenerater : MonoBehaviour
                 }
                 Debug.Log(key.Remove(key.Length - 1));
             }
+
             //横に分割している場合
-            else if(_loadData[loadkey].startPointZ == _loadData[loadkey].goalPointZ)
+            else if(_loadData[loadkey].zMinPos == _loadData[loadkey].zMaxPos)
             {
                 //通路を生成し始めるランダムなZ座標
                 _randomPos = Random.Range(_roomData[key].xMinPos, _roomData[key].xMaxPos);
 
-                if (_areaData[key].zMaxPos < _loadData[loadkey].startPointZ)
+                if (_areaData[key].zMaxPos < _loadData[loadkey].zMinPos)
                 {
-                    for (int i = _roomData[key].zMaxPos; i <= _loadData[loadkey].startPointZ; i++)
+                    for (int i = _roomData[key].zMaxPos; i <= _loadData[loadkey].zMinPos; i++)
                     {
                         Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                        if (i == _loadData[loadkey].startPointZ)
+                        if (i == _loadData[loadkey].zMinPos)
                         {
                             _linkPoint.Add((_randomPos, i));
                         }
@@ -279,10 +346,10 @@ public class MapGenerater : MonoBehaviour
                 }
                 else
                 {
-                    for (int i = _roomData[key].zMinPos; i >= _loadData[loadkey].startPointZ; i--)
+                    for (int i = _roomData[key].zMinPos; i >= _loadData[loadkey].zMinPos; i--)
                     {
                         Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                        if (i == _loadData[loadkey].startPointZ)
+                        if (i == _loadData[loadkey].zMinPos)
                         {
                             _linkPoint.Add((_randomPos, i));
                         }
@@ -298,3 +365,4 @@ public class MapGenerater : MonoBehaviour
         }
     }
 }
+

@@ -4,9 +4,7 @@ using UnityEngine;
 
 static public class MapData
 {
-    [SerializeField] private static int _gridSize = 1;
+    [SerializeField] private static int _gridSize;
 
     public static int GridSize => _gridSize;
-
-    static public struct 
 }
