@@ -6,6 +6,14 @@ using UnityEngine;
 /// </summary>
 public class MapGenerater : MonoBehaviour
 {
+    public struct PosData
+    {
+        public int xMinPos;
+        public int zMinPos;
+        public int xMaxPos;
+        public int zMaxPos;
+    }
+
     //マップ全体の大きさを決める
     [SerializeField,Header("マップ全体の横幅")] public int _xLength = 50;
     [SerializeField,Header("マップ全体の縦幅")] public int _zLength = 50;
@@ -16,7 +24,7 @@ public class MapGenerater : MonoBehaviour
     [SerializeField,Header("生成する部屋の大きさの最大値")] int _roomSizeMax = 10;
     [SerializeField,Header("生成するエリア大きさの最小値")] int _areaSizeMin = 7;
 
-    [SerializeField] int _gridSize = 1;
+    private int _gridSize => MapData.GridSize;
 
     [SerializeField, Header("エリアを分割する時の初期の分割し始める初期の中心座標")]
     (int x, int z) _startPos = (1, 1);
@@ -25,25 +33,25 @@ public class MapGenerater : MonoBehaviour
     private GameObject _roomTile;
 
     //それぞれのエリアと部屋の大きさのデータ
-    private Dictionary<string, (int xMin, int xMax, int zMin, int zMax)> _areaData 
-        = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
+    private Dictionary<string, PosData> _areaData 
+        = new Dictionary<string, PosData>();
 
-    private Dictionary<string, (int xMin, int xMax, int zMin, int zMax)> _roomData
-        = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
+    private Dictionary<string, PosData> _roomData
+        = new Dictionary<string, PosData>();
 
+    public Dictionary<string, PosData> AreaData => _areaData;
+
+    public Dictionary<string, PosData> RoomData => _roomData;
 
     //道を作る際に必要となる境界線のデータ
-    private Dictionary<string, (int startPointX, int startPointZ, int goalPointX, int goalPointZ)> _loadData
-        = new Dictionary<string, (int startPointX, int startPointZ, int goalPointX, int goalPointZ)>();
+    private Dictionary<string, PosData> _loadData
+        = new Dictionary<string, PosData>();
 
     private List<(int xPoint, int zPoint)> _linkPoint = new List<(int xPoint, int zPoint)>();
 
     //区画ごとのKeyの名前
     private string _a = "A";
     private string _b = "B";
-
-    //エリアの分割線につける
-    private string _road = "R";
 
     //最終的に出来上がった区画のKeyのみを保存するList
     private List<string> _keyList = new List<string>();
@@ -61,12 +69,6 @@ public class MapGenerater : MonoBehaviour
     private int _randomRoomSizeMinZ;
     private int _randomRoomSizeMaxZ;
 
-    //生成する道の本数
-    private int _randomRoadNum;
-
-    //ランダムな数値
-    private int _randomNum;
-
     public void Start()
     {
         MapGenerate();
@@ -75,8 +77,8 @@ public class MapGenerater : MonoBehaviour
     public void MapGenerate()
     {
         //Dataの初期化
-        _roomData = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
-        _areaData = new Dictionary<string, (int xMin, int xMax, int zMin, int zMax)>();
+        _roomData = new Dictionary<string, PosData>();
+        _areaData = new Dictionary<string, PosData>();
         _keyList = new List<string>();
 
         //エリアの作成
@@ -101,9 +103,32 @@ public class MapGenerater : MonoBehaviour
             {
                 _randomPos = Random.Range(_startPos.x + _areaSizeMin, _xLength - _areaSizeMin);
 
-                _areaData.Add(_a, (_startPos.x, _randomPos - 1, _startPos.z, _zLength));
-                _areaData.Add(_b, (_randomPos + 1, _xLength, _startPos.z, _zLength));
-                _loadData.Add("firstDivide", (_randomPos, _startPos.z, _randomPos, _zLength));
+                _areaData.Add(_a,
+                    new PosData
+                    {
+                        xMinPos = _startPos.x,
+                        xMaxPos = _randomPos - 1, 
+                        zMinPos = _startPos.z, 
+                        zMaxPos = _zLength 
+                    });
+
+                _areaData.Add(_b,
+                    new PosData
+                    {
+                        xMinPos = _randomPos + 1,
+                        xMaxPos = _xLength,
+                        zMinPos = _startPos.z,
+                        zMaxPos = _zLength
+                    });
+
+                _loadData.Add("firstDivide",
+                    new PosData
+                    {
+                        xMinPos = _randomPos,
+                        xMaxPos = _randomPos,
+                        zMinPos = _startPos.z,
+                        zMaxPos = _zLength
+                    });
 
                 _keyList.Add(_a);
                 _keyList.Add(_b);
@@ -127,8 +152,8 @@ public class MapGenerater : MonoBehaviour
                     }
                     else if (_wideArea != null)
                     {
-                        if ((_areaData[_wideArea].xMax - _areaData[_wideArea].xMin) * (_areaData[_wideArea].zMax - _areaData[_wideArea].zMin) <
-                            (_areaData[key].xMax - _areaData[key].xMin) * (_areaData[key].zMax - _areaData[key].zMin))
+                        if ((_areaData[_wideArea].xMaxPos - _areaData[_wideArea].xMinPos) * (_areaData[_wideArea].zMaxPos - _areaData[_wideArea].zMinPos) <
+                            (_areaData[key].xMaxPos - _areaData[key].xMinPos) * (_areaData[key].zMaxPos - _areaData[key].zMinPos))
                         {
                             _wideArea = key;
                         }
@@ -137,11 +162,12 @@ public class MapGenerater : MonoBehaviour
                 Debug.Log(_wideArea + "を分割します");
 
                 //_wideAreaがXじくに大きければたてにYじくのに大きければ横に分割する
-                if (_areaData[_wideArea].xMax - _areaData[_wideArea].xMin > _areaData[_wideArea].zMax - _areaData[_wideArea].zMin)
+                if (_areaData[_wideArea].xMaxPos - _areaData[_wideArea].xMinPos > _areaData[_wideArea].zMaxPos - _areaData[_wideArea].zMinPos)
                 {
-                    _randomPos = Random.Range(_areaData[_wideArea].xMin + _areaSizeMin, _areaData[_wideArea].xMax - _areaSizeMin);
+                    _randomPos = Random.Range(_areaData[_wideArea].xMinPos + _areaSizeMin, _areaData[_wideArea].xMaxPos - _areaSizeMin);
 
-                    _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMin, _randomPos - 1, _areaData[_wideArea].zMin, _areaData[_wideArea].zMax));
+                    _areaData.Add(_wideArea + _a, 
+                        new PosData _areaData[_wideArea].xMinPos, _randomPos - 1, _areaData[_wideArea].zMinPos, _areaData[_wideArea].zMax));
                     _areaData.Add(_wideArea + _b, (_randomPos + 1, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _areaData[_wideArea].zMax));
                     _loadData.Add(_wideArea, (_randomPos, _areaData[_wideArea].zMin , _randomPos, _areaData[_wideArea].zMax));
 
@@ -154,9 +180,9 @@ public class MapGenerater : MonoBehaviour
                 }
                 else
                 {
-                    _randomPos = Random.Range(_areaData[_wideArea].zMin + _areaSizeMin, _areaData[_wideArea].zMax - _areaSizeMin);
+                    _randomPos = Random.Range(_areaData[_wideArea].zMinPos + _areaSizeMin, _areaData[_wideArea].zMaxPos - _areaSizeMin);
 
-                    _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _areaData[_wideArea].zMin, _randomPos - 1));
+                    _areaData.Add(_wideArea + _a, (_areaData[_wideArea].xMinPos, _areaData[_wideArea].xMaxPos, _areaData[_wideArea].zMinP, _randomPos - 1));
                     _areaData.Add(_wideArea + _b, (_areaData[_wideArea].xMin, _areaData[_wideArea].xMax, _randomPos + 1, _areaData[_wideArea].zMax));
                     _loadData.Add(_wideArea, (_areaData[_wideArea].xMin, _randomPos, _areaData[_wideArea].xMax, _randomPos));
 
@@ -177,10 +203,10 @@ public class MapGenerater : MonoBehaviour
         foreach (var key in _keyList)
         {
             //ランダムに部屋の大きさを決める 
-            _randomRoomSizeMinX = Random.Range(_areaData[key].xMin, _areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2) - _roomSizeMin) + 1;
-            _randomRoomSizeMaxX = Random.Range(_areaData[key].xMin + ((_areaData[key].xMax - _areaData[key].xMin) / 2), _areaData[key].xMax) - 1;
-            _randomRoomSizeMinZ = Random.Range(_areaData[key].zMin, _areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2) - _roomSizeMin) + 1;
-            _randomRoomSizeMaxZ = Random.Range(_areaData[key].zMin + ((_areaData[key].zMax - _areaData[key].zMin) / 2), _areaData[key].zMax) - 1;
+            _randomRoomSizeMinX = Random.Range(_areaData[key].xMinPos, _areaData[key].xMinPos + ((_areaData[key].xMaxPos - _areaData[key].xMinPos) / 2) - _roomSizeMin) + 1;
+            _randomRoomSizeMaxX = Random.Range(_areaData[key].xMinPos + ((_areaData[key].xMaxPos - _areaData[key].xMinPos) / 2), _areaData[key].xMaxPos) - 1;
+            _randomRoomSizeMinZ = Random.Range(_areaData[key].zMinPos, _areaData[key].zMinPos + ((_areaData[key].zMaxPos - _areaData[key].zMinPos) / 2) - _roomSizeMin) + 1;
+            _randomRoomSizeMaxZ = Random.Range(_areaData[key].zMinPos + ((_areaData[key].zMaxPos - _areaData[key].zMinPos) / 2), _areaData[key].zMaxPos) - 1;
 
             //上記で決めた大きさをもとに床となるオブジェクトを生成する
             for (int i = _randomRoomSizeMinX; _randomRoomSizeMaxX >= i; i++)
@@ -205,14 +231,14 @@ public class MapGenerater : MonoBehaviour
             var loadkey = key.Remove(key.Length - 1);
 
             //たてに分割している場合
-            if (_loadData[loadkey].startPointX == _loadData[loadkey].goalPointX)
+            if (_loadData[loadkey].xMinPos == _loadData[loadkey].xMaxPos)
             {
                 //通路を生成し始めるランダムなZ座標
-                _randomPos = Random.Range(_roomData[key].zMin, _roomData[key].zMax);
+                _randomPos = Random.Range(_roomData[key].zMinPos, _roomData[key].zMaxPos);
 
-                if (_areaData[key].xMax < _loadData[loadkey].startPointX)
+                if (_areaData[key].xMaxPos < _loadData[loadkey].xMinPos)
                 {
-                    for(int i = _roomData[key].xMax; i <= _loadData[loadkey].startPointX; i++)
+                    for(int i = _roomData[key].xMaxPos; i <= _loadData[loadkey].startPointX; i++)
                     {
                         Instantiate(_roomTile,new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
                         if(i == _loadData[loadkey].startPointX)
@@ -223,7 +249,7 @@ public class MapGenerater : MonoBehaviour
                 }
                 else
                 {
-                    for (int i = _roomData[key].xMin; i >= _loadData[loadkey].startPointX; i--)
+                    for (int i = _roomData[key].xMinPos; i >= _loadData[loadkey].startPointX; i--)
                     {
                         Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
                         if (i == _loadData[loadkey].startPointX)
@@ -238,11 +264,11 @@ public class MapGenerater : MonoBehaviour
             else if(_loadData[loadkey].startPointZ == _loadData[loadkey].goalPointZ)
             {
                 //通路を生成し始めるランダムなZ座標
-                _randomPos = Random.Range(_roomData[key].xMin, _roomData[key].xMax);
+                _randomPos = Random.Range(_roomData[key].xMinPos, _roomData[key].xMaxPos);
 
-                if (_areaData[key].zMax < _loadData[loadkey].startPointZ)
+                if (_areaData[key].zMaxPos < _loadData[loadkey].startPointZ)
                 {
-                    for (int i = _roomData[key].zMax; i <= _loadData[loadkey].startPointZ; i++)
+                    for (int i = _roomData[key].zMaxPos; i <= _loadData[loadkey].startPointZ; i++)
                     {
                         Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
                         if (i == _loadData[loadkey].startPointZ)
@@ -253,7 +279,7 @@ public class MapGenerater : MonoBehaviour
                 }
                 else
                 {
-                    for (int i = _roomData[key].zMin; i >= _loadData[loadkey].startPointZ; i--)
+                    for (int i = _roomData[key].zMinPos; i >= _loadData[loadkey].startPointZ; i--)
                     {
                         Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
                         if (i == _loadData[loadkey].startPointZ)
