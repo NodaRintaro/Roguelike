@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 区域分割法によるMap自動生成
 /// </summary>
-public class MapGenerater : MonoBehaviour
+public class MapCreate : MonoBehaviour
 {
     public struct PosData
     {
@@ -46,7 +46,7 @@ public class MapGenerater : MonoBehaviour
     public Dictionary<string, PosData> RoomData => _roomData;
 
     //道を作る際に必要となる境界線のデータ
-    private Dictionary<string, PosData> _loadData
+    private Dictionary<string, PosData> _dividePosData
         = new Dictionary<string, PosData>();
 
     private List<(int xPoint, int zPoint)> _linkPoint = new List<(int xPoint, int zPoint)>();
@@ -124,7 +124,7 @@ public class MapGenerater : MonoBehaviour
                         zMaxPos = _zLength
                     });
 
-                _loadData.Add(_fKey,
+                _dividePosData.Add(_fKey,
                     new PosData
                     {
                         xMinPos = _randomPos,
@@ -188,7 +188,7 @@ public class MapGenerater : MonoBehaviour
                         });
 
 
-                    _loadData.Add(_wideArea,
+                    _dividePosData.Add(_wideArea,
                         new PosData
                         {
                             xMinPos = _randomPos,
@@ -227,7 +227,7 @@ public class MapGenerater : MonoBehaviour
                             zMaxPos = _areaData[_wideArea].zMaxPos
                         });
 
-                    _loadData.Add(_wideArea,
+                    _dividePosData.Add(_wideArea,
                         new PosData
                         {
                             xMinPos = _areaData[_wideArea].xMinPos,
@@ -297,17 +297,17 @@ public class MapGenerater : MonoBehaviour
             }
 
             //たてに分割している場合
-            if (_loadData[loadkey].xMinPos == _loadData[loadkey].xMaxPos)
+            if (_dividePosData[loadkey].xMinPos == _dividePosData[loadkey].xMaxPos)
             {
                 //通路を生成し始めるランダムなZ座標
                 _randomPos = Random.Range(_roomData[key].zMinPos, _roomData[key].zMaxPos);
 
-                if (_areaData[key].xMaxPos < _loadData[loadkey].xMinPos)
+                if (_areaData[key].xMaxPos < _dividePosData[loadkey].xMinPos)
                 {
-                    for(int i = _roomData[key].xMaxPos; i <= _loadData[loadkey].xMinPos; i++)
+                    for(int i = _roomData[key].xMaxPos; i <= _dividePosData[loadkey].xMinPos; i++)
                     {
                         Instantiate(_roomTile,new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                        if(i == _loadData[loadkey].xMinPos)
+                        if(i == _dividePosData[loadkey].xMinPos)
                         {
                             _linkPoint.Add((i, _randomPos));
                         }
@@ -315,10 +315,10 @@ public class MapGenerater : MonoBehaviour
                 }
                 else
                 {
-                    for (int i = _roomData[key].xMinPos; i >= _loadData[loadkey].xMinPos; i--)
+                    for (int i = _roomData[key].xMinPos; i >= _dividePosData[loadkey].xMinPos; i--)
                     {
                         Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                        if (i == _loadData[loadkey].xMinPos)
+                        if (i == _dividePosData[loadkey].xMinPos)
                         {
                             _linkPoint.Add((i, _randomPos));
                         }
@@ -328,17 +328,17 @@ public class MapGenerater : MonoBehaviour
             }
 
             //横に分割している場合
-            else if(_loadData[loadkey].zMinPos == _loadData[loadkey].zMaxPos)
+            else if(_dividePosData[loadkey].zMinPos == _dividePosData[loadkey].zMaxPos)
             {
                 //通路を生成し始めるランダムなZ座標
                 _randomPos = Random.Range(_roomData[key].xMinPos, _roomData[key].xMaxPos);
 
-                if (_areaData[key].zMaxPos < _loadData[loadkey].zMinPos)
+                if (_areaData[key].zMaxPos < _dividePosData[loadkey].zMinPos)
                 {
-                    for (int i = _roomData[key].zMaxPos; i <= _loadData[loadkey].zMinPos; i++)
+                    for (int i = _roomData[key].zMaxPos; i <= _dividePosData[loadkey].zMinPos; i++)
                     {
                         Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                        if (i == _loadData[loadkey].zMinPos)
+                        if (i == _dividePosData[loadkey].zMinPos)
                         {
                             _linkPoint.Add((_randomPos, i));
                         }
@@ -346,10 +346,10 @@ public class MapGenerater : MonoBehaviour
                 }
                 else
                 {
-                    for (int i = _roomData[key].zMinPos; i >= _loadData[loadkey].zMinPos; i--)
+                    for (int i = _roomData[key].zMinPos; i >= _dividePosData[loadkey].zMinPos; i--)
                     {
                         Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                        if (i == _loadData[loadkey].zMinPos)
+                        if (i == _dividePosData[loadkey].zMinPos)
                         {
                             _linkPoint.Add((_randomPos, i));
                         }
@@ -359,9 +359,9 @@ public class MapGenerater : MonoBehaviour
             }
         }
 
-        foreach(var key in _loadData.Keys)
+        foreach (var key in _dividePosData.Keys)
         {
-
+            
         }
     }
 }
