@@ -284,6 +284,9 @@ public class MapCreate : MonoBehaviour
         //エリアに隣接している通路のキーを入れる
         string loadkey = null;
 
+        //通路から一番近い距離にある部屋
+        string nearRoom = null;
+
         //通路を作る
         foreach(var key in _keyList)
         {
@@ -359,9 +362,16 @@ public class MapCreate : MonoBehaviour
             }
         }
 
-        foreach (var key in _dividePosData.Keys)
+        foreach(var key in _dividePosData.Keys) 
         {
-            
+            if(_dividePosData[key].xMinPos == _dividePosData[key].xMaxPos)
+            {
+                for()
+            }
+            else if(_dividePosData[key].zMinPos == _dividePosData[key].zMaxPos)
+            {
+
+            }
         }
     }
 }
