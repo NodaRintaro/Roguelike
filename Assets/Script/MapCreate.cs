@@ -49,8 +49,6 @@ public class MapCreate : MonoBehaviour
     private Dictionary<string, PosData> _dividePosData
         = new Dictionary<string, PosData>();
 
-    private List<(int xPoint, int zPoint)> _linkPoint = new List<(int xPoint, int zPoint)>();
-
     //区画ごとのKeyの名前
     private string _a = "A";
     private string _b = "B";
@@ -62,6 +60,9 @@ public class MapCreate : MonoBehaviour
 
     //ランダムな座標
     private int _randomPos;
+
+    //道を作る際に道同士をつなぐ座標
+    private (int x, int y, int z) _loadLinkPosA, _loadLinkPosB;
 
     //一番大きいエリア
     private string _wideArea = null;
@@ -285,92 +286,124 @@ public class MapCreate : MonoBehaviour
         string loadkey = null;
 
         //通路から一番近い距離にある部屋
-        string nearRoom = null;
+        string nearRoomA = null;
+        string nearRoomB = null;
 
         //通路を作る
-        foreach(var key in _keyList)
-        {
-            if(key == _a || key == _b)
-            {
-                loadkey = _fKey;
-            }
-            else
-            {
-                loadkey = key.Remove(key.Length - 1);
-            }
-
-            //たてに分割している場合
-            if (_dividePosData[loadkey].xMinPos == _dividePosData[loadkey].xMaxPos)
-            {
-                //通路を生成し始めるランダムなZ座標
-                _randomPos = Random.Range(_roomData[key].zMinPos, _roomData[key].zMaxPos);
-
-                if (_areaData[key].xMaxPos < _dividePosData[loadkey].xMinPos)
-                {
-                    for(int i = _roomData[key].xMaxPos; i <= _dividePosData[loadkey].xMinPos; i++)
-                    {
-                        Instantiate(_roomTile,new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                        if(i == _dividePosData[loadkey].xMinPos)
-                        {
-                            _linkPoint.Add((i, _randomPos));
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = _roomData[key].xMinPos; i >= _dividePosData[loadkey].xMinPos; i--)
-                    {
-                        Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                        if (i == _dividePosData[loadkey].xMinPos)
-                        {
-                            _linkPoint.Add((i, _randomPos));
-                        }
-                    }
-                }
-                Debug.Log(key.Remove(key.Length - 1));
-            }
-
-            //横に分割している場合
-            else if(_dividePosData[loadkey].zMinPos == _dividePosData[loadkey].zMaxPos)
-            {
-                //通路を生成し始めるランダムなZ座標
-                _randomPos = Random.Range(_roomData[key].xMinPos, _roomData[key].xMaxPos);
-
-                if (_areaData[key].zMaxPos < _dividePosData[loadkey].zMinPos)
-                {
-                    for (int i = _roomData[key].zMaxPos; i <= _dividePosData[loadkey].zMinPos; i++)
-                    {
-                        Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                        if (i == _dividePosData[loadkey].zMinPos)
-                        {
-                            _linkPoint.Add((_randomPos, i));
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = _roomData[key].zMinPos; i >= _dividePosData[loadkey].zMinPos; i--)
-                    {
-                        Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                        if (i == _dividePosData[loadkey].zMinPos)
-                        {
-                            _linkPoint.Add((_randomPos, i));
-                        }
-                    }
-                }
-                Debug.Log(key.Remove(key.Length - 1));
-            }
-        }
-
         foreach(var key in _dividePosData.Keys) 
         {
+            nearRoomA = null;
+            nearRoomB = null;
+
             if(_dividePosData[key].xMinPos == _dividePosData[key].xMaxPos)
             {
-                for()
+                foreach(var roomKey in _keyList)
+                {
+                    if (_dividePosData[key].zMinPos < _roomData[roomKey].zMinPos && _dividePosData[key].zMaxPos > _roomData[roomKey].zMaxPos)
+                    {
+                        if(_dividePosData[key].xMinPos < _roomData[roomKey].xMinPos)
+                        {
+                            if(nearRoomA == null)
+                            {
+                                nearRoomA = roomKey;
+                            }
+                            else if (_roomData[nearRoomA].xMinPos > _roomData[roomKey].xMinPos)
+                            {
+                                nearRoomA = roomKey;
+                            }
+                        }
+                        else if(_dividePosData[key].xMinPos > _roomData[roomKey].xMinPos)
+                        {
+                            if (nearRoomB == null)
+                            {
+                                nearRoomB = roomKey;
+                            }
+                            else if (_roomData[nearRoomB].xMaxPos < _roomData[roomKey].xMaxPos)
+                            {
+                                nearRoomB = roomKey;
+                            }
+                        }
+                    }
+                }
+
+                _randomPos = Random.Range(_roomData[nearRoomA].zMinPos, _roomData[nearRoomA].zMaxPos);
+
+                for(int i = _dividePosData[key].xMaxPos; i < _roomData[nearRoomA].xMaxPos; i++)
+                {
+                    Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
+                    if (i == _roomData[nearRoomA].xMaxPos - 1)
+                        _loadLinkPosA = (i, 0, _randomPos);
+                }
+
+                _randomPos = Random.Range(_roomData[nearRoomB].zMinPos, _roomData[nearRoomB].zMaxPos);
+
+                for (int i = _dividePosData[key].xMaxPos; i > _roomData[nearRoomB].xMaxPos; i--)
+                {
+                    Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
+                    if(i == _roomData[nearRoomB].xMaxPos + 1)
+                        _loadLinkPosB = (i, 0, _randomPos);
+                }
+
+                if(_loadLinkPosA.z < _loadLinkPosB.z)
+                {
+                    for(int i = _loadLinkPosA.z; i < _loadLinkPosB.z; i++)
+                    {
+                        Instantiate(_roomTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                    }
+                }
+
+                else if(_loadLinkPosA.z > _loadLinkPosB.z)
+                {
+                    for (int i = _loadLinkPosA.z; i > _loadLinkPosB.z; i--)
+                    {
+                        Instantiate(_roomTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                    }
+                }
             }
             else if(_dividePosData[key].zMinPos == _dividePosData[key].zMaxPos)
             {
+                foreach (var roomKey in _keyList)
+                {
+                    if (_dividePosData[key].xMinPos < _roomData[roomKey].xMinPos && _dividePosData[key].xMaxPos > _roomData[roomKey].xMaxPos)
+                    {
+                        if (_dividePosData[key].zMinPos < _roomData[roomKey].zMinPos)
+                        {
+                            if (nearRoomA == null)
+                            {
+                                nearRoomA = roomKey;
+                            }
+                            else if (_roomData[nearRoomA].zMinPos > _roomData[roomKey].zMinPos)
+                            {
+                                nearRoomA = roomKey;
+                            }
+                        }
+                        else
+                        {
+                            if (nearRoomB == null)
+                            {
+                                nearRoomB = roomKey;
+                            }
+                            else if (_roomData[nearRoomB].zMaxPos < _roomData[roomKey].zMaxPos)
+                            {
+                                nearRoomB = roomKey;
+                            }
+                        }
+                    }
+                }
 
+                _randomPos = Random.Range(_roomData[nearRoomA].xMinPos, _roomData[nearRoomA].xMaxPos);
+
+                for (int i = _dividePosData[key].zMaxPos; i < _roomData[nearRoomA].zMaxPos; i++)
+                {
+                    Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                }
+
+                _randomPos = Random.Range(_roomData[nearRoomB].xMinPos, _roomData[nearRoomB].xMaxPos);
+
+                for (int i = _dividePosData[key].zMaxPos; i > _roomData[nearRoomB].zMaxPos; i--)
+                {
+                    Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                }
             }
         }
     }
