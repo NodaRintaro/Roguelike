@@ -280,6 +280,7 @@ public class MapCreate : MonoBehaviour
         }
     }
 
+    [SerializeField] GameObject testTile;
     private void LoadCreate()
     {
         //エリアに隣接している通路のキーを入れる
@@ -344,20 +345,23 @@ public class MapCreate : MonoBehaviour
                         _loadLinkPosB = (i, 0, _randomPos);
                 }
 
-                if(_loadLinkPosA.z < _loadLinkPosB.z)
+                if(_loadLinkPosA.z > _loadLinkPosB.z)
                 {
-                    for(int i = _loadLinkPosA.z; i < _loadLinkPosB.z; i++)
+                    for(int i = _loadLinkPosA.z + 1; i < _loadLinkPosB.z; i++)
                     {
-                        Instantiate(_roomTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                        Instantiate(testTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                        Debug.Log("道を繋ぐ");
                     }
+                    //Debug.Log("道を繋ぐ");
                 }
-
-                else if(_loadLinkPosA.z > _loadLinkPosB.z)
+                else if(_loadLinkPosA.z < _loadLinkPosB.z)
                 {
-                    for (int i = _loadLinkPosA.z; i > _loadLinkPosB.z; i--)
+                    for (int i = _loadLinkPosA.z - 1; i > _loadLinkPosB.z; i--)
                     {
-                        Instantiate(_roomTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                        Instantiate(testTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                        Debug.Log("道を繋ぐ");
                     }
+                    //Debug.Log("道を繋ぐ");
                 }
             }
             else if(_dividePosData[key].zMinPos == _dividePosData[key].zMaxPos)

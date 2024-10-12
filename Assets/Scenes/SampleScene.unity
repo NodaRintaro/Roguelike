@@ -361,6 +361,7 @@ MonoBehaviour:
   _roomSizeMax: 10
   _areaSizeMin: 10
   _roomTile: {fileID: 2440097209149797066, guid: afe663956a0dedb45b5c0a832142d31f, type: 3}
+  testTile: {fileID: 3479160281844390296, guid: b8bcf757f8f202848938183108d6cbb9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
