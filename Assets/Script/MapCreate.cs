@@ -56,7 +56,6 @@ public class MapCreate : MonoBehaviour
 
     //最終的に出来上がった区画のKeyのみを保存するList
     private List<string> _keyList = new List<string>();
-    private List<(int x,int z)> _roadLinkPoint = new List<(int x,int z)>();
 
     //ランダムな座標
     private int _randomPos;
@@ -93,8 +92,6 @@ public class MapCreate : MonoBehaviour
 
         //道を作る
         LoadCreate();
-
-        //todo:作った道同士をつなげる
     }
 
     private void AreaCreate()
@@ -280,7 +277,6 @@ public class MapCreate : MonoBehaviour
         }
     }
 
-    [SerializeField] GameObject testTile;
     private void LoadCreate()
     {
         //エリアに隣接している通路のキーを入れる
@@ -332,7 +328,7 @@ public class MapCreate : MonoBehaviour
                 for(int i = _dividePosData[key].xMaxPos; i < _roomData[nearRoomA].xMaxPos; i++)
                 {
                     Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                    if (i == _roomData[nearRoomA].xMaxPos - 1)
+                    if (i == _dividePosData[key].xMaxPos)
                         _loadLinkPosA = (i, 0, _randomPos);
                 }
 
@@ -341,27 +337,23 @@ public class MapCreate : MonoBehaviour
                 for (int i = _dividePosData[key].xMaxPos; i > _roomData[nearRoomB].xMaxPos; i--)
                 {
                     Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                    if(i == _roomData[nearRoomB].xMaxPos + 1)
+                    if(i == _dividePosData[key].xMaxPos)
                         _loadLinkPosB = (i, 0, _randomPos);
                 }
 
                 if(_loadLinkPosA.z > _loadLinkPosB.z)
                 {
-                    for(int i = _loadLinkPosA.z + 1; i < _loadLinkPosB.z; i++)
+                    for(int i = _loadLinkPosB.z + 1; i < _loadLinkPosA.z; i++)
                     {
-                        Instantiate(testTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                        Debug.Log("道を繋ぐ");
+                        Instantiate(_roomTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
                     }
-                    //Debug.Log("道を繋ぐ");
                 }
                 else if(_loadLinkPosA.z < _loadLinkPosB.z)
                 {
-                    for (int i = _loadLinkPosA.z - 1; i > _loadLinkPosB.z; i--)
+                    for (int i = _loadLinkPosA.z + 1; i < _loadLinkPosB.z; i++)
                     {
-                        Instantiate(testTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                        Debug.Log("道を繋ぐ");
+                        Instantiate(_roomTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
                     }
-                    //Debug.Log("道を繋ぐ");
                 }
             }
             else if(_dividePosData[key].zMinPos == _dividePosData[key].zMaxPos)
@@ -400,6 +392,8 @@ public class MapCreate : MonoBehaviour
                 for (int i = _dividePosData[key].zMaxPos; i < _roomData[nearRoomA].zMaxPos; i++)
                 {
                     Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                    if (i == _dividePosData[key].zMaxPos)
+                        _loadLinkPosA = (_randomPos, 0, i);
                 }
 
                 _randomPos = Random.Range(_roomData[nearRoomB].xMinPos, _roomData[nearRoomB].xMaxPos);
@@ -407,6 +401,23 @@ public class MapCreate : MonoBehaviour
                 for (int i = _dividePosData[key].zMaxPos; i > _roomData[nearRoomB].zMaxPos; i--)
                 {
                     Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                    if (i == _dividePosData[key].zMaxPos)
+                        _loadLinkPosB = (_randomPos, 0, i);
+                }
+
+                if (_loadLinkPosA.x > _loadLinkPosB.x)
+                {
+                    for (int i = _loadLinkPosB.x + 1; i < _loadLinkPosA.x; i++)
+                    {
+                        Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
+                    }
+                }
+                else if (_loadLinkPosA.x < _loadLinkPosB.x)
+                {
+                    for (int i = _loadLinkPosA.x + 1; i < _loadLinkPosB.x; i++)
+                    {
+                        Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _loadLinkPosB.z * _gridSize), Quaternion.identity);
+                    }
                 }
             }
         }
