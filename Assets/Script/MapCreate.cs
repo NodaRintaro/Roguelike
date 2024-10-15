@@ -34,6 +34,9 @@ public class MapCreate : MonoBehaviour
     [SerializeField, Header("部屋の床となるオブジェクト")]
     private GameObject _roomTile;
 
+    [SerializeField, Header("部屋や通路以外のMapを埋める")]
+    private GameObject _dontWalkTile;
+
     //それぞれのエリアと部屋の大きさのデータ
     private Dictionary<string, PosData> _areaData 
         = new Dictionary<string, PosData>();
