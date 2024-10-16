@@ -425,5 +425,10 @@ public class MapCreate : MonoBehaviour
             }
         }
     }
+
+    private void CreateDontWalkTile()
+    {
+
+    }
 }
 
