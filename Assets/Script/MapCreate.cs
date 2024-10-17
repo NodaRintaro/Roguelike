@@ -350,6 +350,15 @@ public class MapCreate : MonoBehaviour
                     {
                         Instantiate(_roomTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
                     }
+
+                    for(int i = _dividePosData[key].zMinPos; i < _loadLinkPosB.z; i++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                    }
+                    for (int i = _loadLinkPosA.z + 1; i <= _dividePosData[key].zMaxPos; i++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                    }
                 }
                 else if(_loadLinkPosA.z < _loadLinkPosB.z)
                 {
@@ -357,8 +366,18 @@ public class MapCreate : MonoBehaviour
                     {
                         Instantiate(_roomTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
                     }
+
+                    for (int i = _dividePosData[key].zMinPos; i < _loadLinkPosA.z; i++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                    }
+                    for (int i = _loadLinkPosB.z + 1; i <= _dividePosData[key].zMaxPos; i++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                    }
                 }
             }
+
             else if(_dividePosData[key].zMinPos == _dividePosData[key].zMaxPos)
             {
                 foreach (var roomKey in _keyList)
@@ -414,6 +433,15 @@ public class MapCreate : MonoBehaviour
                     {
                         Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
                     }
+
+                    for (int i = _dividePosData[key].xMinPos; i < _loadLinkPosB.x; i++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, _loadLinkPosB.z * _gridSize), Quaternion.identity);
+                    }
+                    for (int i = _loadLinkPosA.x + 1; i <= _dividePosData[key].xMaxPos; i++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
+                    }
                 }
                 else if (_loadLinkPosA.x < _loadLinkPosB.x)
                 {
@@ -421,12 +449,23 @@ public class MapCreate : MonoBehaviour
                     {
                         Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _loadLinkPosB.z * _gridSize), Quaternion.identity);
                     }
+
+                    for (int i = _dividePosData[key].xMinPos; i < _loadLinkPosA.x; i++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
+                    }
+                    for (int i = _loadLinkPosB.x + 1; i <= _dividePosData[key].xMaxPos; i++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
+                    }
                 }
+
+
             }
         }
     }
 
-    private void CreateDontWalkTile()
+    private void CreateDontWalkAreaTile()
     {
 
     }

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -647,9 +647,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 95.37502, y: -1.5265594, z: 47.47279}
+    m_Target: {x: 120.49161, y: 22.941765, z: 114.50847}
     speed: 2
-    m_Value: {x: 95.37502, y: -1.5265594, z: 47.47279}
+    m_Value: {x: 120.49161, y: 22.941765, z: 114.50847}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -695,13 +695,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.4911779, y: 0.50857925, z: -0.48882902, w: 0.51102227}
+    m_Target: {x: 0.3371484, y: 0.51086545, z: -0.22740035, w: 0.75740373}
     speed: 2
-    m_Value: {x: 0.49117637, y: 0.5085777, z: -0.4888275, w: 0.51102066}
+    m_Value: {x: 0.33714437, y: 0.5108594, z: -0.22739764, w: 0.75739473}
   m_Size:
-    m_Target: 68.02027
+    m_Target: 46.415264
     speed: 2
-    m_Value: 68.02027
+    m_Value: 46.415264
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -932,7 +932,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script
+    - Assets/Prefab
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -940,15 +940,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Script
+  - Assets/Prefab
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\vantan\Desktop\Unity\RoguelikeGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 60}
-    m_SelectedIDs: 045a0000
-    m_LastClickedID: 23044
+    m_SelectedIDs: 005a0000
+    m_LastClickedID: 23040
     m_ExpandedIDs: 00000000f2590000f459000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
