@@ -498,20 +498,46 @@ public class MapCreate : MonoBehaviour
         }
     }
 
-    private void CreateDontWalkAreaTile()
+    private void CheckDontWalkArea()
     {
-        foreach(var key in _keyList)
+        //エリアに道があるかどうか
+        bool inLoad;
+
+        
+    }
+
+    private void CreateDontWalkAreaTile(PosData areaData, PosData loadData, bool InLoad)
+    {
+        if(InLoad)
         {
-            foreach(var load in _loadData)
+            if(loadData.xMinPos == loadData.xMaxPos)
             {
-
-            }
-
-            for(int i = _areaData[key].zMinPos; i < _roomData[key].zMinPos - 1; i++)
-            {
-                for(int j = _areaData[key].xMinPos; i < _areaData[key].xMaxPos; j++)
+                for (int i = areaData.xMinPos; i <= areaData.xMaxPos; i++)
                 {
-                    
+                    for (int j = areaData.zMinPos; j <= areaData.zMaxPos; j++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, j * _gridSize), Quaternion.identity);
+                    }
+                }
+            }
+            else if(loadData.zMaxPos == loadData.zMinPos)
+            {
+                for (int i = areaData.zMinPos; i <= areaData.zMaxPos; i++)
+                {
+                    for (int j = areaData.xMinPos; j <= areaData.xMaxPos; j++)
+                    {
+                        Instantiate(_dontWalkTile, new Vector3(j * _gridSize, 0, i * _gridSize), Quaternion.identity);
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = areaData.xMinPos; i <= areaData.xMaxPos; i++)
+            {
+                for (int j = areaData.zMinPos; j <= areaData.zMaxPos; j++)
+                {
+                    Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, j * _gridSize), Quaternion.identity);
                 }
             }
         }
