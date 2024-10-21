@@ -52,6 +52,9 @@ public class MapCreate : MonoBehaviour
     private Dictionary<string, PosData> _dividePosData
         = new Dictionary<string, PosData>();
 
+    //エリアをつなぐみちのData
+    private List<PosData> _loadData = new List<PosData>();
+
     //区画ごとのKeyの名前
     private string _a = "A";
     private string _b = "B";
@@ -335,6 +338,14 @@ public class MapCreate : MonoBehaviour
                         _loadLinkPosA = (i, 0, _randomPos);
                 }
 
+                _loadData.Add(new PosData
+                {
+                    xMinPos = _dividePosData[key].xMaxPos,
+                    zMinPos = _randomPos,
+                    xMaxPos = _roomData[nearRoomA].xMaxPos,
+                    zMaxPos = _randomPos
+                });
+
                 _randomPos = Random.Range(_roomData[nearRoomB].zMinPos, _roomData[nearRoomB].zMaxPos);
 
                 for (int i = _dividePosData[key].xMaxPos; i > _roomData[nearRoomB].xMaxPos; i--)
@@ -344,7 +355,15 @@ public class MapCreate : MonoBehaviour
                         _loadLinkPosB = (i, 0, _randomPos);
                 }
 
-                if(_loadLinkPosA.z > _loadLinkPosB.z)
+                _loadData.Add(new PosData
+                {
+                    xMinPos = _dividePosData[key].xMaxPos,
+                    zMinPos = _randomPos,
+                    xMaxPos = _roomData[nearRoomB].xMaxPos,
+                    zMaxPos = _randomPos
+                });
+
+                if (_loadLinkPosA.z >= _loadLinkPosB.z)
                 {
                     for(int i = _loadLinkPosB.z + 1; i < _loadLinkPosA.z; i++)
                     {
@@ -418,6 +437,14 @@ public class MapCreate : MonoBehaviour
                         _loadLinkPosA = (_randomPos, 0, i);
                 }
 
+                _loadData.Add(new PosData
+                {
+                    xMinPos = _randomPos,
+                    zMinPos = _dividePosData[key].zMaxPos,
+                    xMaxPos = _randomPos,
+                    zMaxPos = _roomData[nearRoomA].zMaxPos
+                });
+
                 _randomPos = Random.Range(_roomData[nearRoomB].xMinPos, _roomData[nearRoomB].xMaxPos);
 
                 for (int i = _dividePosData[key].zMaxPos; i > _roomData[nearRoomB].zMaxPos; i--)
@@ -427,7 +454,15 @@ public class MapCreate : MonoBehaviour
                         _loadLinkPosB = (_randomPos, 0, i);
                 }
 
-                if (_loadLinkPosA.x > _loadLinkPosB.x)
+                _loadData.Add(new PosData
+                {
+                    xMinPos = _randomPos,
+                    zMinPos = _dividePosData[key].zMaxPos,
+                    xMaxPos = _randomPos,
+                    zMaxPos = _roomData[nearRoomB].zMaxPos
+                });
+
+                if (_loadLinkPosA.x >= _loadLinkPosB.x)
                 {
                     for (int i = _loadLinkPosB.x + 1; i < _loadLinkPosA.x; i++)
                     {
@@ -459,15 +494,27 @@ public class MapCreate : MonoBehaviour
                         Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
                     }
                 }
-
-
             }
         }
     }
 
     private void CreateDontWalkAreaTile()
     {
+        foreach(var key in _keyList)
+        {
+            foreach(var load in _loadData)
+            {
 
+            }
+
+            for(int i = _areaData[key].zMinPos; i < _roomData[key].zMinPos - 1; i++)
+            {
+                for(int j = _areaData[key].xMinPos; i < _areaData[key].xMaxPos; j++)
+                {
+                    
+                }
+            }
+        }
     }
 }
 
