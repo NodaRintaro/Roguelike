@@ -500,10 +500,24 @@ public class MapCreate : MonoBehaviour
 
     private void CheckDontWalkArea()
     {
-        //エリアに道があるかどうか
-        bool inLoad;
+        List<PosData> checkLoad;
 
-        
+        foreach (var key in _keyList)
+        {
+            checkLoad = new List<PosData>();
+
+            foreach(var load in _loadData)
+            {
+                if (_areaData[key].xMinPos < load.xMinPos && _areaData[key].xMaxPos > load.xMaxPos)
+                {
+                    if(_areaData[key].zMinPos < load.zMinPos && _areaData[key].zMaxPos > load.zMaxPos)
+                    {
+                        checkLoad.Add(load);
+                    }
+                }
+
+            }
+        }
     }
 
     private void CreateDontWalkAreaTile(PosData areaData, PosData loadData, bool InLoad)
