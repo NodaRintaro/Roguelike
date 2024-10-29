@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// 区域分割法によるMap自動生成
@@ -14,19 +16,19 @@ public class MapCreate : MonoBehaviour
         public int zMaxPos;
     }
 
-    [SerializeField,Header("1つのグリッドの大きさ")] private int _gridSize;
+    [SerializeField, Header("1つのグリッドの大きさ")] private int _gridSize;
 
     public int GridSize => _gridSize;
 
     //マップ全体の大きさを決める
-    [SerializeField,Header("マップ全体の横幅")] public int _xLength = 50;
-    [SerializeField,Header("マップ全体の縦幅")] public int _zLength = 50;
-    [SerializeField,Header("作るエリアの数")] int _areaNum = 4;
+    [SerializeField, Header("マップ全体の横幅")] public int _xLength = 50;
+    [SerializeField, Header("マップ全体の縦幅")] public int _zLength = 50;
+    [SerializeField, Header("作るエリアの数")] int _areaNum = 4;
 
     //部屋の大きさの決めるための範囲
-    [SerializeField,Header("生成する部屋の大きさの最小値")] int _roomSizeMin = 5;
-    [SerializeField,Header("生成する部屋の大きさの最大値")] int _roomSizeMax = 10;
-    [SerializeField,Header("生成するエリア大きさの最小値")] int _areaSizeMin = 7;
+    [SerializeField, Header("生成する部屋の大きさの最小値")] int _roomSizeMin = 5;
+    [SerializeField, Header("生成する部屋の大きさの最大値")] int _roomSizeMax = 10;
+    [SerializeField, Header("生成するエリア大きさの最小値")] int _areaSizeMin = 7;
 
     [SerializeField, Header("エリアを分割する時の初期の分割し始める初期の中心座標")]
     (int x, int z) _startPos = (1, 1);
@@ -38,7 +40,7 @@ public class MapCreate : MonoBehaviour
     private GameObject _dontWalkTile;
 
     //それぞれのエリアと部屋の大きさのデータ
-    private Dictionary<string, PosData> _areaData 
+    private Dictionary<string, PosData> _areaData
         = new Dictionary<string, PosData>();
 
     private Dictionary<string, PosData> _roomData
@@ -114,9 +116,9 @@ public class MapCreate : MonoBehaviour
                     new PosData
                     {
                         xMinPos = _startPos.x,
-                        xMaxPos = _randomPos - 1, 
-                        zMinPos = _startPos.z, 
-                        zMaxPos = _zLength 
+                        xMaxPos = _randomPos - 1,
+                        zMinPos = _startPos.z,
+                        zMaxPos = _zLength
                     });
 
                 _areaData.Add(_b,
@@ -181,7 +183,7 @@ public class MapCreate : MonoBehaviour
                             zMinPos = _areaData[_wideArea].zMinPos,
                             zMaxPos = _areaData[_wideArea].zMaxPos
                         });
-                    
+
                     _areaData.Add(_wideArea + _b,
                         new PosData
                         {
@@ -293,20 +295,20 @@ public class MapCreate : MonoBehaviour
         string nearRoomB = null;
 
         //通路を作る
-        foreach(var key in _dividePosData.Keys) 
+        foreach (var key in _dividePosData.Keys)
         {
             nearRoomA = null;
             nearRoomB = null;
 
-            if(_dividePosData[key].xMinPos == _dividePosData[key].xMaxPos)
+            if (_dividePosData[key].xMinPos == _dividePosData[key].xMaxPos)
             {
-                foreach(var roomKey in _keyList)
+                foreach (var roomKey in _keyList)
                 {
                     if (_dividePosData[key].zMinPos < _roomData[roomKey].zMinPos && _dividePosData[key].zMaxPos > _roomData[roomKey].zMaxPos)
                     {
-                        if(_dividePosData[key].xMinPos < _roomData[roomKey].xMinPos)
+                        if (_dividePosData[key].xMinPos < _roomData[roomKey].xMinPos)
                         {
-                            if(nearRoomA == null)
+                            if (nearRoomA == null)
                             {
                                 nearRoomA = roomKey;
                             }
@@ -315,7 +317,7 @@ public class MapCreate : MonoBehaviour
                                 nearRoomA = roomKey;
                             }
                         }
-                        else if(_dividePosData[key].xMinPos > _roomData[roomKey].xMinPos)
+                        else if (_dividePosData[key].xMinPos > _roomData[roomKey].xMinPos)
                         {
                             if (nearRoomB == null)
                             {
@@ -331,7 +333,7 @@ public class MapCreate : MonoBehaviour
 
                 _randomPos = Random.Range(_roomData[nearRoomA].zMinPos, _roomData[nearRoomA].zMaxPos);
 
-                for(int i = _dividePosData[key].xMaxPos; i < _roomData[nearRoomA].xMaxPos; i++)
+                for (int i = _dividePosData[key].xMaxPos; i < _roomData[nearRoomA].xMaxPos; i++)
                 {
                     Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
                     if (i == _dividePosData[key].xMaxPos)
@@ -351,7 +353,7 @@ public class MapCreate : MonoBehaviour
                 for (int i = _dividePosData[key].xMaxPos; i > _roomData[nearRoomB].xMaxPos; i--)
                 {
                     Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                    if(i == _dividePosData[key].xMaxPos)
+                    if (i == _dividePosData[key].xMaxPos)
                         _loadLinkPosB = (i, 0, _randomPos);
                 }
 
@@ -365,12 +367,12 @@ public class MapCreate : MonoBehaviour
 
                 if (_loadLinkPosA.z >= _loadLinkPosB.z)
                 {
-                    for(int i = _loadLinkPosB.z + 1; i < _loadLinkPosA.z; i++)
+                    for (int i = _loadLinkPosB.z + 1; i < _loadLinkPosA.z; i++)
                     {
                         Instantiate(_roomTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
                     }
 
-                    for(int i = _dividePosData[key].zMinPos; i < _loadLinkPosB.z; i++)
+                    for (int i = _dividePosData[key].zMinPos; i < _loadLinkPosB.z; i++)
                     {
                         Instantiate(_dontWalkTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
                     }
@@ -379,7 +381,7 @@ public class MapCreate : MonoBehaviour
                         Instantiate(_dontWalkTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
                     }
                 }
-                else if(_loadLinkPosA.z < _loadLinkPosB.z)
+                else if (_loadLinkPosA.z < _loadLinkPosB.z)
                 {
                     for (int i = _loadLinkPosA.z + 1; i < _loadLinkPosB.z; i++)
                     {
@@ -397,7 +399,7 @@ public class MapCreate : MonoBehaviour
                 }
             }
 
-            else if(_dividePosData[key].zMinPos == _dividePosData[key].zMaxPos)
+            else if (_dividePosData[key].zMinPos == _dividePosData[key].zMaxPos)
             {
                 foreach (var roomKey in _keyList)
                 {
@@ -500,21 +502,31 @@ public class MapCreate : MonoBehaviour
 
     private void CheckDontWalkArea()
     {
-        List<PosData> checkLoad;
+        bool inLoad;
+        List<PosData> inLoadList;
+        
 
         foreach (var key in _keyList)
         {
-            checkLoad = new List<PosData>();
+            inLoadList = new List<PosData>();
 
-            foreach(var load in _loadData)
+            foreach (var load in _loadData)
             {
                 if (_areaData[key].xMinPos < load.xMinPos && _areaData[key].xMaxPos > load.xMaxPos)
                 {
-                    if(_areaData[key].zMinPos < load.zMinPos && _areaData[key].zMaxPos > load.zMaxPos)
+                    if (_areaData[key].zMinPos < load.zMinPos && _areaData[key].zMaxPos > load.zMaxPos)
                     {
-                        checkLoad.Add(load);
+                        inLoadList.Add(load);
                     }
                 }
+            }
+
+            if(inLoadList.Count != 0)
+            {
+                Debug.Log("道がないよ");
+            }
+            else
+            {
 
             }
         }
@@ -522,9 +534,9 @@ public class MapCreate : MonoBehaviour
 
     private void CreateDontWalkAreaTile(PosData areaData, PosData loadData, bool InLoad)
     {
-        if(InLoad)
+        if (InLoad)
         {
-            if(loadData.xMinPos == loadData.xMaxPos)
+            if (loadData.xMinPos == loadData.xMaxPos)
             {
                 for (int i = areaData.xMinPos; i <= areaData.xMaxPos; i++)
                 {
@@ -534,7 +546,7 @@ public class MapCreate : MonoBehaviour
                     }
                 }
             }
-            else if(loadData.zMaxPos == loadData.zMinPos)
+            else if (loadData.zMaxPos == loadData.zMinPos)
             {
                 for (int i = areaData.zMinPos; i <= areaData.zMaxPos; i++)
                 {
@@ -557,4 +569,3 @@ public class MapCreate : MonoBehaviour
         }
     }
 }
-
