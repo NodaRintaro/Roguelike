@@ -523,11 +523,10 @@ public class MapCreate : MonoBehaviour
 
             if(inLoadList.Count != 0)
             {
-                Debug.Log("道がないよ");
-            }
-            else
-            {
+                foreach (var load in inLoadList)
+                {
 
+                }
             }
         }
     }
