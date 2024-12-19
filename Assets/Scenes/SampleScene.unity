@@ -356,9 +356,9 @@ MonoBehaviour:
   _xLength: 100
   _zLength: 100
   _areaNum: 15
-  _roomSizeMin: 5
-  _roomSizeMax: 10
-  _areaSizeMin: 10
+  _roomSizeMin: 2
+  _roomSizeMax: 20
+  _areaSizeMin: 5
   _roomTile: {fileID: 2440097209149797066, guid: afe663956a0dedb45b5c0a832142d31f, type: 3}
   _dontWalkTile: {fileID: 4688546104308179374, guid: c5d1ec0b0981e4745a097b4012b9168c, type: 3}
 --- !u!1660057539 &9223372036854775807

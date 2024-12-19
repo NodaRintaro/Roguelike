@@ -14,6 +14,7 @@ public class MapCreate : MonoBehaviour
         public int zMinPos;
         public int xMaxPos;
         public int zMaxPos;
+        public bool nullData;
     }
 
     [SerializeField, Header("1つのグリッドの大きさ")] private int _gridSize;
@@ -36,7 +37,7 @@ public class MapCreate : MonoBehaviour
     [SerializeField, Header("部屋の床となるオブジェクト")]
     private GameObject _roomTile;
 
-    [SerializeField, Header("部屋や通路以外のMapを埋める")]
+    [SerializeField, Header("部屋や通路以外のMapを埋めるオブジェクト")]
     private GameObject _dontWalkTile;
 
     //それぞれのエリアと部屋の大きさのデータ
@@ -80,6 +81,7 @@ public class MapCreate : MonoBehaviour
     private int _randomRoomSizeMinZ;
     private int _randomRoomSizeMaxZ;
 
+
     public void Start()
     {
         MapGenerate();
@@ -100,8 +102,15 @@ public class MapCreate : MonoBehaviour
 
         //道を作る
         LoadCreate();
+
+        //TODO:歩けない床を作る       
+        DontWalkGroundCreate();
     }
 
+
+    /// <summary>
+    /// 部屋を作るためのエリアを作る
+    /// </summary>
     private void AreaCreate()
     {
         //エリアを分割する
@@ -253,6 +262,10 @@ public class MapCreate : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// 先ほど作ったエリア内に部屋を作る
+    /// </summary>
     private void RoomCreate()
     {
         //部屋を作る
@@ -260,18 +273,20 @@ public class MapCreate : MonoBehaviour
         {
             //ランダムに部屋の大きさを決める 
             _randomRoomSizeMinX = Random.Range(_areaData[key].xMinPos, _areaData[key].xMinPos + ((_areaData[key].xMaxPos - _areaData[key].xMinPos) / 2) - _roomSizeMin) + 1;
-            _randomRoomSizeMaxX = Random.Range(_areaData[key].xMinPos + ((_areaData[key].xMaxPos - _areaData[key].xMinPos) / 2), _areaData[key].xMaxPos) - 1;
+            _randomRoomSizeMaxX = Random.Range(_areaData[key].xMinPos + ((_areaData[key].xMaxPos - _areaData[key].xMinPos) / 2) + _roomSizeMin, _areaData[key].xMaxPos) - 1;
             _randomRoomSizeMinZ = Random.Range(_areaData[key].zMinPos, _areaData[key].zMinPos + ((_areaData[key].zMaxPos - _areaData[key].zMinPos) / 2) - _roomSizeMin) + 1;
-            _randomRoomSizeMaxZ = Random.Range(_areaData[key].zMinPos + ((_areaData[key].zMaxPos - _areaData[key].zMinPos) / 2), _areaData[key].zMaxPos) - 1;
+            _randomRoomSizeMaxZ = Random.Range(_areaData[key].zMinPos + ((_areaData[key].zMaxPos - _areaData[key].zMinPos) / 2) + _roomSizeMin, _areaData[key].zMaxPos) - 1;
 
             //上記で決めた大きさをもとに床となるオブジェクトを生成する
-            for (int i = _randomRoomSizeMinX; _randomRoomSizeMaxX >= i; i++)
-            {
-                for (int j = _randomRoomSizeMinZ; _randomRoomSizeMaxZ >= j; j++)
-                {
-                    Instantiate(_roomTile, new Vector3(i * _gridSize, 0, j * _gridSize), Quaternion.identity);
-                }
-            }
+            BuildTile(_randomRoomSizeMinX, _randomRoomSizeMaxX, _randomRoomSizeMinZ, _randomRoomSizeMaxZ, _roomTile);
+
+            //for (int i = _randomRoomSizeMinX; _randomRoomSizeMaxX >= i; i++)
+            //{
+            //    for (int j = _randomRoomSizeMinZ; _randomRoomSizeMaxZ >= j; j++)
+            //    {
+            //        Instantiate(_roomTile, new Vector3(i * _gridSize, 0, j * _gridSize), Quaternion.identity);
+            //   }
+            //}
 
             //部屋のDataを保存する
             _roomData.Add(key,
@@ -285,6 +300,10 @@ public class MapCreate : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// 道を作る
+    /// </summary>
     private void LoadCreate()
     {
         //エリアに隣接している通路のキーを入れる
@@ -300,8 +319,10 @@ public class MapCreate : MonoBehaviour
             nearRoomA = null;
             nearRoomB = null;
 
+            //分割線が縦にエリアを分割していた場合
             if (_dividePosData[key].xMinPos == _dividePosData[key].xMaxPos)
             {
+                //分割線と一番近い位置にある部屋を２つ探す
                 foreach (var roomKey in _keyList)
                 {
                     if (_dividePosData[key].zMinPos < _roomData[roomKey].zMinPos && _dividePosData[key].zMaxPos > _roomData[roomKey].zMaxPos)
@@ -330,6 +351,8 @@ public class MapCreate : MonoBehaviour
                         }
                     }
                 }
+
+                //分割線と部屋をつなげる
 
                 _randomPos = Random.Range(_roomData[nearRoomA].zMinPos, _roomData[nearRoomA].zMaxPos);
 
@@ -399,8 +422,10 @@ public class MapCreate : MonoBehaviour
                 }
             }
 
+            //分割線が横にエリアを分割していた場合
             else if (_dividePosData[key].zMinPos == _dividePosData[key].zMaxPos)
             {
+                //分割線と一番近い位置にある部屋を２つ探す
                 foreach (var roomKey in _keyList)
                 {
                     if (_dividePosData[key].xMinPos < _roomData[roomKey].xMinPos && _dividePosData[key].xMaxPos > _roomData[roomKey].xMaxPos)
@@ -500,71 +525,61 @@ public class MapCreate : MonoBehaviour
         }
     }
 
-    private void CheckDontWalkArea()
+    private void DontWalkGroundCreate()
     {
-        bool inLoad;
-        List<PosData> inLoadList;
-        
+        PosData loadPos;
 
-        foreach (var key in _keyList)
+        foreach(var areaKey in _keyList)
         {
-            inLoadList = new List<PosData>();
+            //エリアの左上の部分を埋める
+            BuildTile(_areaData[areaKey].xMinPos, _roomData[areaKey].xMinPos - 1, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
 
-            foreach (var load in _loadData)
+            //エリアの右上の部分を埋める
+            BuildTile(_roomData[areaKey].xMaxPos + 1, _areaData[areaKey].xMaxPos, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
+
+            //エリアの左下の部分を埋める
+            BuildTile(_areaData[areaKey].xMinPos, _roomData[areaKey].xMinPos - 1, _areaData[areaKey].zMinPos, _roomData[areaKey].zMinPos - 1, _dontWalkTile);
+
+            //エリアの右下の部分を埋める
+            BuildTile(_roomData[areaKey].xMaxPos + 1, _areaData[areaKey].xMaxPos, _areaData[areaKey].zMinPos, _roomData[areaKey].zMinPos - 1, _dontWalkTile);
+
+            //エリア上部の部分を埋める
+            loadPos = SearchLoad(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _roomData[areaKey].zMinPos, _areaData[areaKey].zMaxPos);
+            if (loadPos.nullData)
+                BuildTile(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
+            else
             {
-                if (_areaData[key].xMinPos < load.xMinPos && _areaData[key].xMaxPos > load.xMaxPos)
-                {
-                    if (_areaData[key].zMinPos < load.zMinPos && _areaData[key].zMaxPos > load.zMaxPos)
-                    {
-                        inLoadList.Add(load);
-                    }
-                }
-            }
-
-            if(inLoadList.Count != 0)
-            {
-                foreach (var load in inLoadList)
-                {
-
-                }
+                BuildTile(_roomData[areaKey].xMinPos, loadPos.xMinPos - 1, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
             }
         }
     }
 
-    private void CreateDontWalkAreaTile(PosData areaData, PosData loadData, bool InLoad)
+    /// <summary>
+    /// 指定された範囲をTileで埋める
+    /// </summary>
+    private void BuildTile(int xMin ,int xMax ,int zMin ,int zMax ,GameObject Tile)
     {
-        if (InLoad)
+        for(int x = xMin; x <= xMax; x++)
         {
-            if (loadData.xMinPos == loadData.xMaxPos)
+            for (int z = zMin; z <= zMax; z++)
             {
-                for (int i = areaData.xMinPos; i <= areaData.xMaxPos; i++)
-                {
-                    for (int j = areaData.zMinPos; j <= areaData.zMaxPos; j++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, j * _gridSize), Quaternion.identity);
-                    }
-                }
-            }
-            else if (loadData.zMaxPos == loadData.zMinPos)
-            {
-                for (int i = areaData.zMinPos; i <= areaData.zMaxPos; i++)
-                {
-                    for (int j = areaData.xMinPos; j <= areaData.xMaxPos; j++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(j * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                    }
-                }
+                Instantiate(Tile, new Vector3(x * _gridSize, 0, z * _gridSize), Quaternion.identity);
             }
         }
-        else
+    }
+
+    /// <summary>
+    /// エリアないに道があるかを探す
+    /// </summary>
+    private PosData SearchLoad(int xMin, int xMax, int zMin, int zMax)
+    {
+        foreach (var item in _loadData)
         {
-            for (int i = areaData.xMinPos; i <= areaData.xMaxPos; i++)
+            if(xMin <= item.xMinPos && xMax >= item.xMaxPos && zMin <= item.xMinPos && zMax >= item.zMaxPos)
             {
-                for (int j = areaData.zMinPos; j <= areaData.zMaxPos; j++)
-                {
-                    Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, j * _gridSize), Quaternion.identity);
-                }
-            }
+                return item;
+            } 
         }
+        return new PosData{nullData = true};
     }
 }
