@@ -353,9 +353,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gridSize: 2
-  _xLength: 100
-  _zLength: 100
-  _areaNum: 15
+  _xLength: 50
+  _zLength: 50
+  _areaNum: 5
   _roomSizeMin: 2
   _roomSizeMax: 20
   _areaSizeMin: 5
