@@ -42,10 +42,10 @@ public class MapCreate : MonoBehaviour
 
     //それぞれのエリアと部屋の大きさのデータ
     private Dictionary<string, PosData> _areaData
-        = new ();
+        = new();
 
     private Dictionary<string, PosData> _roomData
-        = new Dictionary<string, PosData>();
+        = new();
 
     public Dictionary<string, PosData> AreaData => _areaData;
 
@@ -53,10 +53,10 @@ public class MapCreate : MonoBehaviour
 
     //道を作る際に必要となる境界線のデータ
     private Dictionary<string, PosData> _dividePosData
-        = new Dictionary<string, PosData>();
+        = new();
 
     //エリアをつなぐみちのData
-    private List<PosData> _loadData = new List<PosData>();
+    private List<PosData> _loadData = new();
 
     //区画ごとのKeyの名前
     private string _areaNameA = "_A";
@@ -383,19 +383,11 @@ public class MapCreate : MonoBehaviour
                 //分割線の部分にタイルを敷き詰める
                 if (_loadLinkPosA.z >= _loadLinkPosB.z)
                 {
-                    for (int i = _loadLinkPosB.z + 1; i < _loadLinkPosA.z; i++)
-                    {
-                        Instantiate(_roomTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                    }
+                    BuildTile(_loadLinkPosB.x, _loadLinkPosB.x, _loadLinkPosB.z + 1, _loadLinkPosA.z - 1, _roomTile);
 
-                    for (int i = _dividePosData[key].zMinPos; i < _loadLinkPosB.z; i++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                    }
-                    for (int i = _loadLinkPosA.z + 1; i <= _dividePosData[key].zMaxPos; i++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                    }
+                    BuildTile(_loadLinkPosB.x, _loadLinkPosB.x, _dividePosData[key].zMinPos, _loadLinkPosB.z - 1, _dontWalkTile);
+
+                    BuildTile(_loadLinkPosB.x, _loadLinkPosB.x, _loadLinkPosA.z + 1, _dividePosData[key].zMaxPos, _dontWalkTile);
                 }
                 else if (_loadLinkPosA.z < _loadLinkPosB.z)
                 {
@@ -488,40 +480,25 @@ public class MapCreate : MonoBehaviour
                 //分割線の部分にタイルを敷き詰める
                 if (_loadLinkPosA.x >= _loadLinkPosB.x)
                 {
-                    for (int i = _loadLinkPosB.x + 1; i < _loadLinkPosA.x; i++)
-                    {
-                        Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
-                    }
+                    //道同士を繋げる
+                    BuildTile(_loadLinkPosB.x + 1, _loadLinkPosA.x - 1, _loadLinkPosA.z, _loadLinkPosA.z, _roomTile);
 
-                    for (int i = _dividePosData[key].xMinPos; i < _loadLinkPosB.x; i++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, _loadLinkPosB.z * _gridSize), Quaternion.identity);
-                    }
-                    for (int i = _loadLinkPosA.x + 1; i <= _dividePosData[key].xMaxPos; i++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
-                    }
+                    //分割線の残りの部分を歩けない床で埋める
+                    BuildTile(_dividePosData[key].xMinPos, _loadLinkPosB.x - 1, _loadLinkPosB.z, _loadLinkPosB.z, _dontWalkTile);
+                    BuildTile(_loadLinkPosA.x + 1, _dividePosData[key].xMaxPos, _loadLinkPosA.z, _loadLinkPosA.z, _dontWalkTile);
                 }
                 else if (_loadLinkPosA.x < _loadLinkPosB.x)
                 {
-                    for (int i = _loadLinkPosA.x + 1; i < _loadLinkPosB.x; i++)
-                    {
-                        Instantiate(_roomTile, new Vector3(i * _gridSize, 0, _loadLinkPosB.z * _gridSize), Quaternion.identity);
-                    }
+                    //道同士を繋げる
+                    BuildTile(_loadLinkPosA.x + 1, _loadLinkPosB.x - 1, _loadLinkPosB.z, _loadLinkPosB.z, _roomTile) ;
 
-                    for (int i = _dividePosData[key].xMinPos; i < _loadLinkPosA.x; i++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
-                    }
-                    for (int i = _loadLinkPosB.x + 1; i <= _dividePosData[key].xMaxPos; i++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(i * _gridSize, 0, _loadLinkPosA.z * _gridSize), Quaternion.identity);
-                    }
+                    //分割線の残りの部分を歩けない床で埋める
+                    BuildTile(_dividePosData[key].xMinPos, _loadLinkPosA.x - 1, _loadLinkPosA.z, _loadLinkPosA.z, _dontWalkTile);
+                    BuildTile(_loadLinkPosB.x + 1, _dividePosData[key].xMaxPos, _loadLinkPosA.z, _loadLinkPosA.z, _dontWalkTile);
                 }
             }
         }
     }
-
 
     /// <summary>
     /// 歩けない床を敷き詰めていく
@@ -546,12 +523,12 @@ public class MapCreate : MonoBehaviour
 
             //エリア上部の部分を埋める
             loadPos = SearchLoad(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos);
-            if (loadPos.nullData)
-                BuildTile(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
-            else
-            {
-                //BuildTile(_roomData[areaKey].xMinPos, loadPos.xMinPos - 1, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
-            }
+            //if (loadPos.nullData)
+            //    BuildTile(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
+            //else
+            //{
+            //    BuildTile(_roomData[areaKey].xMinPos, loadPos.xMinPos - 1, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
+            //}
         }
     }
 
@@ -567,6 +544,11 @@ public class MapCreate : MonoBehaviour
                 Instantiate(Tile, new Vector3(x * _gridSize, 0, z * _gridSize), Quaternion.identity);
             }
         }
+    }
+
+    private void DataAdd(List<PosData> posList, int xMin, int xMax, int zMin, int zMax)
+    {
+
     }
 
     /// <summary>
