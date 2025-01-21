@@ -85,6 +85,11 @@ public class MapCreate : MonoBehaviour
     public void Start()
     {
         MapGenerate();
+
+        foreach(var load in _loadData)
+        {
+            Debug.Log("ロードデータ" + load.xMinPos + "," +load.xMaxPos + "," + load.zMinPos + "," + load.zMaxPos);
+        }
     }
 
     public void MapGenerate()
@@ -344,10 +349,8 @@ public class MapCreate : MonoBehaviour
                     }
                 }
 
-                //分割線と部屋をつなげる
-
+                //ランダムな位置から分割線までの道を作る
                 _randomPos = Random.Range(_roomData[nearRoomA].zMinPos, _roomData[nearRoomA].zMaxPos);
-
                 for (int xPos = _dividePosData[key].xMaxPos; xPos < _roomData[nearRoomA].xMinPos; xPos++)
                 {
                     Instantiate(_roomTile, new Vector3(xPos * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
@@ -355,16 +358,18 @@ public class MapCreate : MonoBehaviour
                         _loadLinkPosA = (xPos, 0, _randomPos);
                 }
 
+                //分割線と部屋をつなぐRoomAの道のデータを保存する
                 _loadData.Add(new PosData
                 {
-                    xMinPos = _dividePosData[key].xMaxPos + 1,
+                    xMinPos = _dividePosData[key].xMinPos + 1,
                     zMinPos = _randomPos,
                     xMaxPos = _roomData[nearRoomA].xMinPos - 1,
                     zMaxPos = _randomPos
                 });
 
-                _randomPos = Random.Range(_roomData[nearRoomB].zMinPos, _roomData[nearRoomB].zMaxPos);
 
+                //ランダムな位置から分割線までの道を作る
+                _randomPos = Random.Range(_roomData[nearRoomB].zMinPos, _roomData[nearRoomB].zMaxPos);
                 for (int xPos = _dividePosData[key].xMaxPos; xPos > _roomData[nearRoomB].xMaxPos; xPos--)
                 {
                     Instantiate(_roomTile, new Vector3(xPos * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
@@ -372,6 +377,7 @@ public class MapCreate : MonoBehaviour
                         _loadLinkPosB = (xPos, 0, _randomPos);
                 }
 
+                //分割線と部屋をつなぐRoomBの道のデータを保存する
                 _loadData.Add(new PosData
                 {
                     xMinPos = _roomData[nearRoomB].xMaxPos + 1,
@@ -383,27 +389,21 @@ public class MapCreate : MonoBehaviour
                 //分割線の部分にタイルを敷き詰める
                 if (_loadLinkPosA.z >= _loadLinkPosB.z)
                 {
+                    //道同士を繋げる
                     BuildTile(_loadLinkPosB.x, _loadLinkPosB.x, _loadLinkPosB.z + 1, _loadLinkPosA.z - 1, _roomTile);
 
+                    //分割線の残りの部分を歩けない床で埋める
                     BuildTile(_loadLinkPosB.x, _loadLinkPosB.x, _dividePosData[key].zMinPos, _loadLinkPosB.z - 1, _dontWalkTile);
-
                     BuildTile(_loadLinkPosB.x, _loadLinkPosB.x, _loadLinkPosA.z + 1, _dividePosData[key].zMaxPos, _dontWalkTile);
                 }
                 else if (_loadLinkPosA.z < _loadLinkPosB.z)
                 {
-                    for (int i = _loadLinkPosA.z + 1; i < _loadLinkPosB.z; i++)
-                    {
-                        Instantiate(_roomTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                    }
+                    //道同士を繋げる
+                    BuildTile(_loadLinkPosB.x, _loadLinkPosB.x, _loadLinkPosA.z + 1, _loadLinkPosB.z - 1, _roomTile);
 
-                    for (int i = _dividePosData[key].zMinPos; i < _loadLinkPosA.z; i++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(_loadLinkPosA.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                    }
-                    for (int i = _loadLinkPosB.z + 1; i <= _dividePosData[key].zMaxPos; i++)
-                    {
-                        Instantiate(_dontWalkTile, new Vector3(_loadLinkPosB.x * _gridSize, 0, i * _gridSize), Quaternion.identity);
-                    }
+                    //分割線の残りの部分を歩けない床で埋める
+                    BuildTile(_loadLinkPosB.x, _loadLinkPosB.x, _dividePosData[key].zMinPos, _loadLinkPosA.z - 1, _dontWalkTile);
+                    BuildTile(_loadLinkPosB.x, _loadLinkPosB.x, _loadLinkPosB.z + 1, _dividePosData[key].zMaxPos, _dontWalkTile);
                 }
             }
 
@@ -440,10 +440,8 @@ public class MapCreate : MonoBehaviour
                     }
                 }
 
-                //分割線と部屋をつなげる
-
+                //ランダムな位置から分割線までの道を作る
                 _randomPos = Random.Range(_roomData[nearRoomA].xMinPos, _roomData[nearRoomA].xMaxPos);
-
                 for (int zPos = _dividePosData[key].zMaxPos; zPos < _roomData[nearRoomA].zMinPos; zPos++)
                 {
                     Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, zPos * _gridSize), Quaternion.identity);
@@ -451,16 +449,18 @@ public class MapCreate : MonoBehaviour
                         _loadLinkPosA = (_randomPos, 0, zPos);
                 }
 
+                //分割線と部屋をつなぐRoomA道のデータを保存する
                 _loadData.Add(new PosData
                 {
                     xMinPos = _randomPos,
                     zMinPos = _dividePosData[key].zMaxPos + 1,
                     xMaxPos = _randomPos,
-                    zMaxPos = _roomData[nearRoomA].zMaxPos - 1
+                    zMaxPos = _roomData[nearRoomA].zMinPos - 1
                 });
 
-                _randomPos = Random.Range(_roomData[nearRoomB].xMinPos, _roomData[nearRoomB].xMaxPos);
 
+                //ランダムな位置から分割線までの道を作る
+                _randomPos = Random.Range(_roomData[nearRoomB].xMinPos, _roomData[nearRoomB].xMaxPos);
                 for (int zPos = _dividePosData[key].zMaxPos; zPos > _roomData[nearRoomB].zMaxPos; zPos--)
                 {
                     Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, zPos * _gridSize), Quaternion.identity);
@@ -468,6 +468,7 @@ public class MapCreate : MonoBehaviour
                         _loadLinkPosB = (_randomPos, 0, zPos);
                 }
 
+                //分割線と部屋をつなぐRoomBの道のデータを保存する
                 _loadData.Add(new PosData
                 {
                     xMinPos = _randomPos,
@@ -523,12 +524,43 @@ public class MapCreate : MonoBehaviour
 
             //エリア上部の部分を埋める
             loadPos = SearchLoad(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos);
-            //if (loadPos.nullData)
-            //    BuildTile(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
-            //else
-            //{
-            //    BuildTile(_roomData[areaKey].xMinPos, loadPos.xMinPos - 1, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
-            //}
+            if (loadPos.nullData)
+                BuildTile(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
+            else
+            {
+                BuildTile(_roomData[areaKey].xMinPos, loadPos.xMinPos - 1, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
+                BuildTile(loadPos.xMinPos + 1, _roomData[areaKey].xMaxPos, _roomData[areaKey].zMaxPos + 1, _areaData[areaKey].zMaxPos, _dontWalkTile);
+            }
+
+            //エリア下部の部分を埋める
+            loadPos = SearchLoad(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _areaData[areaKey].zMinPos, _roomData[areaKey].zMinPos - 1);
+            if (loadPos.nullData)
+                BuildTile(_roomData[areaKey].xMinPos, _roomData[areaKey].xMaxPos, _areaData[areaKey].zMinPos, _roomData[areaKey].zMinPos - 1, _dontWalkTile);
+            else
+            {
+                BuildTile(_roomData[areaKey].xMinPos, loadPos.xMinPos - 1, _areaData[areaKey].zMinPos, _roomData[areaKey].zMinPos - 1, _dontWalkTile);
+                BuildTile(loadPos.xMinPos + 1, _roomData[areaKey].xMaxPos, _areaData[areaKey].zMinPos, _roomData[areaKey].zMinPos - 1, _dontWalkTile);
+            }
+
+            //エリアの左の部分を埋める
+            loadPos = SearchLoad(_areaData[areaKey].xMinPos, _roomData[areaKey].xMinPos - 1, _roomData[areaKey].zMinPos, _roomData[areaKey].zMaxPos);
+            if (loadPos.nullData)
+                BuildTile(_areaData[areaKey].xMinPos, _roomData[areaKey].xMinPos - 1, _roomData[areaKey].zMinPos, _roomData[areaKey].zMaxPos, _dontWalkTile);
+            else
+            {
+                BuildTile(_areaData[areaKey].xMinPos, _roomData[areaKey].xMinPos - 1, _roomData[areaKey].zMinPos, loadPos.zMinPos - 1, _dontWalkTile);
+                BuildTile(_areaData[areaKey].xMinPos, _roomData[areaKey].xMinPos - 1, loadPos.zMinPos + 1, _roomData[areaKey].zMaxPos, _dontWalkTile);
+            }
+
+            //エリアの右の部分を埋める
+            loadPos = SearchLoad(_roomData[areaKey].xMaxPos + 1, _areaData[areaKey].xMaxPos, _roomData[areaKey].zMinPos, _roomData[areaKey].zMaxPos);
+            if (loadPos.nullData)
+                BuildTile(_roomData[areaKey].xMaxPos + 1, _areaData[areaKey].xMaxPos, _roomData[areaKey].zMinPos, _roomData[areaKey].zMaxPos, _dontWalkTile);
+            else
+            {
+                BuildTile(_roomData[areaKey].xMaxPos + 1, _areaData[areaKey].xMaxPos, _roomData[areaKey].zMinPos, loadPos.zMinPos - 1, _dontWalkTile);
+                BuildTile(_roomData[areaKey].xMaxPos + 1, _areaData[areaKey].xMaxPos, loadPos.zMinPos + 1, _roomData[areaKey].zMaxPos, _dontWalkTile);
+            }
         }
     }
 
@@ -546,19 +578,16 @@ public class MapCreate : MonoBehaviour
         }
     }
 
-    private void DataAdd(List<PosData> posList, int xMin, int xMax, int zMin, int zMax)
-    {
-
-    }
-
     /// <summary>
     /// エリアないに道があるかを探す
     /// </summary>
     private PosData SearchLoad(int xMin, int xMax, int zMin, int zMax)
     {
+        Debug.Log("サーチエリア：" + xMin + "," + xMax + "," + zMin + "," + zMax);
+
         foreach (var loadPos in _loadData)
         {
-            if(xMin <= loadPos.xMinPos && xMax >= loadPos.xMaxPos && zMin <= loadPos.xMinPos && zMax >= loadPos.zMaxPos)
+            if(xMin <= loadPos.xMinPos && xMax >= loadPos.xMaxPos && zMin <= loadPos.zMinPos && zMax >= loadPos.zMaxPos)
             {
                 Debug.Log("道があります");
                 return loadPos;
