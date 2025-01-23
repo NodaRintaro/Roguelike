@@ -108,7 +108,7 @@ public class MapCreate : MonoBehaviour
         //道を作る
         LoadCreate();
 
-        //TODO:歩けない床を作る       
+        //歩けない床を作る       
         DontWalkGroundCreate();
     }
 
