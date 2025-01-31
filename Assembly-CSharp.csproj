@@ -65,7 +65,7 @@
     <Compile Include="Assets\Editer\Editer.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\Rotator.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\WheelController.cs" />
-    <Compile Include="Assets\Script\Spawn\PlayerSpawn.cs" />
+    <Compile Include="Assets\Script\Spawn\SpawnPoint.cs" />
     <Compile Include="Assets\Script\MapCreate.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
     <Compile Include="Assets\Script\Player\PlayerMove.cs" />
