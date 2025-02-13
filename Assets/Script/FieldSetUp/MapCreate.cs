@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -32,7 +31,8 @@ public class MapCreate : MonoBehaviour
     [SerializeField, Header("生成するエリア大きさの最小値")] int _areaSizeMin = 7;
 
     [SerializeField, Header("エリアを分割する時の初期の分割し始める初期の中心座標")]
-    (int x, int z) _startPos = (1, 1);
+    private const int _startPosX = 1;
+    private const int _startPosZ = 1;
 
     [SerializeField, Header("部屋の床となるオブジェクト")]
     private GameObject _roomTile;
@@ -41,7 +41,7 @@ public class MapCreate : MonoBehaviour
     private GameObject _dontWalkTile;
 
     [SerializeField, Header("生成したタイルを管理する親オブジェクト")]
-    private GameObject _tileListObject;
+    private GameObject _tileCollectObject;
 
     //それぞれのエリアと部屋の大きさのデータ
     private Dictionary<string, PosData> _areaData
@@ -69,6 +69,8 @@ public class MapCreate : MonoBehaviour
     //最終的に出来上がった区画のKeyのみを保存するList
     private List<string> _keyList = new List<string>();
 
+    public List<string> KeyList => _keyList;
+
     //ランダムな座標
     private int _randomPos;
 
@@ -84,11 +86,6 @@ public class MapCreate : MonoBehaviour
     private int _randomRoomSizeMinZ;
     private int _randomRoomSizeMaxZ;
 
-
-    public void Start()
-    {
-        MapGenerate();
-    }
 
     public void MapGenerate()
     {
@@ -122,14 +119,14 @@ public class MapCreate : MonoBehaviour
             //最初のエリアAとBを作る
             if (i == 1)
             {
-                _randomPos = Random.Range(_startPos.x + _areaSizeMin, _fieldLengthX - _areaSizeMin);
+                _randomPos = Random.Range(_startPosX + _areaSizeMin, _fieldLengthX - _areaSizeMin);
 
                 _areaData.Add(_areaNameA,
                     new PosData
                     {
-                        xMinPos = _startPos.x,
+                        xMinPos = _startPosX,
                         xMaxPos = _randomPos - 1,
-                        zMinPos = _startPos.z,
+                        zMinPos = _startPosZ,
                         zMaxPos = _fieldLengthZ
                     });
 
@@ -138,7 +135,7 @@ public class MapCreate : MonoBehaviour
                     {
                         xMinPos = _randomPos + 1,
                         xMaxPos = _fieldLengthX,
-                        zMinPos = _startPos.z,
+                        zMinPos = _startPosZ,
                         zMaxPos = _fieldLengthZ
                     });
 
@@ -147,7 +144,7 @@ public class MapCreate : MonoBehaviour
                     {
                         xMinPos = _randomPos,
                         xMaxPos = _randomPos,
-                        zMinPos = _startPos.z,
+                        zMinPos = _startPosZ,
                         zMaxPos = _fieldLengthZ
                     });
 
@@ -355,7 +352,7 @@ public class MapCreate : MonoBehaviour
                 for (int xPos = _dividePosData[key].xMaxPos; xPos < _roomData[nearRoomA].xMinPos; xPos++)
                 {
                     targetTile = Instantiate(_roomTile, new Vector3(xPos * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                    targetTile.transform.SetParent(_tileListObject.transform);
+                    targetTile.transform.SetParent(_tileCollectObject.transform);
 
                     if (xPos == _dividePosData[key].xMaxPos)
                         _loadLinkPosA = (xPos, 0, _randomPos);
@@ -376,7 +373,7 @@ public class MapCreate : MonoBehaviour
                 for (int xPos = _dividePosData[key].xMaxPos; xPos > _roomData[nearRoomB].xMaxPos; xPos--)
                 {
                     targetTile = Instantiate(_roomTile, new Vector3(xPos * _gridSize, 0, _randomPos * _gridSize), Quaternion.identity);
-                    targetTile.transform.SetParent(_tileListObject.transform);
+                    targetTile.transform.SetParent(_tileCollectObject.transform);
 
                     if (xPos == _dividePosData[key].xMaxPos)
                         _loadLinkPosB = (xPos, 0, _randomPos);
@@ -450,7 +447,7 @@ public class MapCreate : MonoBehaviour
                 for (int zPos = _dividePosData[key].zMaxPos; zPos < _roomData[nearRoomA].zMinPos; zPos++)
                 {
                     targetTile = Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, zPos * _gridSize), Quaternion.identity);
-                    targetTile.transform.SetParent(_tileListObject.transform);
+                    targetTile.transform.SetParent(_tileCollectObject.transform);
 
                     if (zPos == _dividePosData[key].zMaxPos)
                         _loadLinkPosA = (_randomPos, 0, zPos);
@@ -471,7 +468,7 @@ public class MapCreate : MonoBehaviour
                 for (int zPos = _dividePosData[key].zMaxPos; zPos > _roomData[nearRoomB].zMaxPos; zPos--)
                 {
                     targetTile = Instantiate(_roomTile, new Vector3(_randomPos * _gridSize, 0, zPos * _gridSize), Quaternion.identity);
-                    targetTile.transform.SetParent(_tileListObject.transform);
+                    targetTile.transform.SetParent(_tileCollectObject.transform);
 
                     if (zPos == _dividePosData[key].zMaxPos)
                         _loadLinkPosB = (_randomPos, 0, zPos);
@@ -584,10 +581,9 @@ public class MapCreate : MonoBehaviour
             for (int z = zMin; z <= zMax; z++)
             {
                 tile = Instantiate(Tile, new Vector3(x * _gridSize, 0, z * _gridSize), Quaternion.identity);
-                tile.transform.SetParent(_tileListObject.transform);
+                tile.transform.SetParent(_tileCollectObject.transform);
             }
         }
-
     }
 
     /// <summary>
