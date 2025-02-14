@@ -376,11 +376,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c30e14318de1d7479390039623eacab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerObject: {fileID: 888410778428879486, guid: bb1d0ca1003f3004c853b24e21eefa8c, type: 3}
+  _playerObject: {fileID: 3382802251586078486, guid: bb1d0ca1003f3004c853b24e21eefa8c, type: 3}
   _enemyList:
-  - {fileID: 0}
-  _item:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 06d444034f9c9ef4b83d5f1199e9b74d, type: 2}
+  - {fileID: 11400000, guid: 8b976522cde0a2441a6048eb27f06bb8, type: 2}
+  - {fileID: 11400000, guid: 60ae35128daf80a478a36d59818b885f, type: 2}
+  _itemList: []
 --- !u!114 &1721198144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mapCreate: {fileID: 1721198142}
   _characterSpawn: {fileID: 1721198143}
-  _setUpField: 0
+  _firstSpawnEnemysNum: 5
 --- !u!1 &1965601179
 GameObject:
   m_ObjectHideFlags: 0

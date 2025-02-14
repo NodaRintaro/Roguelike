@@ -61,11 +61,14 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.23f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\CharacterData\EnemysData.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
     <Compile Include="Assets\Editer\Editer.cs" />
+    <Compile Include="Assets\Script\CharacterData\ItemData.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\Rotator.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\WheelController.cs" />
     <Compile Include="Assets\Script\FieldSetUp\FieldSetUp.cs" />
+    <Compile Include="Assets\Script\CharacterData\PlayerData.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
     <Compile Include="Assets\Script\FieldSetUp\MapCreate.cs" />
     <Compile Include="Assets\Script\FieldSetUp\characterSpawn.cs" />
