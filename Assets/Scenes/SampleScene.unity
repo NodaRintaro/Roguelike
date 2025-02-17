@@ -119,6 +119,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &483973871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483973873}
+  - component: {fileID: 483973872}
+  m_Layer: 0
+  m_Name: TurnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &483973872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483973871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b195cd92007774688a3120d771cbae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveCharacters: []
+--- !u!4 &483973873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483973871}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 57.040733, y: 1.4323006, z: 55.361702}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,16 +396,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1721198140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690cbd4863f402844b6d1cd572556229, type: 3}
+  m_Script: {fileID: 11500000, guid: f7f23b9dc194870428103e0ef96223e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gridSize: 2
   _fieldLengthX: 50
   _fieldLengthZ: 50
-  _areaNum: 8
-  _roomSizeMin: 2
+  _areaNum: 4
+  _roomSizeMin: 3
   _roomSizeMax: 20
-  _areaSizeMin: 5
+  _areaSizeMin: 7
   _roomTile: {fileID: 2440097209149797066, guid: afe663956a0dedb45b5c0a832142d31f, type: 3}
   _dontWalkTile: {fileID: 4688546104308179374, guid: c5d1ec0b0981e4745a097b4012b9168c, type: 3}
   _tileCollectObject: {fileID: 1965601179}
@@ -436,3 +481,4 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 1721198141}
   - {fileID: 1965601180}
+  - {fileID: 483973873}

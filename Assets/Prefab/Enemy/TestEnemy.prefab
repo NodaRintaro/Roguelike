@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3639982308596534914}
   - component: {fileID: 3183890966659876826}
   - component: {fileID: 4322728348167818532}
+  - component: {fileID: -1883858679925369324}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Untagged
@@ -110,3 +111,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1883858679925369324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849226470356090786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d04a7a35fa1984aae5c66f21c1494c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HP: 0
+  _attack: 0
+  _speed: 5

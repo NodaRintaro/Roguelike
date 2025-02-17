@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 838964624045000643}
   - component: {fileID: 5946475673395850453}
   - component: {fileID: 3280316997121028289}
+  - component: {fileID: -8140059569292113437}
   - component: {fileID: 3996518667101084402}
   m_Layer: 0
   m_Name: TeatEnemy2
@@ -87,6 +88,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-8140059569292113437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4418180425588050649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d04a7a35fa1984aae5c66f21c1494c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HP: 0
+  _attack: 0
+  _speed: 3
 --- !u!136 &3996518667101084402
 CapsuleCollider:
   m_ObjectHideFlags: 0

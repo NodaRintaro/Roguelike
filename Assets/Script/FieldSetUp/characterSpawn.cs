@@ -1,20 +1,20 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSpawn : MonoBehaviour
 {
-    [SerializeField,Header("ƒvƒŒƒCƒ„[‚ÌƒvƒŒƒtƒ@ƒu")]
+    [SerializeField,Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ—ãƒ¬ãƒ•ã‚¡ãƒ–")]
     private GameObject _playerObject;
 
-    [SerializeField,Header("“G‚Ìí—Ş‚ÆoŒ»Šm—¦")]
+    [SerializeField,Header("æ•µã®ç¨®é¡ã¨å‡ºç¾ç¢ºç‡")]
     private List<EnemysData> _enemyList;
 
-    [SerializeField,Header("ƒAƒCƒeƒ€‚Ìí—Ş‚ÆoŒ»Šm—¦")]
+    [SerializeField,Header("ã‚¢ã‚¤ãƒ†ãƒ ã®ç¨®é¡ã¨å‡ºç¾ç¢ºç‡")]
     private List<GameObject> _itemList;
 
-    private List<GameObject> _actorsList = new();
+    private MapGenerator _mapCreate;
 
-    private MapCreate _mapCreate;
+    private List<GameObject> _actorsList = new();
 
     public GameObject PlayerPrefab => _playerObject;
 
@@ -24,22 +24,25 @@ public class CharacterSpawn : MonoBehaviour
 
     private void Start()
     {
-        _mapCreate = GetComponent<MapCreate>();
+        _mapCreate = GetComponent<MapGenerator>();
     }
 
     /// <summary>
-    /// ƒLƒƒƒ‰‚ğ¶¬‚·‚é
+    /// ã‚­ãƒ£ãƒ©ã‚’ç”Ÿæˆã™ã‚‹
     /// </summary>
     /// <param name="spawnObject"></param>
     /// <param name="posX"></param>
     /// <param name="posZ"></param>
     public void SpawnActor(GameObject spawnObject, int posX, int posZ)
     {
-        _actorsList.Add(Instantiate(spawnObject, new Vector3(posX * _mapCreate.GridSize, _mapCreate.GridSize, posZ * _mapCreate.GridSize), Quaternion.identity));
+        GameObject spawnObj= Instantiate(spawnObject, new Vector3(posX * _mapCreate.GridSize, _mapCreate.GridSize, posZ * _mapCreate.GridSize), Quaternion.identity);
+        Character spawnCharaInstance = spawnObj.GetComponent<Character>();
+        TurnManager.Instance._moveCharacters.Add(spawnCharaInstance);
+        _actorsList.Add(spawnObj);
     }
 
     /// <summary>
-    /// ƒLƒƒƒ‰‚ğ¶¬‚·‚éˆÊ’u‚ğƒ‰ƒ“ƒ_ƒ€‚ÉŒˆ’è‚·‚é
+    /// ã‚­ãƒ£ãƒ©ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«æ±ºå®šã™ã‚‹
     /// </summary>
     /// <param name="Xpos"></param>
     /// <param name="Zpos"></param>
@@ -60,6 +63,7 @@ public class CharacterSpawn : MonoBehaviour
         Xpos = Random.Range(_mapCreate.RoomData[roomKey].xMinPos, _mapCreate.RoomData[roomKey].xMaxPos);
         Zpos = Random.Range(_mapCreate.RoomData[roomKey].zMinPos, _mapCreate.RoomData[roomKey].zMaxPos);
 
+        //ã‚‚ã—ä»–ã®ã‚­ãƒ£ãƒ©ã¨å‡ºç¾å ´æ‰€ãŒã‹ã¶ã£ãŸã‚‰ã‚‚ã†ä¸€åº¦å‡ºç¾å ´æ‰€ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«é¸æŠã™ã‚‹
         if (_actorsList != null)
         {
             foreach (var actors in _actorsList)
@@ -73,7 +77,7 @@ public class CharacterSpawn : MonoBehaviour
     }
 
     /// <summary>
-    /// d‚İ•t‚«Šm—¦ŒvZ‚É‚æ‚é¶¬‚·‚é“GƒLƒƒƒ‰‚Ì‘I‘ğ
+    /// é‡ã¿ä»˜ãç¢ºç‡è¨ˆç®—ã«ã‚ˆã‚‹ç”Ÿæˆã™ã‚‹æ•µã‚­ãƒ£ãƒ©ã®é¸æŠ
     /// </summary>
     /// <param name="GachaList"></param>
     /// <returns></returns>

@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 /// <summary>
 /// 区域分割法によるMap自動生成
 /// </summary>
-public class MapCreate : MonoBehaviour
+public class MapGenerator : MonoBehaviour
 {
     public struct PosData
     {
@@ -15,6 +15,7 @@ public class MapCreate : MonoBehaviour
         public int zMaxPos;
         public bool nullData;
     }
+
 
     [SerializeField, Header("1つのグリッドの大きさ")] private int _gridSize;
 

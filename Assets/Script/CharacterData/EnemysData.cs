@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemysData", menuName = "Scriptable Objects/EnemysData")]
 public class EnemysData : ScriptableObject
 {
-    [SerializeField,Header("ƒLƒƒƒ‰‚ÌoŒ»Šm—¦")] private int _probability = 5;
+    [SerializeField,Header("ã‚­ãƒ£ãƒ©ã®å‡ºç¾ç¢ºç‡")] private int _probability = 5;
 
     public int Probability => _probability;
 
-    [SerializeField,Header("ƒLƒƒƒ‰‚ÌƒvƒŒƒtƒ@ƒu")] GameObject _enemyPrefab = null;
+    [SerializeField,Header("ã‚­ãƒ£ãƒ©ã®ãƒ—ãƒ¬ãƒ•ã‚¡ãƒ–")] GameObject _enemyPrefab = null;
 
     public GameObject EnemyPrefab => _enemyPrefab;
 }
