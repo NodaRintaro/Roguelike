@@ -6,50 +6,67 @@ using System.Collections.Generic;
 /// </summary>
 public class TurnManager : MonoBehaviour
 {
-    static TurnManager _TMinstance = new TurnManager();
-    public static TurnManager Instance => _TMinstance;
+    [SerializeField, Header("行動可能キャラクターのリスト")]
+    public List<CharacterData> _canMoveCharactersList = new();
 
-    [Header("行動可能キャラクターのリスト")]
-    public List<Character> _moveCharacters = new();
+    [SerializeField, Header("行動済みキャラクターのリスト")]
+    private List<CharacterData> _alreadyActedCharacters = new();
 
     /// <summary>
     /// 次のキャラに行動をさせる
     /// </summary>
     /// <param name="speed"></param>
-    public void GoNextTurn(int speed)
+    public void GoNextTurn(CharacterData currentActCharacter)
     {
-        Character currentNextMoveCharacter = null;
-        foreach (var character in _moveCharacters)
+        CharacterData NextMoveCharacter = null;
+        foreach (var character in _canMoveCharactersList)
         {
             //配列内の次の行動順のキャラクターを探す
-            if(currentNextMoveCharacter == null)
+            if(NextMoveCharacter == null)
             {
-                if (speed >= character.Speed)
+                if (currentActCharacter.Speed > character.Speed)
                 {
-                    currentNextMoveCharacter = character;
+                    NextMoveCharacter = character;
                 }
             }
             else
             {
-                if(speed >= character.Speed && currentNextMoveCharacter.Speed < character.Speed)
+                if(currentActCharacter.Speed >= character.Speed && NextMoveCharacter.Speed < character.Speed)
                 {
-                    currentNextMoveCharacter = character;
+                    NextMoveCharacter = character;
                 }
             }
         }
 
         //もし、次の行動順のキャラがいなければ一番早いキャラに行動順が移る
-        if (currentNextMoveCharacter == null)
+        if (NextMoveCharacter == null)
         {
-            foreach (var character in _moveCharacters)
+            foreach (var character in _canMoveCharactersList)
             {
-                if (currentNextMoveCharacter == null || currentNextMoveCharacter.Speed < character.Speed)
+                if (NextMoveCharacter == null || NextMoveCharacter.Speed < character.Speed)
                 {
-                    currentNextMoveCharacter = character;
+                    NextMoveCharacter = character;
                 }
             }
         }
         
-        currentNextMoveCharacter.TurnChange();
+        NextMoveCharacter.TurnChange();
+        _canMoveCharactersList.Remove(NextMoveCharacter);
+        _alreadyActedCharacters.Add(NextMoveCharacter);
+
+        if(_canMoveCharactersList.Count == 0)
+        {
+            foreach(var character in _alreadyActedCharacters)
+            {
+                _canMoveCharactersList.Add(character);
+            }
+            _alreadyActedCharacters.Clear();
+        }
+    }
+
+    public void AddCharactersList(CharacterData addCharacter)
+    {
+        Debug.Log("実行中です");
+        _canMoveCharactersList.Add(addCharacter);
     }
 }

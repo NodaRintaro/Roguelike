@@ -596,11 +596,9 @@ public class MapGenerator : MonoBehaviour
         {
             if(xMin <= loadPos.xMinPos && xMax >= loadPos.xMaxPos && zMin <= loadPos.zMinPos && zMax >= loadPos.zMaxPos)
             {
-                Debug.Log("道があります");
                 return loadPos;
             } 
         }
-        Debug.Log("道がありません");
         return new PosData {nullData = true};
     }
 }

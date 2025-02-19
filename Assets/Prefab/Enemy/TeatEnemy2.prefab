@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3280316997121028289}
   - component: {fileID: -8140059569292113437}
   - component: {fileID: 3996518667101084402}
+  - component: {fileID: -5422357575773348222}
   m_Layer: 0
   m_Name: TeatEnemy2
   m_TagString: Untagged
@@ -97,12 +98,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4418180425588050649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35d04a7a35fa1984aae5c66f21c1494c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6922323c6cfb15f489a78230e45f8e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _HP: 0
-  _attack: 0
-  _speed: 3
+  _HP: 11
+  _speed: 11
+  _power: 11
+  _canMove: 0
 --- !u!136 &3996518667101084402
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -126,3 +128,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5422357575773348222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4418180425588050649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b11db945be6a86448cf5b7de399bad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

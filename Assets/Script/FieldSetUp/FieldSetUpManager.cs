@@ -12,10 +12,13 @@ public class FieldSetUpManager : MonoBehaviour
     [SerializeField,Header("最初にスポーンさせる敵の数")]
     private int _firstSpawnEnemysNum = 4;
 
+    private TurnManager _turnManager;
+
     private void Start()
     {
         _characterSpawn = GetComponent<CharacterSpawn>();
         _mapCreate = GetComponent<MapGenerator>();
+        _turnManager = FindFirstObjectByType<TurnManager>();
 
         FirstFieldSetUp();
     }
@@ -39,6 +42,8 @@ public class FieldSetUpManager : MonoBehaviour
             _characterSpawn.RandomSpawnPos(out randomPosX, out randomPosZ);
             _characterSpawn.SpawnActor(_characterSpawn.SpawnGacha(), randomPosX, randomPosZ);
         }
+
+        _turnManager.GoNextTurn(_turnManager._canMoveCharactersList[Random.Range(0,_turnManager._canMoveCharactersList.Count - 1)]);
     }
 
     public void EnemySpawn(int spawnNum)

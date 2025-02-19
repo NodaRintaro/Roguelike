@@ -7,24 +7,27 @@ public class CharacterSpawn : MonoBehaviour
     private GameObject _playerObject;
 
     [SerializeField,Header("敵の種類と出現確率")]
-    private List<EnemysData> _enemyList;
+    private List<EnemysGachaData> _enemyList;
 
     [SerializeField,Header("アイテムの種類と出現確率")]
     private List<GameObject> _itemList;
 
     private MapGenerator _mapCreate;
 
+    private TurnManager _turnManager;
+
     private List<GameObject> _actorsList = new();
 
     public GameObject PlayerPrefab => _playerObject;
 
-    public List<EnemysData> EnemyList => _enemyList;
+    public List<EnemysGachaData> EnemyList => _enemyList;
 
     public List<GameObject> ItemList => _itemList;
 
     private void Start()
     {
         _mapCreate = GetComponent<MapGenerator>();
+        _turnManager = FindFirstObjectByType<TurnManager>();
     }
 
     /// <summary>
@@ -35,10 +38,11 @@ public class CharacterSpawn : MonoBehaviour
     /// <param name="posZ"></param>
     public void SpawnActor(GameObject spawnObject, int posX, int posZ)
     {
-        GameObject spawnObj= Instantiate(spawnObject, new Vector3(posX * _mapCreate.GridSize, _mapCreate.GridSize, posZ * _mapCreate.GridSize), Quaternion.identity);
-        Character spawnCharaInstance = spawnObj.GetComponent<Character>();
-        TurnManager.Instance._moveCharacters.Add(spawnCharaInstance);
-        _actorsList.Add(spawnObj);
+        GameObject generatedObj = Instantiate(spawnObject, new Vector3(posX * _mapCreate.GridSize, _mapCreate.GridSize, posZ * _mapCreate.GridSize), Quaternion.identity);
+        CharacterData spawnCharaInstance = generatedObj.GetComponent<CharacterData>();
+        _turnManager._canMoveCharactersList.Add(spawnCharaInstance);
+        _actorsList.Add(generatedObj);
+        Debug.Log("キャラを生成");
     }
 
     /// <summary>

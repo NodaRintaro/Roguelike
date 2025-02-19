@@ -7,17 +7,16 @@ public class PlayerMove : MonoBehaviour
 
     private MapGenerator _mapGenerator;
 
-    private Player _player;
-
     private void Start()
     {
         _playerPos = this.transform.position;
-        _mapGenerator = GetComponent<MapGenerator>();
-        _player = GetComponent<Player>();
+        _mapGenerator = FindFirstObjectByType<MapGenerator>();
     }
 
     public void GridMove(Vector3 moveVec)
     {
-        _playerPos += moveVec * _mapGenerator.GridSize;
+        int gridSize = _mapGenerator.GridSize;
+        _playerPos += new Vector3(moveVec.x * gridSize,0,moveVec.z * gridSize);
+        this.transform.position = _playerPos;
     }
 }
