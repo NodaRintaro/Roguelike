@@ -39,7 +39,7 @@ public class CharacterSpawn : MonoBehaviour
     public void SpawnActor(GameObject spawnObject, int posX, int posZ)
     {
         GameObject generatedObj = Instantiate(spawnObject, new Vector3(posX * _mapCreate.GridSize, _mapCreate.GridSize, posZ * _mapCreate.GridSize), Quaternion.identity);
-        CharacterData spawnCharaInstance = generatedObj.GetComponent<CharacterData>();
+        Character spawnCharaInstance = generatedObj.GetComponent<Character>();
         _turnManager._canMoveCharactersList.Add(spawnCharaInstance);
         _actorsList.Add(generatedObj);
         Debug.Log("キャラを生成");

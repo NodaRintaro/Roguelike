@@ -87,6 +87,10 @@ public class MapGenerator : MonoBehaviour
     private int _randomRoomSizeMinZ;
     private int _randomRoomSizeMaxZ;
 
+    private List<Vector3> _walkPointList = new List<Vector3>();
+    private List<Vector3> _goalPointList = new List<Vector3>();
+
+    public List<Vector3> WalkPointList => _walkPointList;
 
     public void MapGenerate()
     {
@@ -356,7 +360,11 @@ public class MapGenerator : MonoBehaviour
                     targetTile.transform.SetParent(_tileCollectObject.transform);
 
                     if (xPos == _dividePosData[key].xMaxPos)
+                    {
                         _loadLinkPosA = (xPos, 0, _randomPos);
+                        _walkPointList.Add(new Vector3(xPos, 0, _randomPos));
+                    }
+
                 }
 
                 //分割線と部屋をつなぐRoomAの道のデータを保存する
@@ -377,7 +385,10 @@ public class MapGenerator : MonoBehaviour
                     targetTile.transform.SetParent(_tileCollectObject.transform);
 
                     if (xPos == _dividePosData[key].xMaxPos)
+                    {
                         _loadLinkPosB = (xPos, 0, _randomPos);
+                        _walkPointList.Add(new Vector3(xPos, 0, _randomPos));
+                    }
                 }
 
                 //分割線と部屋をつなぐRoomBの道のデータを保存する
@@ -451,7 +462,10 @@ public class MapGenerator : MonoBehaviour
                     targetTile.transform.SetParent(_tileCollectObject.transform);
 
                     if (zPos == _dividePosData[key].zMaxPos)
+                    {
                         _loadLinkPosA = (_randomPos, 0, zPos);
+                        _walkPointList.Add(new Vector3(_randomPos, 0, zPos));
+                    }
                 }
 
                 //分割線と部屋をつなぐRoomA道のデータを保存する
@@ -472,7 +486,10 @@ public class MapGenerator : MonoBehaviour
                     targetTile.transform.SetParent(_tileCollectObject.transform);
 
                     if (zPos == _dividePosData[key].zMaxPos)
+                    {
                         _loadLinkPosB = (_randomPos, 0, zPos);
+                        _walkPointList.Add(new Vector3(_randomPos, 0, zPos));
+                    }
                 }
 
                 //分割線と部屋をつなぐRoomBの道のデータを保存する

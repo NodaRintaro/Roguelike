@@ -1,6 +1,7 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
 
+[DefaultExecutionOrder(0)]
 public class FieldSetUpManager : MonoBehaviour
 {
     [SerializeField,Header("マップを自動で生成してくれるクラス")] 
@@ -43,7 +44,8 @@ public class FieldSetUpManager : MonoBehaviour
             _characterSpawn.SpawnActor(_characterSpawn.SpawnGacha(), randomPosX, randomPosZ);
         }
 
-        _turnManager.GoNextTurn(_turnManager._canMoveCharactersList[Random.Range(0,_turnManager._canMoveCharactersList.Count - 1)]);
+        Debug.Log(_turnManager._canMoveCharactersList[Random.Range(1, _turnManager._canMoveCharactersList.Count - 1)].Speed);
+        _turnManager.GoNextTurn(_turnManager._canMoveCharactersList[Random.Range(1,_turnManager._canMoveCharactersList.Count - 1)]);
     }
 
     public void EnemySpawn(int spawnNum)

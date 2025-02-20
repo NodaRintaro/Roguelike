@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5548529145566675701}
   - component: {fileID: 2795921297586682470}
   - component: {fileID: 2124409693936481004}
-  - component: {fileID: -7404458615530884657}
   - component: {fileID: -4236713953206447004}
   m_Layer: 0
   m_Name: TestEnemy3
@@ -112,22 +111,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7404458615530884657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9060334712959979510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6922323c6cfb15f489a78230e45f8e26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _HP: 9
-  _speed: 9
-  _power: 9
-  _canMove: 0
 --- !u!114 &-4236713953206447004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b11db945be6a86448cf5b7de399bad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _HP: 10
+  _speed: 15
+  _power: 3
+  _playerObject: {fileID: 182100975310302802, guid: 6a4b05b98ee0e2f4f99357eb9970d6d6, type: 3}
+  _turnManagerObj: {fileID: 0}

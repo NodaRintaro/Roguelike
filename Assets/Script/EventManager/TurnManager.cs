@@ -7,31 +7,31 @@ using System.Collections.Generic;
 public class TurnManager : MonoBehaviour
 {
     [SerializeField, Header("行動可能キャラクターのリスト")]
-    public List<CharacterData> _canMoveCharactersList = new();
+    public List<Character> _canMoveCharactersList = new();
 
     [SerializeField, Header("行動済みキャラクターのリスト")]
-    private List<CharacterData> _alreadyActedCharacters = new();
+    private List<Character> _alreadyActedCharacters = new();
 
     /// <summary>
     /// 次のキャラに行動をさせる
     /// </summary>
     /// <param name="speed"></param>
-    public void GoNextTurn(CharacterData currentActCharacter)
+    public void GoNextTurn(Character currentCharacter)
     {
-        CharacterData NextMoveCharacter = null;
+        Character NextMoveCharacter = null;
         foreach (var character in _canMoveCharactersList)
         {
             //配列内の次の行動順のキャラクターを探す
             if(NextMoveCharacter == null)
             {
-                if (currentActCharacter.Speed > character.Speed)
+                if (currentCharacter.Speed > character.Speed)
                 {
                     NextMoveCharacter = character;
                 }
             }
             else
             {
-                if(currentActCharacter.Speed >= character.Speed && NextMoveCharacter.Speed < character.Speed)
+                if(currentCharacter.Speed >= character.Speed && NextMoveCharacter.Speed < character.Speed)
                 {
                     NextMoveCharacter = character;
                 }
@@ -49,12 +49,12 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
-        
-        NextMoveCharacter.TurnChange();
+
+        //次のターンに行動するキャラを行動済みのListにあらかじめ入れておく
         _canMoveCharactersList.Remove(NextMoveCharacter);
         _alreadyActedCharacters.Add(NextMoveCharacter);
 
-        if(_canMoveCharactersList.Count == 0)
+        if (_canMoveCharactersList.Count == 0)
         {
             foreach(var character in _alreadyActedCharacters)
             {
@@ -62,11 +62,26 @@ public class TurnManager : MonoBehaviour
             }
             _alreadyActedCharacters.Clear();
         }
+
+        NextMoveCharacter.TurnChange();
     }
 
-    public void AddCharactersList(CharacterData addCharacter)
+    public void AddCharactersList(Character addCharacter)
     {
         Debug.Log("実行中です");
         _canMoveCharactersList.Add(addCharacter);
+    }
+
+
+    public void RemoveCharacter(Character removeCharacter)
+    {
+        if(_canMoveCharactersList.Contains(removeCharacter))
+        {
+            _canMoveCharactersList.Remove(removeCharacter);
+        }
+        if (_alreadyActedCharacters.Contains(removeCharacter))
+        {
+            _alreadyActedCharacters.Remove(removeCharacter);
+        }
     }
 }
