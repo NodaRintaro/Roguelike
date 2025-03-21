@@ -19,7 +19,7 @@ public class EnemyMove : MonoBehaviour
 
     public void OnWalk()
     {
-        if (!Physics.Raycast(_ray, out _hitDontWalkTile, _mapGenerator.GridSize))
+        if (!Physics.Raycast(_ray, out _hitDontWalkTile, MapGenerator.GridSize))
         {
             //TODOFˆÚ“®ˆ—
         }

@@ -21,6 +21,11 @@ public class Character : MonoBehaviour
     
     public virtual void TurnChange()
     {
-        
+        //このキャラクターのターンになったら呼ばれる
+    }
+
+    public virtual void TurnEnd() 
+    {
+        //ターン終了時に呼び出す
     }
 }

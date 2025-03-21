@@ -17,9 +17,9 @@ public class MapGenerator : MonoBehaviour
     }
 
 
-    [SerializeField, Header("1つのグリッドの大きさ")] private int _gridSize;
+    [SerializeField, Header("1つのグリッドの大きさ")] static private int _gridSize = 2;
 
-    public int GridSize => _gridSize;
+    public static int GridSize => _gridSize;
 
     //マップ全体の大きさを決める
     [SerializeField, Header("マップ全体の横幅")] public int _fieldLengthX = 50;

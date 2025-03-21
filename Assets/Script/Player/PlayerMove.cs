@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using Cysharp.Threading.Tasks;
 using TMPro;
+using UnityEngine.SocialPlatforms;
+using static Player;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -10,25 +12,18 @@ public class PlayerMove : MonoBehaviour
     [SerializeField,Header("移動速度")]
     private float _playerSpeed = 5f;
 
-    private MapGenerator _mapGenerator;
-    private Character _playerData;
-    private TurnManager _turnManager;
+    private Player _player;
 
     private Ray _ray;
     private RaycastHit _hitDontWalkTile;
 
     private Animator _animator;
 
-    private int _gridSize;
-
     private void Start()
     {
+        _player = GetComponent<Player>();
         _animator = GetComponent<Animator>();
         _playerPos = this.transform.position;
-        _mapGenerator = FindFirstObjectByType<MapGenerator>();
-        _playerData = GetComponent<Character>();
-        _turnManager = FindFirstObjectByType<TurnManager>();
-        _gridSize = _mapGenerator.GridSize;
     }
 
     private void Update()
@@ -51,16 +46,17 @@ public class PlayerMove : MonoBehaviour
         transform.eulerAngles = new Vector3(0, angle, 0);
     }
 
-    public void GridMove(Vector3 moveVec)
+    public async UniTask GridMove(Vector3 moveVec)
     {
-        if (!Physics.Raycast(_ray, out _hitDontWalkTile, _gridSize))
+        if (!Physics.Raycast(_ray, out _hitDontWalkTile, MapGenerator.GridSize))
         {
-            _playerPos += new Vector3(moveVec.x * _gridSize, 0, moveVec.z * _gridSize);
-            _turnManager.GoNextTurn(_playerData);
-            _playerData.TurnChange();
+            _playerPos += new Vector3(moveVec.x * MapGenerator.GridSize, 0, moveVec.z * MapGenerator.GridSize);
+            await UniTask.WaitUntil(() => _playerPos == transform.position);
+            _player.TurnEnd();
         }
         else
         {
+            _player.ChangeStatu(PlayerStatu.CanMove);
             Debug.Log("進めないよ");
         }
     }

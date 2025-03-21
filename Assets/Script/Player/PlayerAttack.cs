@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
 {
     private List<Button> _skillButtonList = new();
 
-    Ray _ray;
+    private Ray _ray;
     private RaycastHit _hit;
     private MapGenerator _mapGenerator;
     private Animator _animator;

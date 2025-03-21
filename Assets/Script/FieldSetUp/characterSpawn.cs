@@ -38,7 +38,7 @@ public class CharacterSpawn : MonoBehaviour
     /// <param name="posZ"></param>
     public void SpawnActor(GameObject spawnObject, int posX, int posZ)
     {
-        GameObject generatedObj = Instantiate(spawnObject, new Vector3(posX * _mapCreate.GridSize, _mapCreate.GridSize, posZ * _mapCreate.GridSize), Quaternion.identity);
+        GameObject generatedObj = Instantiate(spawnObject, new Vector3(posX * MapGenerator.GridSize, MapGenerator.GridSize, posZ * MapGenerator.GridSize), Quaternion.identity);
         Character spawnCharaInstance = generatedObj.GetComponent<Character>();
         _turnManager._canMoveCharactersList.Add(spawnCharaInstance);
         _actorsList.Add(generatedObj);
@@ -72,7 +72,7 @@ public class CharacterSpawn : MonoBehaviour
         {
             foreach (var actors in _actorsList)
             {
-                if(Xpos == actors.transform.position.x / _mapCreate.GridSize && Zpos == actors.transform.position.z / _mapCreate.GridSize)
+                if(Xpos == actors.transform.position.x / MapGenerator.GridSize && Zpos == actors.transform.position.z / MapGenerator.GridSize)
                 {
                     RandomSpawnPos(out Xpos, out Zpos);
                 }
