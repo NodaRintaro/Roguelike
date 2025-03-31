@@ -62,23 +62,23 @@
     <Analyzer Include="C:\Users\Enuar\OneDrive\ドキュメント\Roguelike\Library\PackageCache\com.unity.dt.app-ui\Runtime\SourceGenerators\netstandard2.0\EnumToLowerCase.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
     <Compile Include="Assets\Script\Enemy\Enemy.cs" />
     <Compile Include="Assets\Editer\Editer.cs" />
-    <Compile Include="Assets\Script\EventManager\TurnManager.cs" />
-    <Compile Include="Assets\AurynSky\Forest Pack\Scripts\Rotator.cs" />
+    <Compile Include="Assets\AssetStoreTools\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
+    <Compile Include="Assets\AssetStoreTools\AurynSky\Forest Pack\Scripts\Rotator.cs" />
     <Compile Include="Assets\AssetStoreTools\SubClassSerecter\SubclassSelectorAttribute.cs" />
     <Compile Include="Assets\Script\CharacterData\EnemysGachaData.cs" />
-    <Compile Include="Assets\AurynSky\Forest Pack\Scripts\WheelController.cs" />
+    <Compile Include="Assets\Script\FieldSetUp\EventManager\TurnManager.cs" />
+    <Compile Include="Assets\Script\Player\PlayerContrller.cs" />
+    <Compile Include="Assets\AssetStoreTools\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyMove.cs" />
     <Compile Include="Assets\Script\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Script\FieldSetUp\FieldSetUpManager.cs" />
-    <Compile Include="Assets\Script\Player\Player.cs" />
     <Compile Include="Assets\Script\CharacterData\Character.cs" />
+    <Compile Include="Assets\AssetStoreTools\AurynSky\Forest Pack\Scripts\WheelController.cs" />
     <Compile Include="Assets\Script\Skill\Skill.cs" />
     <Compile Include="Assets\Script\CharacterData\ItemGachaData.cs" />
     <Compile Include="Assets\AssetStoreTools\SubClassSerecter\SubclassSelectorDrawer.cs" />
-    <Compile Include="Assets\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
     <Compile Include="Assets\Script\FieldSetUp\MapGenerator.cs" />
     <Compile Include="Assets\Behavior\EnemyBehavior.cs" />
     <Compile Include="Assets\Script\FieldSetUp\characterSpawn.cs" />
@@ -86,8 +86,8 @@
     <Compile Include="Assets\Script\Camera\CameraFollow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\AurynSky\Forest Pack\READ ME.txt" />
-    <None Include="Assets\RPG Button 7\Readme.txt" />
+    <None Include="Assets\AssetStoreTools\AurynSky\Forest Pack\READ ME.txt" />
+    <None Include="Assets\AssetStoreTools\RPG Button 7\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine.SocialPlatforms;
-using static Player;
+using static PlayerContrller;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField,Header("移動速度")]
     private float _playerSpeed = 5f;
 
-    private Player _player;
+    private PlayerContrller _player;
 
     private Ray _ray;
     private RaycastHit _hitDontWalkTile;
@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
-        _player = GetComponent<Player>();
+        _player = GetComponent<PlayerContrller>();
         _animator = GetComponent<Animator>();
         _playerPos = this.transform.position;
     }

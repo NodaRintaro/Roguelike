@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class CharacterSpawn : MonoBehaviour
 {
+    [SerializeField,Header("キャラをスポーンさせる際のY座標")]
+    private int _spawnHeight = 0;
+
     [SerializeField,Header("プレイヤーのプレファブ")]
     private GameObject _playerObject;
 
@@ -38,7 +41,7 @@ public class CharacterSpawn : MonoBehaviour
     /// <param name="posZ"></param>
     public void SpawnActor(GameObject spawnObject, int posX, int posZ)
     {
-        GameObject generatedObj = Instantiate(spawnObject, new Vector3(posX * MapGenerator.GridSize, MapGenerator.GridSize, posZ * MapGenerator.GridSize), Quaternion.identity);
+        GameObject generatedObj = Instantiate(spawnObject, new Vector3(posX * MapGenerator.GridSize, _spawnHeight, posZ * MapGenerator.GridSize), Quaternion.identity);
         Character spawnCharaInstance = generatedObj.GetComponent<Character>();
         _turnManager._canMoveCharactersList.Add(spawnCharaInstance);
         _actorsList.Add(generatedObj);
