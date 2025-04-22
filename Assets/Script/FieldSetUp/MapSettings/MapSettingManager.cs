@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 [DefaultExecutionOrder(0)]
 public class MapSettingManager : MonoBehaviour
@@ -38,11 +37,8 @@ public class MapSettingManager : MonoBehaviour
         _characterSpawn.RandomSpawnPos(out randomPosX, out randomPosZ);
         _characterSpawn.SpawnActor(_characterSpawn.PlayerPrefab, randomPosX, randomPosZ);
 
-        for (int spawnCount = 0; spawnCount < _firstSpawnEnemysNum; spawnCount++)
-        {
-            _characterSpawn.RandomSpawnPos(out randomPosX, out randomPosZ);
-            _characterSpawn.SpawnActor(_characterSpawn.SpawnGacha(), randomPosX, randomPosZ);
-        }
+        //敵をスポーンさせる
+        EnemySpawn(_firstSpawnEnemysNum);
 
         Debug.Log(_turnManager._canMoveCharactersList[Random.Range(1, _turnManager._canMoveCharactersList.Count - 1)].Speed);
         _turnManager.GoNextTurn(_turnManager._canMoveCharactersList[Random.Range(1,_turnManager._canMoveCharactersList.Count - 1)]);

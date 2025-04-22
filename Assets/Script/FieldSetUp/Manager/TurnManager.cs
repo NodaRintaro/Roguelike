@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// </summary>
 public class TurnManager : MonoBehaviour
 {
-    [SerializeField, Header("行動可能キャラクターのリスト")]
+    [Header("行動可能キャラクターのリスト")]
     public List<Characters> _canMoveCharactersList = new();
 
     [SerializeField, Header("行動済みキャラクターのリスト")]
