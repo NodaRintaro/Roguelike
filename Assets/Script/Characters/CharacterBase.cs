@@ -1,14 +1,20 @@
 ﻿using UnityEngine;
 
-public class Characters : MonoBehaviour
+public class CharacterBase : MonoBehaviour
 {
-    [SerializeField,Header("行動速度")]private int _speed;
+    [SerializeField, Header("体力")] private int _hp;
+
+    [SerializeField, Header("攻撃力")] private int _attack;
+
+    [SerializeField, Header("防御力")] private int _defense;
+
+    [SerializeField, Header("行動速度")] private int _speed;
 
     [SerializeField, Header("行動速度")] private int _hitPoint;
 
     public int Speed => _speed;
 
-    public int HP => _hitPoint;
+    public int HP => _hp;
 
     public virtual void TurnChange()
     {

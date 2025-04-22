@@ -7,18 +7,18 @@ using System.Collections.Generic;
 public class TurnManager : MonoBehaviour
 {
     [Header("行動可能キャラクターのリスト")]
-    public List<Characters> _canMoveCharactersList = new();
+    public List<CharacterBase> _canMoveCharactersList = new();
 
     [SerializeField, Header("行動済みキャラクターのリスト")]
-    private List<Characters> _alreadyActedCharacters = new();
+    private List<CharacterBase> _alreadyActedCharacters = new();
 
     /// <summary>
     /// 次のキャラに行動をさせる
     /// </summary>
     /// <param name="speed"></param>
-    public void GoNextTurn(Characters currentCharacter)
+    public void GoNextTurn(CharacterBase currentCharacter)
     {
-        Characters NextMoveCharacter = null;
+        CharacterBase NextMoveCharacter = null;
         foreach (var character in _canMoveCharactersList)
         {
             //配列内の次の行動順のキャラクターを探す
@@ -66,14 +66,14 @@ public class TurnManager : MonoBehaviour
         NextMoveCharacter.TurnChange();
     }
 
-    public void AddCharactersList(Characters addCharacter)
+    public void AddCharactersList(CharacterBase addCharacter)
     {
         Debug.Log("実行中です");
         _canMoveCharactersList.Add(addCharacter);
     }
 
 
-    public void RemoveCharacter(Characters removeCharacter)
+    public void RemoveCharacter(CharacterBase removeCharacter)
     {
         if(_canMoveCharactersList.Contains(removeCharacter))
         {

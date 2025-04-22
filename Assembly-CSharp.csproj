@@ -75,6 +75,7 @@
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\WheelController.cs" />
     <Compile Include="Assets\Script\Player\PlayerController.cs" />
     <Compile Include="Assets\Script\FieldSetUp\MapSettings\characterSpawn.cs" />
+    <Compile Include="Assets\Script\Characters\CharacterBase.cs" />
     <Compile Include="Assets\Script\FieldSetUp\Manager\TurnManager.cs" />
     <Compile Include="Assets\Script\Characters\ItemGachaData.cs" />
     <Compile Include="Assets\Script\FieldSetUp\MapSettings\MapSettingManager.cs" />
@@ -84,7 +85,6 @@
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
     <Compile Include="Assets\Script\Characters\CharacterData\CharacterData.cs" />
     <Compile Include="Assets\Behavior\EnemyBehavior.cs" />
-    <Compile Include="Assets\Script\Characters\Characters.cs" />
     <Compile Include="Assets\Script\Camera\CameraFollow.cs" />
   </ItemGroup>
   <ItemGroup>

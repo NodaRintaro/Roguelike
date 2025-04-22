@@ -404,3 +404,157 @@ Received Import Request.
 Start importing Assets/Script/Characters/Enemy/EnemyData/CharacterData.cs using Guid(65a10ecda0db46340a0919d002049453) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8674cf48f9048ed7947aee555c8a1d75') in 0.0072918 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
+========================================================================
+Received Import Request.
+  Time since last request: 157.374953 seconds.
+  path: Assets/Script/Characters/ItemGachaData.cs
+  artifactKey: Guid(eb6a6ca82f185e1449bc8359b1227084) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Characters/ItemGachaData.cs using Guid(eb6a6ca82f185e1449bc8359b1227084) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b8d46072a6ec2f74390c770a49cb111f') in 0.0005809 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 2.92 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.10 ms.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4938 unused Assets / (1.3 MB). Loaded Objects now: 5540.
+Memory consumption went from 127.5 MB to 126.3 MB.
+Total: 9.404900 ms (FindLiveObjects: 0.569800 ms CreateObjectMapping: 0.315700 ms MarkObjects: 7.182900 ms  DeleteObjects: 1.334500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 37.081387 seconds.
+  path: Assets/Script/Characters/CharacterBase.cs
+  artifactKey: Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Characters/CharacterBase.cs using Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '861ffeabbe67feff52d793352e3f74c5') in 0.0015057 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.50 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.04 ms.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4938 unused Assets / (0.8 MB). Loaded Objects now: 5540.
+Memory consumption went from 127.5 MB to 126.7 MB.
+Total: 9.312700 ms (FindLiveObjects: 0.587900 ms CreateObjectMapping: 0.313400 ms MarkObjects: 6.895600 ms  DeleteObjects: 1.513800 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.51 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.04 ms.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4938 unused Assets / (1.3 MB). Loaded Objects now: 5540.
+Memory consumption went from 127.5 MB to 126.2 MB.
+Total: 8.644600 ms (FindLiveObjects: 0.631400 ms CreateObjectMapping: 0.325200 ms MarkObjects: 6.486100 ms  DeleteObjects: 1.200300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 101.257787 seconds.
+  path: Assets/Script/Characters/CharacterData
+  artifactKey: Guid(f5b2da7c1fb3d4741b49e443ff5a3720) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Characters/CharacterData using Guid(f5b2da7c1fb3d4741b49e443ff5a3720) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b8a722bd8749b603308a0f5b854f6f54') in 0.0018162 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.60 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.04 ms.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4938 unused Assets / (1.1 MB). Loaded Objects now: 5540.
+Memory consumption went from 127.5 MB to 126.4 MB.
+Total: 6.752300 ms (FindLiveObjects: 0.360900 ms CreateObjectMapping: 0.296900 ms MarkObjects: 5.193500 ms  DeleteObjects: 0.899900 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.43 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.04 ms.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4938 unused Assets / (0.8 MB). Loaded Objects now: 5540.
+Memory consumption went from 127.5 MB to 126.7 MB.
+Total: 6.136000 ms (FindLiveObjects: 0.554300 ms CreateObjectMapping: 0.325000 ms MarkObjects: 4.567600 ms  DeleteObjects: 0.687500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 65.202802 seconds.
+  path: Assets/Script/Characters/CharacterBase.cs
+  artifactKey: Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Characters/CharacterBase.cs using Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '861ffeabbe67feff52d793352e3f74c5') in 0.0021197 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 2.12 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.04 ms.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4938 unused Assets / (1.2 MB). Loaded Objects now: 5540.
+Memory consumption went from 127.5 MB to 126.3 MB.
+Total: 7.527500 ms (FindLiveObjects: 0.380900 ms CreateObjectMapping: 0.329300 ms MarkObjects: 5.645100 ms  DeleteObjects: 1.171000 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 200.188719 seconds.
+  path: Assets/Script/Characters/CharacterBase.cs
+  artifactKey: Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Characters/CharacterBase.cs using Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '248102b39eface4763550286af7032fb') in 0.0014901 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.49 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4938 unused Assets / (1.4 MB). Loaded Objects now: 5540.
+Memory consumption went from 127.5 MB to 126.1 MB.
+Total: 8.999900 ms (FindLiveObjects: 0.394300 ms CreateObjectMapping: 0.318400 ms MarkObjects: 7.136900 ms  DeleteObjects: 1.149100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.66 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4938 unused Assets / (1.3 MB). Loaded Objects now: 5540.
+Memory consumption went from 127.5 MB to 126.2 MB.
+Total: 9.206900 ms (FindLiveObjects: 0.387800 ms CreateObjectMapping: 0.313800 ms MarkObjects: 6.988300 ms  DeleteObjects: 1.515200 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 1037.375371 seconds.
+  path: Assets/Script/Characters/CharacterBase.cs
+  artifactKey: Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Characters/CharacterBase.cs using Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9be2fae44a5b74e0b35bde9dae9c609f') in 0.0036961 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.85 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.04 ms.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4938 unused Assets / (1.1 MB). Loaded Objects now: 5540.
+Memory consumption went from 127.5 MB to 126.4 MB.
+Total: 7.858700 ms (FindLiveObjects: 0.630900 ms CreateObjectMapping: 0.474700 ms MarkObjects: 5.740900 ms  DeleteObjects: 1.010800 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 2752.497106 seconds.
+  path: Assets/Script/Characters/CharacterBase.cs
+  artifactKey: Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Characters/CharacterBase.cs using Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '732b4fe02780b78c5f7f044512f87823') in 0.0032862 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.366501 seconds.
+  path: Assets/Script/Characters/CharacterBase.cs
+  artifactKey: Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Characters/CharacterBase.cs using Guid(5234f8e281abe094897c70d6ff4330bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '732b4fe02780b78c5f7f044512f87823') in 0.0004749 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+

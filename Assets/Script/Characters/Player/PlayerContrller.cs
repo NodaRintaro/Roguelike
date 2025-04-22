@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class PlayerContrller : Characters
+public class PlayerContrller : CharacterBase
 {
     [SerializeField] private int _moveDelay = 100;
 

@@ -9,8 +9,8 @@ public class CharacterSpawn : MonoBehaviour
     [SerializeField,Header("プレイヤーのプレファブ")]
     private GameObject _playerObject;
 
-    [SerializeField,Header("敵の種類と出現確率")]
-    private List<EnemysBaseData> _enemyList;
+    [SerializeField,Header("敵の種類")]
+    private List<CharacterData> _enemyList;
 
     [SerializeField,Header("アイテムの種類と出現確率")]
     private List<GameObject> _itemList;
@@ -23,7 +23,7 @@ public class CharacterSpawn : MonoBehaviour
 
     public GameObject PlayerPrefab => _playerObject;
 
-    public List<EnemysBaseData> EnemyList => _enemyList;
+    public List<CharacterData> EnemyList => _enemyList;
 
     public List<GameObject> ItemList => _itemList;
 
@@ -42,7 +42,7 @@ public class CharacterSpawn : MonoBehaviour
     public void SpawnActor(GameObject spawnObject, int posX, int posZ)
     {
         GameObject generatedObj = Instantiate(spawnObject, new Vector3(posX * MapGenerator.GridSize, _spawnHeight, posZ * MapGenerator.GridSize), Quaternion.identity);
-        Characters spawnCharaInstance = generatedObj.GetComponent<Characters>();
+        CharacterBase spawnCharaInstance = generatedObj.GetComponent<CharacterBase>();
         _turnManager._canMoveCharactersList.Add(spawnCharaInstance);
         _actorsList.Add(generatedObj);
         Debug.Log("キャラを生成");
@@ -93,20 +93,20 @@ public class CharacterSpawn : MonoBehaviour
         float totalNum = 0;
         foreach (var gachaContents in _enemyList)
         {
-            totalNum += gachaContents.Probability;
+            totalNum += gachaContents.SpawnProbability;
         }
 
         float randomPoint = Random.value * totalNum;
 
         for (int i = 0; i < _enemyList.Count; i++)
         {
-            if(randomPoint < _enemyList[i].Probability)
+            if(randomPoint < _enemyList[i].SpawnProbability)
             {
                 return _enemyList[i].EnemyPrefab;
             }
             else
             {
-                randomPoint -= _enemyList[i].Probability;
+                randomPoint -= _enemyList[i].SpawnProbability;
             }
         }
         return _enemyList[_enemyList.Count - 1].EnemyPrefab;
