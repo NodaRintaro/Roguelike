@@ -1,15 +1,15 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
 public class Skill : ScriptableObject
 {
-    [SerializeField,Header("ƒXƒLƒ‹–¼")]
+    [SerializeField,Header("ã‚¹ã‚­ãƒ«å")]
     private string _skillName;
 
-    [SerializeField,Header("ˆÐ—Í")]
+    [SerializeField,Header("å¨åŠ›")]
     private int _skillDamage;
 
-    [SerializeField,Header("”ÍˆÍ")]
+    [SerializeField,Header("ç¯„å›²")]
     private int _skillRange;
 
     public string SkillName => _skillName;

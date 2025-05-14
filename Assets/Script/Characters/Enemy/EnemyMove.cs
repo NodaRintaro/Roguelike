@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class EnemyMove : MonoBehaviour
     {
         if (!Physics.Raycast(_ray, out _hitDontWalkTile, MapGenerator.GridSize))
         {
-            //TODOFˆÚ“®ˆ—
+            //TODOï¼šç§»å‹•å‡¦ç†
         }
     }
 }

@@ -62,30 +62,29 @@
     <Analyzer Include="C:\Users\vantan\Desktop\Unity\RoguelikeGame\Library\PackageCache\com.unity.dt.app-ui\Runtime\SourceGenerators\netstandard2.0\EnumToLowerCase.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editer\SubClassSerecter\SubclassSelectorAttribute.cs" />
     <Compile Include="Assets\Script\Characters\Enemy\EnemyMove.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
+    <Compile Include="Assets\Script\FieldSetUp\FieldSetting\CharacterSpawner.cs" />
     <Compile Include="Assets\Editer\Editer.cs" />
-    <Compile Include="Assets\Script\Camera\CameraFollowPlayer.cs" />
-    <Compile Include="Assets\Script\FieldSetUp\MapSettings\MapGenerator.cs" />
+    <Compile Include="Assets\Script\Characters\CharacterBase\CharacterData.cs" />
+    <Compile Include="Assets\Script\Characters\Enemy\EnemyBase.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\Rotator.cs" />
     <Compile Include="Assets\Script\Characters\Player\PlayerMove.cs" />
-    <Compile Include="Assets\AssetStoreTools\SubClassSerecter\SubclassSelectorAttribute.cs" />
-    <Compile Include="Assets\Script\Characters\Player\PlayerContrller.cs" />
     <Compile Include="Assets\Script\Characters\Enemy\EnemyController.cs" />
+    <Compile Include="Assets\Script\FieldSetUp\FieldSetting\FieldManager.cs" />
+    <Compile Include="Assets\Script\Characters\Player\PlayerBase.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\WheelController.cs" />
-    <Compile Include="Assets\Script\Player\PlayerController.cs" />
-    <Compile Include="Assets\Script\FieldSetUp\MapSettings\characterSpawn.cs" />
-    <Compile Include="Assets\Script\Characters\CharacterBase.cs" />
-    <Compile Include="Assets\Script\FieldSetUp\Manager\TurnManager.cs" />
-    <Compile Include="Assets\Script\Characters\ItemGachaData.cs" />
-    <Compile Include="Assets\Script\FieldSetUp\MapSettings\MapSettingManager.cs" />
     <Compile Include="Assets\Script\Characters\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Script\Skill\Skill.cs" />
-    <Compile Include="Assets\AssetStoreTools\SubClassSerecter\SubclassSelectorDrawer.cs" />
     <Compile Include="Assets\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
-    <Compile Include="Assets\Script\Characters\CharacterData\CharacterData.cs" />
+    <Compile Include="Assets\Script\FieldSetUp\FieldSetting\MapGenerator.cs" />
     <Compile Include="Assets\Behavior\EnemyBehavior.cs" />
+    <Compile Include="Assets\Editer\SubClassSerecter\SubclassSelectorDrawer.cs" />
+    <Compile Include="Assets\Script\Characters\CharacterBase\ICharacter.cs" />
+    <Compile Include="Assets\Script\FieldSetUp\TurnManager\TurnManager.cs" />
     <Compile Include="Assets\Script\Camera\CameraFollow.cs" />
+    <Compile Include="Assets\Script\Characters\CharacterBase\CharacterAnimater.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AurynSky\Forest Pack\READ ME.txt" />

@@ -1,15 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using Cysharp.Threading.Tasks;
 
 public class EnemyController : MonoBehaviour
 { 
 
-    [SerializeField,Header("ƒvƒŒƒCƒ„[")]
+    [SerializeField,Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼")]
     private GameObject _playerObject;
 
-    [SerializeField] GameObject _turnManagerObj;
-
-    CharacterData _enemy;
+    ICharacter _enemy;
     TurnManager _turnManager;
     MapGenerator _mapGenerator;
     EnemyMove _enemyMove;
@@ -18,7 +16,7 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        _enemy = GetComponent<CharacterData>();
+        _enemy = GetComponent<ICharacter>();
         _enemyMove = GetComponent<EnemyMove>();
         _turnManager = FindAnyObjectByType<TurnManager>();
         _mapGenerator = FindAnyObjectByType<MapGenerator>();
@@ -28,7 +26,7 @@ public class EnemyController : MonoBehaviour
     
     private async UniTask OnMyTurn()
     {
-        Debug.Log("“GƒLƒƒƒ‰‚Ìƒ^[ƒ“I");
+        Debug.Log("æ•µã‚­ãƒ£ãƒ©ã®ã‚¿ãƒ¼ãƒ³ï¼");
 
         switch (_moveType)
         {
@@ -38,8 +36,6 @@ public class EnemyController : MonoBehaviour
                 _enemyMove.OnWalk();
                 break;
         }
-        if(_turnManager != null)
-           _turnManager.GoNextTurn(_enemy);
     }
 
     enum MoveType

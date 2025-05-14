@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 483973873}
-  - component: {fileID: 483973872}
+  - component: {fileID: 483973874}
   m_Layer: 0
   m_Name: TurnManager
   m_TagString: Untagged
@@ -136,20 +136,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &483973872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 483973871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35b195cd92007774688a3120d771cbae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canMoveCharactersList: []
-  _alreadyActedCharacters: []
 --- !u!4 &483973873
 Transform:
   m_ObjectHideFlags: 0
@@ -165,6 +151,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &483973874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483973871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4808d517be838364c8fe35c494805172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentTurn: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,11 +431,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbf375c6b56f8a4e8aefd6287c785d9, type: 3}
+  m_Script: {fileID: 11500000, guid: dbb98e6a5f5e64443a911972164824f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
-  _offset: {x: 0, y: 10, z: -5}
+  _offset: {x: 5, y: 5, z: 0}
   _player: {fileID: 0}
 --- !u!1 &1721198140
 GameObject:
@@ -502,16 +501,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1721198140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c30e14318de1d7479390039623eacab, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b25cc56dff303c43b29f72efa03cb66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerData: {fileID: 11400000, guid: 1ae7e0ed52dfbf64f99bf34e7df92877, type: 2}
   _spawnHeight: 1
-  _playerObject: {fileID: 182100975310302802, guid: 6a4b05b98ee0e2f4f99357eb9970d6d6, type: 3}
-  _enemyList:
-  - {fileID: 11400000, guid: 06d444034f9c9ef4b83d5f1199e9b74d, type: 2}
-  - {fileID: 11400000, guid: 8b976522cde0a2441a6048eb27f06bb8, type: 2}
-  - {fileID: 11400000, guid: 60ae35128daf80a478a36d59818b885f, type: 2}
-  _itemList: []
 --- !u!114 &1721198144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,9 +518,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cac00d1b19b6354492b12d264072e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapCreate: {fileID: 1721198142}
-  _characterSpawn: {fileID: 1721198143}
+  _enemysPool:
+  - {fileID: 11400000, guid: 3ffbe55c2d1b1dc4593602591c74d1ed, type: 2}
+  - {fileID: 11400000, guid: 44676531d1ad61140ab90d0674004c5a, type: 2}
+  - {fileID: 11400000, guid: eb219949df702a8489d097eedfbb485a, type: 2}
+  _activeCharactersList: []
   _firstSpawnEnemysNum: 5
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1965601179
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,8 +562,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
   - {fileID: 705507995}
+  - {fileID: 963194228}
   - {fileID: 1721198141}
   - {fileID: 1965601180}
   - {fileID: 483973873}

@@ -1,15 +1,15 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField, Header("ƒvƒŒƒCƒ„[ƒ^ƒO")]
+    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¿ã‚°")]
     private string _playerTag;
 
-    [SerializeField,Header("ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£")]
-    private Vector3 _offset;    // ƒJƒƒ‰‚ÆƒvƒŒƒCƒ„[‚Ì‹——£
+    [SerializeField,Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®è·é›¢")]
+    private Vector3 _offset;    // ã‚«ãƒ¡ãƒ©ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è·é›¢
 
-    [SerializeField,Header("ƒvƒŒƒCƒ„[")]
-    private GameObject _player;  // ƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒgiƒ^[ƒQƒbƒgj
+    [SerializeField,Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼")]
+    private GameObject _player;  // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼‰
 
     void Update()
     {
@@ -18,7 +18,7 @@ public class CameraFollow : MonoBehaviour
             _player = GameObject.FindWithTag(_playerTag);
         }
 
-        // ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ÉƒIƒtƒZƒbƒg‚ğ’Ç‰Á‚µ‚ÄƒJƒƒ‰‚ğˆÚ“®
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã«ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’è¿½åŠ ã—ã¦ã‚«ãƒ¡ãƒ©ã‚’ç§»å‹•
         this.transform.position = _player.transform.position + _offset;
         transform.LookAt(_player.transform.position);
     }
