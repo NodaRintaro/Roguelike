@@ -9,6 +9,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField,Header("移動速度")]
     private float _playerMoveSpeed = 5f;
 
+    [SerializeField]
+    private 
+
     private Ray _ray;
     private RaycastHit _hitDontWalkTile;
 

@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentTurn: 0
+  _maxMoveNum: 3
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,9 +525,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb219949df702a8489d097eedfbb485a, type: 2}
   _activeCharactersList: []
   _firstSpawnEnemysNum: 5
+  _currentMoveCharacter:
+    rid: -2
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &1965601179
 GameObject:
   m_ObjectHideFlags: 0
