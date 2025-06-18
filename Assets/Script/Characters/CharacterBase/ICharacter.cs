@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Chracterのインターフェース
@@ -7,17 +8,14 @@ public interface ICharacter
 {
     public GameObject CharacterObject { get; }
 
-    public int HP { get; }
-
-    public int Attack { get; }
-
-    public int Defense { get; }
-
-    public int Speed { get; }
+    public Status CharacterStatus { get; }
 
     public MoveState CharacterState { get; }
 
-    public void StatusInitialize(CharacterData characterData, GameObject characterObject);
+    /// <summary>キャラクタのデータを初期化</summary>
+    /// <param name="characterData">キャラクタのデータ</param>
+    /// <param name="characterObject">キャラクタのオブジェクト</param>
+    public void InitCharacterData(CharacterData characterData, GameObject characterObject);
     public void StartAction();
     public void FinishAction();
 }

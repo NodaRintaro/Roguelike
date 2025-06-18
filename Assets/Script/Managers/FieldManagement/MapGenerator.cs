@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public struct PosData
 {
@@ -16,7 +15,7 @@ public struct PosData
 /// </summary>
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField, Header("1つのグリッドの大きさ")] static private int _gridSize = 2;
+    [SerializeField, Header("1グリッドの大きさ")] static private int _gridSize = 2;
 
     public static int GridSize => _gridSize;
 

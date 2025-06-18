@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CharacterAnimater : MonoBehaviour
+public class CharacterAnimater
 {
     
 }

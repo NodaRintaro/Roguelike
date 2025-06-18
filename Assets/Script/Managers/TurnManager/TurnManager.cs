@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 /// <summary>
 /// 生成したキャラクターの行動順を決定し制御するClass
@@ -9,6 +10,9 @@ public class TurnManager : MonoBehaviour
     [SerializeField, Header("経過ターン")] int _currentTurn = 0;
 
     [SerializeField, Header("最大行動回数")] int _maxMoveNum = 3;
+
+    [SerializeReference, SubclassSelector, Header("現在行動中のキャラクター")]
+    private ICharacter _currentMoveCharacter;
 
     public int CurrentTurn => _currentTurn;
 
@@ -24,21 +28,35 @@ public class TurnManager : MonoBehaviour
         _fieldManager = FindAnyObjectByType<FieldManager>();
     }
 
+    private void Update()
+    {
+        if(_currentMoveCharacter != null)
+        {
+            if (_currentMoveCharacter.CharacterState == MoveState.Stay)
+            {
+                NextTurn();
+            }
+        }
+    }
+
+
+    //TODO:TurnManagerをメソッドクラスにする
+
     /// <summary>
     /// キャラの行動順を決める
     /// </summary>
-    public void SetActionOrder()
+    public void SetActionTurn(List<ICharacter>activeCharacters)
     {
         _currentTurn++;
         List<ICharacter> characters = new();
         List<ICharacter> alreadyMoveCharacters = new();
-        foreach (var character in _fieldManager.ActiveCharactersList)
+        foreach (var character in activeCharacters)
         { 
              characters.Add(character);
         }
         Debug.Log("charactersCount:" + characters.Count);
 
-        characters.Sort((x,y) => y.Speed.CompareTo(x.Speed));
+        SortSpeed(characters);
 
         int actionCount = 0;
         int bonusActionPoint = 40;
@@ -49,7 +67,7 @@ public class TurnManager : MonoBehaviour
                 if(!alreadyMoveCharacters.Contains(character))
                     _charactersActionOrder.Enqueue(character);
                 
-                if(character.Speed - bonusActionPoint < 0)
+                if(character.CharacterStatus.Speed - bonusActionPoint < 0)
                     alreadyMoveCharacters.Add(character);
             }
 
@@ -58,24 +76,38 @@ public class TurnManager : MonoBehaviour
         }
         Debug.Log("QueueCount:" + _charactersActionOrder.Count);
 
-        NextActionOrder();
+        NextTurn();
     }
 
     /// <summary>
     /// 次のキャラに行動をさせる
     /// </summary>
-    public void NextActionOrder()
+    public void NextTurn()
     { 
         if (_charactersActionOrder.Count == 0)
         {
-            SetActionOrder();
+            //TODO:全員行動し終わったら次の行動順を制作
         }
         else
         {
             ICharacter nextActionCharacter = _charactersActionOrder.Dequeue();
 
             nextActionCharacter.StartAction();
-            _fieldManager.ChangeMoveCharacter(nextActionCharacter);
+            _currentMoveCharacter = nextActionCharacter;
         }
+    }
+
+    public void SetActionCharacters()
+    {
+
+    }
+
+    /// <summary>
+    /// キャラクター達を行動順にソートする
+    /// </summary>
+    /// <param name="characters"></param>
+    public void SortSpeed(List<ICharacter> characters)
+    {
+        characters.Sort((x, y) => y.CharacterStatus.Speed.CompareTo(x.CharacterStatus.Speed));
     }
 }

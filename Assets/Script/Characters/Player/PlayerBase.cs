@@ -2,42 +2,54 @@
 
 public class PlayerBase : ICharacter
 {
-    [SerializeField,Header("HP")]private int _hp;
+    /// <summary>プレイヤーのステータス</summary>
+    private Status _playerStatus = default; 
 
-    [SerializeField, Header("攻撃力")] private int _attack;
+    /// <summary>プレイヤーの操るゲームオブジェクト</summary>
+    [SerializeField,Header("プレイヤーのオブジェクト")] private GameObject _characterObject;
 
-    [SerializeField, Header("防御力")] private int _defense;
-
-    [SerializeField, Header("素早さ")] private int _speed;
-
-    [SerializeField, Header("キャラのオブジェクト")] private GameObject _characterObject;
+    public Status CharacterStatus => _playerStatus;
 
     public GameObject CharacterObject => _characterObject;
 
-    public int HP => _hp;
-
-    public int Attack => _attack;
-
-    public int Defense => _defense;
-
-    public int Speed => _speed;
-
     public MoveState CharacterState { get; private set; }
 
-    public void StatusInitialize(CharacterData characterData, GameObject characterObject)
+    /// <summary>プレイヤーの初期化</summary>
+    /// <param name="characterData">プレイヤーのデータ</param>
+    /// <param name="characterObject">プレイヤーのオブジェクト</param>
+    public void InitCharacterData(CharacterData characterData, GameObject characterObject)
     {
-        _characterObject = characterObject;
-        _hp = characterData.BaseHP;
-        _attack = characterData.BaseAttack;
-        _defense = characterData.BaseDefense;
-        _speed = characterData.BaseSpeed;
+        //生成したキャラクターのオブジェクトを初期化
+        SetPlayerObj(characterObject);
+
+        //ステータスの初期化
+        SetStatus(characterData);
     }
 
+    /// <summary>ステータスを設定</summary>
+    /// <param name="characterData">プレイヤーのData</param>
+    private void SetStatus(CharacterData charaData)
+    {
+        _playerStatus = new();
+        _playerStatus.InitStatus(charaData.BaseHP, charaData.BaseMP, charaData.BaseAttack, charaData.BaseDefense, charaData.BaseSpeed);
+    }
+
+    /// <summary>プレイヤーのObjectを初期化</summary>
+    /// <param name="playerObject">プレイヤーのオブジェクト</param>
+    private void SetPlayerObj(GameObject playerObject)
+    {
+        _characterObject = playerObject; 
+        PlayerController playerController = playerObject.AddComponent<PlayerController>();
+        playerController.GetPlayerBase(this);
+    }
+
+    /// <summary>ターン開始時の処理</summary>
     public void StartAction()
     {
         CharacterState = MoveState.Move;
     }
 
+    /// <summary>ターン終了時の処理</summary>
     public void FinishAction()
     {
         CharacterState = MoveState.Stay;

@@ -27,9 +27,9 @@ public class CharacterSpawner : MonoBehaviour
         GameObject spawnCharaObj =
             Instantiate(_playerData.CharacterPrefab, spawnPos, Quaternion.identity);
 
-        ICharacter character = new PlayerBase();
+        PlayerBase character = new PlayerBase();
 
-        character.StatusInitialize(_playerData, spawnCharaObj);
+        character.InitCharacterData(_playerData, spawnCharaObj);
 
         return character;
     }
@@ -44,9 +44,10 @@ public class CharacterSpawner : MonoBehaviour
         GameObject spawnCharaObj = 
             Instantiate(spawnCharacter.CharacterPrefab, spawnPos, Quaternion.identity);
 
-        ICharacter character = new EnemyBase();
+        //敵の情報データを作る
+        EnemyBase character = new EnemyBase();
 
-        character.StatusInitialize(spawnCharacter, spawnCharaObj);
+        character.InitCharacterData(spawnCharacter, spawnCharaObj);
 
         return character;
     }
@@ -70,20 +71,20 @@ public class CharacterSpawner : MonoBehaviour
             count++;
         }
 
-        int Xpos = Random.Range(_mapCreate.RoomData[roomKey].xMinPos, _mapCreate.RoomData[roomKey].xMaxPos);
-        int Zpos = Random.Range(_mapCreate.RoomData[roomKey].zMinPos, _mapCreate.RoomData[roomKey].zMaxPos);
+        int spawnPosX = Random.Range(_mapCreate.RoomData[roomKey].xMinPos, _mapCreate.RoomData[roomKey].xMaxPos);
+        int spawnPosZ = Random.Range(_mapCreate.RoomData[roomKey].zMinPos, _mapCreate.RoomData[roomKey].zMaxPos);
 
         //もし他のキャラと出現場所がかぶったらもう一度出現場所をランダムに選択する
-        foreach (var fieldChara in _fieldManager.ActiveCharactersList)
+        foreach (var fieldChara in _fieldManager.FieldCharacters)
         {
-            while (Xpos == fieldChara.CharacterObject.transform.position.x && Zpos == fieldChara.CharacterObject.transform.position.z)
+            while (spawnPosX == fieldChara.CharacterObject.transform.position.x && spawnPosZ == fieldChara.CharacterObject.transform.position.z)
             {
-                Xpos = Random.Range(_mapCreate.RoomData[roomKey].xMinPos, _mapCreate.RoomData[roomKey].xMaxPos);
-                Zpos = Random.Range(_mapCreate.RoomData[roomKey].zMinPos, _mapCreate.RoomData[roomKey].zMaxPos);
+                spawnPosX = Random.Range(_mapCreate.RoomData[roomKey].xMinPos, _mapCreate.RoomData[roomKey].xMaxPos);
+                spawnPosZ = Random.Range(_mapCreate.RoomData[roomKey].zMinPos, _mapCreate.RoomData[roomKey].zMaxPos);
             }
         }　
 
-        return new Vector3(Xpos * MapGenerator.GridSize, _spawnHeight, Zpos * MapGenerator.GridSize);
+        return new Vector3(spawnPosX * MapGenerator.GridSize, _spawnHeight, spawnPosZ * MapGenerator.GridSize);
     }
 
     /// <summary>

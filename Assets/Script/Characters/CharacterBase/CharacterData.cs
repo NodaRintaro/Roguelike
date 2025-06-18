@@ -10,6 +10,9 @@ public class CharacterData : ScriptableObject
     [SerializeField, Header("初期HP")]
     private int _baseHP;
 
+    [SerializeField, Header("初期MP")]
+    private int _baseMP;
+
     [SerializeField, Header("初期の攻撃力")]
     private int _baseAttack;
 
@@ -26,6 +29,8 @@ public class CharacterData : ScriptableObject
     private GameObject _characterPrefab;
 
     public int BaseHP => _baseHP;
+
+    public int BaseMP => _baseMP;
 
     public int BaseAttack => _baseAttack;
 
